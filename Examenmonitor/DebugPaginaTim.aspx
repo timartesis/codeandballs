@@ -13,13 +13,19 @@
  <%
      
      //Response.Write("<p>"+ConfigDB.getPad()+"</p>");
-     
-     List<int> lijst = DatabankConnector.test();
+
+     DatabankConnector.Insert(0, 3, "greg", "greg", "greg","greg");
+
+     List<int> lijst = DatabankConnector.GetData();
      foreach (int id in lijst) 
      {
          Response.Write("<p>"+id+"</p>");
         
      }
+     
+     
+     
+     
       
 %>
     </div>
