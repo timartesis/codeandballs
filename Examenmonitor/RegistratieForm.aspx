@@ -68,7 +68,7 @@
             <asp:TextBox ID="wachtwoord2TextBox" runat="server"></asp:TextBox>
         </p>
 
-        <p><asp:Button ID="registeerButton" runat="server" Text="Registreer" /></p>
+        <p><asp:Button ID="registeerButton" runat="server" Text="Registreer" OnClick="registeerButton_Click" /></p>
     
     </div>
     </form>

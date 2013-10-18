@@ -14,8 +14,6 @@ namespace Examenmonitor
 
         }
 
-        
-
         protected void wwValidator(object sender, ServerValidateEventArgs e)
         {
             e.IsValid = Validatie.ControleerWachtwoord(e.ToString());
@@ -26,10 +24,15 @@ namespace Examenmonitor
             
         }
 
-        protected void CustomValidatorVoorNaam_ServerValidate(object source, ServerValidateEventArgs args)
+        protected void CustomValidatorVoorNaam_ServerValidate(object source, ServerValidateEventArgs e)
         {
-            args.IsValid = Validatie.ControleerNaam(args.ToString());
-            //args.IsValid = false;
+            e.IsValid = Validatie.ControleerNaam(e.Value);
+            //e.IsValid = false;
+        }
+
+        protected void registeerButton_Click(object sender, EventArgs e)
+        {
+        
         }
     }
 }
