@@ -9,27 +9,26 @@ namespace Examenmonitor
 {
     public class Validatie
     {
-        private static Regex JuisteMailRegex = MaakJuisteEmailRegex();
-
-        private static Regex MaakJuisteEmailRegex()
-        {
-
-            string mailPatroon = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
-                + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)"
-                + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+        private static string mailPatroon = @"(?=^.{0,255}$)^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
+          + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)"
+          + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+        private static string gebrNaamPatroon = @"(?=^.{0,255}$)^[a-zA-Z][-\w.]{0,255}([a-zA-Z\d]|(?<![-.])_)$";
         
 
-            //Reguliere expressie die het patroon van een email zal controleren om te zien of deze juist is,
-            //controleert NIET of het adres geldig is.
+        //Reguliere expressies die het patroon van een email en gebruikersnaam sullen controleren om te zien of deze juist zijn,
+        //controleren NIET of het adres geldig is.
 
-            return new Regex(mailPatroon, RegexOptions.IgnoreCase);
-        }
+        private static Regex JuisteMailRegex = new Regex(mailPatroon, RegexOptions.IgnoreCase);
+        private static Regex JuisteGebrNaamRegex = new Regex(gebrNaamPatroon, RegexOptions.Compiled);
 
         public static bool Email(string mail)
         {
             return JuisteMailRegex.IsMatch(mail);
         }
 
+        public static bool GebruikersNaam(string naam)
+        {
+            return JuisteGebrNaamRegex.IsMatch(naam);
         //tussen 8 en 20 karakters, bevat minstens 1 cijfer, minstens 1 hoofdletter en minstens 1 kleine letter en geen whitespaces.
         private static string regExWachtwoord = @"(?=^.{8,20}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$";
         static Regex expressieWachtwoord = new Regex(regExWachtwoord, RegexOptions.Compiled);
