@@ -39,6 +39,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SQLite.Designer">
+      <HintPath>Externals\SQLite.Designer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Externals\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>Externals\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -57,10 +66,19 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DebugPaginaTim.aspx" />
     <Content Include="RegistratieForm.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabankConnector.cs" />
+    <Compile Include="DebugPaginaTim.aspx.cs">
+      <DependentUpon>DebugPaginaTim.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DebugPaginaTim.aspx.designer.cs">
+      <DependentUpon>DebugPaginaTim.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Validatie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistratieForm.aspx.cs">
