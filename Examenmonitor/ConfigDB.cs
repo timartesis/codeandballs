@@ -7,7 +7,7 @@ namespace Examenmonitor
 {
     public static class ConfigDB
     {
-        const String Pad = "E:\\Users\\Tim\\Documents\\Bedrijfontwikkelshit\\Examenmonitor\\codeandballs\\Examenmonitor\\Database\\db";
+        const String Pad = "E:\\Users\\hgf\\Documents\\Bedrijfontwikkelshit\\Examenmonitor\\codeandballs\\Examenmonitor\\Database\\db";
         
     
         public static String getPad()
