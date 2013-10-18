@@ -12,9 +12,13 @@ namespace Examenmonitor
 
         private static Regex MaakJuisteEmailRegex()
         {
+
             string mailPatroon = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
                 + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)"
                 + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+
+            //Reguliere expressie die het patroon van een email zal controleren om te zien of deze juist is,
+            //controleert NIET of het adres geldig is.
 
             return new Regex(mailPatroon, RegexOptions.IgnoreCase);
         }
