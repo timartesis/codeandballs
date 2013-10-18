@@ -7,14 +7,9 @@ using System.Web.UI.WebControls;
 
 namespace Examenmonitor
 {
-    public partial class RegistratieForm : System.Web.UI.Page
+    public partial class DebugPaginaTim : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void TextBox2_TextChanged(object sender, EventArgs e)
         {
 
         }
