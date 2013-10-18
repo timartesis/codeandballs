@@ -39,6 +39,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SQLite.Designer">
+      <HintPath>Externals\SQLite.Designer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.88.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Externals\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.88.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Externals\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -57,10 +68,20 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DebugPaginaTim.aspx" />
     <Content Include="RegistratieForm.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigDB.cs" />
+    <Compile Include="DatabankConnector.cs" />
+    <Compile Include="DebugPaginaTim.aspx.cs">
+      <DependentUpon>DebugPaginaTim.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DebugPaginaTim.aspx.designer.cs">
+      <DependentUpon>DebugPaginaTim.aspx</DependentUpon>
+    </Compile>
     <Compile Include="RegistratieForm.aspx.cs">
       <DependentUpon>RegistratieForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
