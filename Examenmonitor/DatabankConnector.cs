@@ -8,18 +8,13 @@ namespace Examenmonitor
 {
     public static class DatabankConnector
     {
-        String pad = ConfigDB.getPad();
-        var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
-
-        public static void OpenConnection()
-        {
-
-            conn.Open();
-        }
+        
 
         public static List<int> GetData()
         {
-            
+            String pad = ConfigDB.getPad();
+            var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
+            conn.Open();
             List<int> lijst = new List<int>();
             
             //var conn = new SQLiteConnection(@"data source=E:\Users\Tim\Documents\Bedrijfontwikkelshit\Examenmonitor\codeandballs\Examenmonitor\Database\db");
@@ -36,9 +31,17 @@ namespace Examenmonitor
             return lijst;
         }
 
-        public static void Insert()
+        public static void Insert(int actief, int id, string email, string wachtwoord, string voornaam, string achternaam)
         {
+            String pad = ConfigDB.getPad();
+            var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
+            conn.Open();
 
+            var cmd = conn.CreateCommand();
+
+            cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
+
+            conn.Close();
         }
         
     }
