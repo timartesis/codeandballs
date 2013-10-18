@@ -6,7 +6,30 @@
 <head runat="server">
     <title>Registratie nieuwe gebruiker</title>
 
+    <script language="javascript">
+        function validateVoorNaam(oSrc, args) {
+            /*var iDay, iMonth, iYear;
+            var arrValues;
+            arrValues = args.Value.split("/");
+            iMonth = arrValues[0];
+            iDay = arrValues[1];
+            iYear = arrValues[2];
 
+            var testDate = new Date(iYear, iMonth - 1, iDay);
+            if ((testDate.getDate() != iDay) ||
+                (testDate.getMonth() != iMonth - 1) ||
+                (testDate.getFullYear() != iYear)) {
+                args.IsValid = false;
+                return;
+            }
+
+            return true;*/
+            var test = args.value;
+            var patt1 = new RegExp("(?=^.{2,255}$)[a-zA-Z]+$");
+            document.write(patt1.test(test));
+        }
+
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
