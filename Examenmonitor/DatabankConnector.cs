@@ -7,16 +7,24 @@ using System.Data.SQLite;
 namespace Examenmonitor
 {
     public static class DatabankConnector
-    {       
+    {
+        String pad = ConfigDB.getPad();
+        var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
 
-        public static List<int> test()
+        public static void OpenConnection()
         {
-            String pad = ConfigDB.getPad();
+
+            conn.Open();
+        }
+
+        public static List<int> GetData()
+        {
+            
             List<int> lijst = new List<int>();
-            var conn = new SQLiteConnection(@"data source="+ConfigDB.getPad()+"");
+            
             //var conn = new SQLiteConnection(@"data source=E:\Users\Tim\Documents\Bedrijfontwikkelshit\Examenmonitor\codeandballs\Examenmonitor\Database\db");
             var cmd = conn.CreateCommand();
-            conn.Open();
+            
             cmd.CommandText = "SELECT * FROM tblUsers";
             var reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -26,6 +34,11 @@ namespace Examenmonitor
             }
             conn.Close();
             return lijst;
+        }
+
+        public static void Insert()
+        {
+
         }
         
     }

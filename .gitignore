@@ -108,4 +108,5 @@ Backup*/
 UpgradeLog*.XML
 
 #tim ignore
-ConfigDB.cs
+Examenmonitor/ConfigDB.cs
+*/ConfigDB.cs
