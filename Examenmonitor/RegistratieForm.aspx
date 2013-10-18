@@ -4,7 +4,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Registratie nieuwe gebruiker</title>
+
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -15,7 +17,7 @@
             <asp:TextBox ID="voornaamTextBox" runat="server"></asp:TextBox>
 
             <asp:RequiredFieldValidator ID="RequiredFieldValidatorVoorNaam" runat="server" ControlToValidate="voornaamTextBox" Display="Dynamic" ErrorMessage="Voornaam is Verplicht" ValidationGroup="AllValidators">Verplicht veld</asp:RequiredFieldValidator>
-            <asp:CustomValidator ID="CustomValidatorVoorNaam" runat="server" ControlToValidate="voornaamTextBox" onServerValidate="naamValidator" Display="Dynamic" ErrorMessage="Gebruik enkel het alfabet" ValidationGroup="AllValidators">Enkel A-Z</asp:CustomValidator>
+            <asp:CustomValidator ID="CustomValidatorVoorNaam" runat="server" ControlToValidate="voornaamTextBox"  Display="Dynamic" ErrorMessage="Gebruik enkel het alfabet" ValidationGroup="AllValidators" OnServerValidate="CustomValidatorVoorNaam_ServerValidate">Enkel A-Z</asp:CustomValidator>
 
         </p>
         <p>
