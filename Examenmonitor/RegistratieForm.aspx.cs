@@ -23,7 +23,7 @@ namespace Examenmonitor
 
         protected void TextBox2_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void CustomValidatorVoorNaam_ServerValidate(object source, ServerValidateEventArgs args)
