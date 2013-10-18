@@ -82,8 +82,6 @@
     <Compile Include="DebugPaginaTim.aspx.designer.cs">
       <DependentUpon>DebugPaginaTim.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Validatie.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistratieForm.aspx.cs">
       <DependentUpon>RegistratieForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -91,6 +89,8 @@
     <Compile Include="RegistratieForm.aspx.designer.cs">
       <DependentUpon>RegistratieForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Validatie.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
