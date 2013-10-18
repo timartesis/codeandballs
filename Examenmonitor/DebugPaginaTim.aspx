@@ -11,16 +11,16 @@
     <form id="form1" runat="server">
     <div>
  <%
-     String pad = System.Environment.CurrentDirectory;
-     Response.Write("<p>"+pad+"</p>");
-     /*
+     
+     //Response.Write("<p>"+ConfigDB.getPad()+"</p>");
+     
      List<int> lijst = DatabankConnector.test();
      foreach (int id in lijst) 
      {
          Response.Write("<p>"+id+"</p>");
         
      }
-      * */
+      
 %>
     </div>
     </form>
