@@ -14,6 +14,25 @@ namespace Examenmonitor
 
         }
 
+        protected void naamValidator(object sender, ServerValidateEventArgs e)
+        {
+            bool check = true;
+            for (int i = 0; i > e.ToString().Length; i++)
+            {
+                if (!(char.IsLetter(e.ToString()[i])))
+                {
+                    check = false;
+                }
+            }
+            e.IsValid = check;
+
+        }
+
+        protected void wwValidator(object sender, ServerValidateEventArgs e)
+        {
+
+        }
+
         protected void TextBox2_TextChanged(object sender, EventArgs e)
         {
 
