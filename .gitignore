@@ -109,3 +109,4 @@ UpgradeLog*.XML
 
 #tim ignore
 Examenmonitor/ConfigDB.cs
+\!ConfigDB.cs
