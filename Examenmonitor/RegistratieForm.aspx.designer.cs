@@ -40,6 +40,24 @@ namespace Examenmonitor {
         protected global::System.Web.UI.WebControls.TextBox voornaamTextBox;
         
         /// <summary>
+        /// RequiredFieldValidatorVoorNaam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorVoorNaam;
+        
+        /// <summary>
+        /// CustomValidatorVoorNaam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorVoorNaam;
+        
+        /// <summary>
         /// achternaamLabel control.
         /// </summary>
         /// <remarks>
@@ -56,6 +74,15 @@ namespace Examenmonitor {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox achternaamTextBox;
+        
+        /// <summary>
+        /// RequiredFieldValidatorAchterNaam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorAchterNaam;
         
         /// <summary>
         /// emailLabel control.
@@ -76,6 +103,24 @@ namespace Examenmonitor {
         protected global::System.Web.UI.WebControls.TextBox emailTextBox;
         
         /// <summary>
+        /// RequiredFieldValidatorEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorEmail;
+        
+        /// <summary>
+        /// RegularExpressionValidatorEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorEmail;
+        
+        /// <summary>
         /// wachtwoord1Label control.
         /// </summary>
         /// <remarks>
@@ -92,6 +137,24 @@ namespace Examenmonitor {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox wachtwoord1TextBox;
+        
+        /// <summary>
+        /// RequiredFieldValidatorWW1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorWW1;
+        
+        /// <summary>
+        /// CustomValidatorWW1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorWW1;
         
         /// <summary>
         /// wachtwoord2Label control.
