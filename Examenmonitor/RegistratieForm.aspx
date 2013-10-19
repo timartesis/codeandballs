@@ -8,16 +8,7 @@
 
     <%-- javascript--%>
     <script type="text/javascript" >
-        function validateNaam(oSrc, args) {
-            var voorNaam = document.getElementById("Voornaam");;
-            var regex = /^[a-zA-Z ]{2,30}$/;
-            
-            if (voorNaam.match(regex)) {
-                alert("Gelieve geen ongeldige tekens te gebruiken voor uw naam aub.");
-                return false;
-            }
-        }
-
+        
     </script>
     <%-- CSS sheet link--%>
     <link href="Content/Site.css" rel="stylesheet" type="text/css" />
@@ -92,7 +83,7 @@
                             </li>
                         </ol>
                         <%-- Registreer button --%>
-                        <asp:Button ID="Button1" runat="server" CommandName="MoveNext" Text="Register" />
+                        <asp:Button ID="buttonRegistreer" runat="server" CommandName="MoveNext" Text="Registreer" OnClick="buttonRegistreer_Click" />
         </fieldset>
         <%-- Einde fieldset --%>
     

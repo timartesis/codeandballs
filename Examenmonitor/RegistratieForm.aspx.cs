@@ -14,39 +14,16 @@ namespace Examenmonitor
 
         }
 
-        protected void wwValidator(object sender, ServerValidateEventArgs e)
-        {
-            e.IsValid = Validatie.ControleerWachtwoord(e.ToString());
-        }
-
-        protected void TextBox2_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        protected void CustomValidatorVoorNaam_ServerValidate(object source, ServerValidateEventArgs e)
-        {
-            //args.IsValid = Validatie.ControleerNaam(args.Value.ToString());
-            //e.IsValid = false;
-        }
-
-        protected void registeerButton_Click(object sender, EventArgs e)
-        {
         
-        }
 
-        protected void CustomValidatorGebruikersnaam_ServerValidate(object source, ServerValidateEventArgs args)
+        protected void buttonRegistreer_Click(object sender, EventArgs e)
         {
-            try
+            if (Page.IsValid)
             {
-                args.IsValid = Validatie.ControleerNaam(args.Value.ToString());
+                //TODO registratie code
             }
-            catch 
-            {
-
-                args.IsValid = false;
-            }
-            
         }
+
+        
     }
 }
