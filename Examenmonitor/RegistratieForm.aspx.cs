@@ -34,5 +34,19 @@ namespace Examenmonitor
         {
         
         }
+
+        protected void CustomValidatorGebruikersnaam_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            try
+            {
+                args.IsValid = Validatie.ControleerNaam(args.Value.ToString());
+            }
+            catch 
+            {
+
+                args.IsValid = false;
+            }
+            
+        }
     }
 }

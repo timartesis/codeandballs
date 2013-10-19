@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RegistratieForm.aspx.cs" Inherits="Examenmonitor.RegistratieForm" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"   CodeBehind="RegistratieForm.aspx.cs" Inherits="Examenmonitor.RegistratieForm" %>
 
 <!DOCTYPE html>
 
@@ -6,13 +6,24 @@
 <head runat="server">
     <title>Registratie nieuwe gebruiker</title>
 
-    <script >
-        
+    <%-- javascript--%>
+    <script type="text/javascript" >
+        function validateNaam(oSrc, args) {
+            var voorNaam = document.getElementById("Voornaam");;
+            var regex = /^[a-zA-Z ]{2,30}$/;
+            
+            if (voorNaam.match(regex)) {
+                alert("Gelieve geen ongeldige tekens te gebruiken voor uw naam aub.");
+                return false;
+            }
+        }
 
     </script>
+    <%-- CSS sheet link--%>
+    <link href="Content/Site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="formRegistratie" runat="server">
     <div style="height: 94px; width: 920px">
     
         <%-- Begin fieldset --%>
@@ -20,32 +31,50 @@
                         <legend>Registration Form</legend>
                         <ol>
                             <li>
-                                <%-- Gebruikersnaam label, textbox en validator --%>
-                                <asp:Label ID="Label1" runat="server" AssociatedControlID="UserName">User name</asp:Label>
-                                <asp:TextBox runat="server" ID="UserName" />
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="UserName"
-                                    CssClass="field-validation-error" ErrorMessage="The user name field is required." />
+                                <%-- Gebruikersnaam label, textbox en validator --%>&nbsp;<asp:Label ID="Label1" runat="server" AssociatedControlID="Email">Voornaam: </asp:Label>
+                                <asp:TextBox runat="server" ID="Voornaam" />
+                                <%-- Validator om te zien of het veld is ingevuld --%>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Voornaam"
+                                    CssClass="field-validation-error" ErrorMessage="Voornaam is een verplicht veld" />
+                                <%-- Regex validator --%>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorVoorNaam" runat="server" ControlToValidate="Voornaam" 
+                                    CssClass="field-validation-error" Display="Dynamic" ValidationExpression="^[a-zA-Z'.\s]{1,40}$"
+                                    ErrorMessage="Gebruik geen ongeldige tekens in uw naam aub!"></asp:RegularExpressionValidator>
+                            </li>
+                            <li>
+                                <asp:Label ID="Label5" runat="server" Text="Achternaam: "></asp:Label>
+                                <asp:TextBox ID="TextBoxAchterNaam" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorAchterNaam" runat="server" ControlToValidate="TextBoxAchterNaam" CssClass="field-validation-error" Display="Dynamic" ErrorMessage="Achternaam is een verplicht veld!"></asp:RequiredFieldValidator>
                             </li>
                             <li>
                                 <%-- Email label, textbox en validator --%>
-                                <asp:Label ID="Label2" runat="server" AssociatedControlID="Email">Email address</asp:Label>
+                                <asp:Label ID="Label2" runat="server" AssociatedControlID="Email">Email: </asp:Label>
                                 <asp:TextBox runat="server" ID="Email" TextMode="Email" />
+                                <%-- Validator om te zien of het veld is ingevuld --%>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Email"
-                                    CssClass="field-validation-error" ErrorMessage="The email address field is required." />
+                                    CssClass="field-validation-error" ErrorMessage="Email is een verplicht veld!" />
                             </li>
                             <li>
-                                <%-- Passwoord label, textbox en validator --%>
-                                <asp:Label ID="Label3" runat="server" AssociatedControlID="Password">Password</asp:Label>
+                                <%-- Passwoord label en textbox --%>
+                                <asp:Label ID="Label3" runat="server" AssociatedControlID="Password">Wachtwoord: </asp:Label>
                                 <asp:TextBox runat="server" ID="Password" TextMode="Password" />
+                                <%-- Validator om te zien of het veld is ingevuld--%>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="Password"
-                                    CssClass="field-validation-error" ErrorMessage="The password field is required." />
+                                    CssClass="field-validation-error" ErrorMessage="Wachtwoord is een verplicht veld!" />
+                                <%-- Validator om te zien of er geen illegale expressions inzitten --%>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorWachtwoord" runat="server" 
+                                    ControlToValidate="Password" CssClass="field-validation-error" Display="Dynamic" 
+                                    ValidationExpression="(?=^.{8,20}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$"
+                                    ErrorMessage="Een wachtwoord moet bestaan uit 8 tot 20 tekens en moet minstens 1 Uppercase, 1 lowercase en 1 cijfer bevatten."></asp:RegularExpressionValidator>
                             </li>
                             <li>
-                                <%-- Passwoord label, textbox en validators --%>
-                                <asp:Label ID="Label4" runat="server" AssociatedControlID="ConfirmPassword">Confirm password</asp:Label>
+                                <%-- Confirm Passwoord label en textbox --%>
+                                <asp:Label ID="Label4" runat="server" AssociatedControlID="ConfirmPassword">Bevestig Wachtwoord</asp:Label>
                                 <asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" />
+                                <%-- Validator om te zien of het veld is ingevuld --%>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ConfirmPassword"
-                                     CssClass="field-validation-error" Display="Dynamic" ErrorMessage="The confirm password field is required." />
+                                     CssClass="field-validation-error" Display="Dynamic" ErrorMessage="Bevestig wachtwoord is een verplicht veld!" />
+                                <%-- Validator om te zien of het passwoord hetzelfde is --%>
                                 <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="Password" ControlToValidate="ConfirmPassword"
                                      CssClass="field-validation-error" Display="Dynamic" ErrorMessage="The password and confirmation password do not match." />
                             </li>
