@@ -29,7 +29,7 @@
                                     CssClass="field-validation-error" ErrorMessage="Voornaam is een verplicht veld" />
                                 <%-- Regex validator --%>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidatorVoorNaam" runat="server" ControlToValidate="Voornaam" 
-                                    CssClass="field-validation-error" Display="Dynamic" ValidationExpression="^[a-zA-Z'.\s]{1,40}$"
+                                    CssClass="field-validation-error" Display="Dynamic" ValidationExpression="^[a-zA-Zéëäïöü]{1,40}$"
                                     ErrorMessage="Gebruik geen ongeldige tekens in uw naam aub!"></asp:RegularExpressionValidator>
                             </li>
                             <li>
@@ -42,7 +42,7 @@
                                 <%-- Regex validator --%>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidatorAchternaam" runat="server" 
                                     ControlToValidate="TextBoxAchterNaam" CssClass="field-validation-error" Display="Dynamic" 
-                                    ValidationExpression="^[a-zA-Z'.\s]{1,40}$"
+                                    ValidationExpression="^[a-zA-Zéëäïöü\s]{1,40}$"
                                     ErrorMessage="Gebruik geen ongeldige tekens in uw naam aub!"></asp:RegularExpressionValidator>
                             </li>
                             <li>
