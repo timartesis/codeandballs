@@ -44,7 +44,15 @@
                             <li>
                                 <asp:Label ID="Label5" runat="server" Text="Achternaam: "></asp:Label>
                                 <asp:TextBox ID="TextBoxAchterNaam" runat="server"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorAchterNaam" runat="server" ControlToValidate="TextBoxAchterNaam" CssClass="field-validation-error" Display="Dynamic" ErrorMessage="Achternaam is een verplicht veld!"></asp:RequiredFieldValidator>
+                                <%-- Validator om te zien of het veld is ingevuld --%>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorAchterNaam" runat="server" ControlToValidate="TextBoxAchterNaam" 
+                                    CssClass="field-validation-error" Display="Dynamic" 
+                                    ErrorMessage="Achternaam is een verplicht veld!"></asp:RequiredFieldValidator>
+                                <%-- Regex validator --%>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorAchternaam" runat="server" 
+                                    ControlToValidate="TextBoxAchterNaam" CssClass="field-validation-error" Display="Dynamic" 
+                                    ValidationExpression="^[a-zA-Z'.\s]{1,40}$"
+                                    ErrorMessage="Gebruik geen ongeldige tekens in uw naam aub!"></asp:RegularExpressionValidator>
                             </li>
                             <li>
                                 <%-- Email label, textbox en validator --%>
@@ -53,6 +61,10 @@
                                 <%-- Validator om te zien of het veld is ingevuld --%>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Email"
                                     CssClass="field-validation-error" ErrorMessage="Email is een verplicht veld!" />
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" 
+                                    ControlToValidate="Email" CssClass="field-validation-error" Display="Dynamic" 
+                                    ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
+                                    ErrorMessage="Gebruik geen illegale tekens in uw email aub!"></asp:RegularExpressionValidator>
                             </li>
                             <li>
                                 <%-- Passwoord label en textbox --%>
