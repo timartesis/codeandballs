@@ -34,14 +34,14 @@
                             </li>
                             <li>
                                 <asp:Label ID="Label5" runat="server" Text="Achternaam: "></asp:Label>
-                                <asp:TextBox ID="TextBoxAchterNaam" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="AchterNaam" runat="server"></asp:TextBox>
                                 <%-- Validator om te zien of het veld is ingevuld --%>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorAchterNaam" runat="server" ControlToValidate="TextBoxAchterNaam" 
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorAchterNaam" runat="server" ControlToValidate="AchterNaam" 
                                     CssClass="field-validation-error" Display="Dynamic" 
                                     ErrorMessage="Achternaam is een verplicht veld!"></asp:RequiredFieldValidator>
                                 <%-- Regex validator --%>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidatorAchternaam" runat="server" 
-                                    ControlToValidate="TextBoxAchterNaam" CssClass="field-validation-error" Display="Dynamic" 
+                                    ControlToValidate="AchterNaam" CssClass="field-validation-error" Display="Dynamic" 
                                     ValidationExpression="^[a-zA-Zéëäïöü\s]{1,40}$"
                                     ErrorMessage="Gebruik geen ongeldige tekens in uw naam aub!"></asp:RegularExpressionValidator>
                             </li>
@@ -79,7 +79,7 @@
                                      CssClass="field-validation-error" Display="Dynamic" ErrorMessage="Bevestig wachtwoord is een verplicht veld!" />
                                 <%-- Validator om te zien of het passwoord hetzelfde is --%>
                                 <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="Password" ControlToValidate="ConfirmPassword"
-                                     CssClass="field-validation-error" Display="Dynamic" ErrorMessage="The password and confirmation password do not match." />
+                                     CssClass="field-validation-error" Display="Dynamic" ErrorMessage="Het wachtwoord komt niet overeen!" />
                             </li>
                         </ol>
                         <%-- Registreer button --%>

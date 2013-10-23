@@ -20,8 +20,16 @@ namespace Examenmonitor
         {
             if (Page.IsValid)
             {
-                //TODO registratie code
+                //Code om values uit de form te halen
+                //@tim moet da hier al gehashed worden of nog niet ? 
+                string voorNaam = Voornaam.Text;
+                string achterNaam = AchterNaam.Text;
+                string email = Email.Text;
+                string wachtwoord = ConfirmPassword.Text;
+                //TODO passen naar DB handler
+                //TODO terug naar home gaan
             }
+
         }
 
         
