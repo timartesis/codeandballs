@@ -47,9 +47,10 @@
         <fieldset>
             <legend>Registreer hier!</legend>
                 <%-- Registreer button --%>
-                <asp:Button ID="buttonRegistreerHier" runat="server" CommandName="MoveNext" Text="Registreer hier!!" 
+                <% /*<asp:Button ID="buttonRegistreerHier" runat="server" CommandName="MoveNext" Text="Registreer hier!!" 
                     OnClick="buttonRegistreerHier_Click" OnClientClick="window.location.href='RegistratieForm.aspx'" 
-                    PostBackUrl="~/RegistratieForm.aspx" />
+                    PostBackUrl="~/RegistratieForm.aspx" />*/ %>
+            <a href="~/RegistratieForm.aspx">Registreer</a>
         </fieldset>
         <%-- Einde fieldset --%>
 
