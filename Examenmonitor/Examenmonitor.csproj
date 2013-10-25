@@ -70,6 +70,7 @@
   <ItemGroup>
     <Content Include="Content\Site.css" />
     <Content Include="DebugPaginaTim.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="RegistratieForm.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -84,6 +85,13 @@
     </Compile>
     <Compile Include="DebugPaginaTim.aspx.designer.cs">
       <DependentUpon>DebugPaginaTim.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="RegistratieForm.aspx.cs">
       <DependentUpon>RegistratieForm.aspx</DependentUpon>

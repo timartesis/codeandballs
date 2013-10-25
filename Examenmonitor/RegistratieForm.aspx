@@ -19,32 +19,8 @@
     
         <%-- Begin fieldset --%>
         <fieldset>
-                        <legend>Registration Form</legend>
+                        <legend>Inlog Form</legend>
                         <ol>
-                            <li>
-                                <%-- Gebruikersnaam label, textbox en validator --%>&nbsp;<asp:Label ID="Label1" runat="server" AssociatedControlID="Email">Voornaam: </asp:Label>
-                                <asp:TextBox runat="server" ID="Voornaam" />
-                                <%-- Validator om te zien of het veld is ingevuld --%>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Voornaam"
-                                    CssClass="field-validation-error" ErrorMessage="Voornaam is een verplicht veld" />
-                                <%-- Regex validator --%>
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorVoorNaam" runat="server" ControlToValidate="Voornaam" 
-                                    CssClass="field-validation-error" Display="Dynamic" ValidationExpression="^[a-zA-Zéëäïöü]{1,40}$"
-                                    ErrorMessage="Gebruik geen ongeldige tekens in uw naam aub!"></asp:RegularExpressionValidator>
-                            </li>
-                            <li>
-                                <asp:Label ID="Label5" runat="server" Text="Achternaam: "></asp:Label>
-                                <asp:TextBox ID="AchterNaam" runat="server"></asp:TextBox>
-                                <%-- Validator om te zien of het veld is ingevuld --%>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorAchterNaam" runat="server" ControlToValidate="AchterNaam" 
-                                    CssClass="field-validation-error" Display="Dynamic" 
-                                    ErrorMessage="Achternaam is een verplicht veld!"></asp:RequiredFieldValidator>
-                                <%-- Regex validator --%>
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorAchternaam" runat="server" 
-                                    ControlToValidate="AchterNaam" CssClass="field-validation-error" Display="Dynamic" 
-                                    ValidationExpression="^[a-zA-Zéëäïöü\s]{1,40}$"
-                                    ErrorMessage="Gebruik geen ongeldige tekens in uw naam aub!"></asp:RegularExpressionValidator>
-                            </li>
                             <li>
                                 <%-- Email label, textbox en validator --%>
                                 <asp:Label ID="Label2" runat="server" AssociatedControlID="Email">Email: </asp:Label>
@@ -70,20 +46,9 @@
                                     ValidationExpression="(?=^.{8,20}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$"
                                     ErrorMessage="Een wachtwoord moet bestaan uit 8 tot 20 tekens en moet minstens 1 Uppercase, 1 lowercase en 1 cijfer bevatten."></asp:RegularExpressionValidator>
                             </li>
-                            <li>
-                                <%-- Confirm Passwoord label en textbox --%>
-                                <asp:Label ID="Label4" runat="server" AssociatedControlID="ConfirmPassword">Bevestig Wachtwoord</asp:Label>
-                                <asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" />
-                                <%-- Validator om te zien of het veld is ingevuld --%>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ConfirmPassword"
-                                     CssClass="field-validation-error" Display="Dynamic" ErrorMessage="Bevestig wachtwoord is een verplicht veld!" />
-                                <%-- Validator om te zien of het passwoord hetzelfde is --%>
-                                <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="Password" ControlToValidate="ConfirmPassword"
-                                     CssClass="field-validation-error" Display="Dynamic" ErrorMessage="Het wachtwoord komt niet overeen!" />
-                            </li>
                         </ol>
                         <%-- Registreer button --%>
-                        <asp:Button ID="buttonRegistreer" runat="server" CommandName="MoveNext" Text="Registreer" OnClick="buttonRegistreer_Click" />
+                        <asp:Button ID="buttonLogIn" runat="server" CommandName="MoveNext" Text="Log in" OnClick="buttonLogIn_Click" />
         </fieldset>
         <%-- Einde fieldset --%>
     
