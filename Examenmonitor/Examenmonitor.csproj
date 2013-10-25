@@ -68,7 +68,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Site.css" />
+    <Content Include="Resources\Site.css" />
     <Content Include="DebugPaginaTim.aspx" />
     <Content Include="MailTestYentl.aspx" />
     <Content Include="Login.aspx" />
@@ -101,7 +101,6 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-
     <Compile Include="RegistratieForm.aspx.cs">
       <DependentUpon>RegistratieForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -109,6 +108,7 @@
     <Compile Include="RegistratieForm.aspx.designer.cs">
       <DependentUpon>RegistratieForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RegistratieMail.cs" />
     <Compile Include="Validatie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -119,6 +119,9 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Images\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
