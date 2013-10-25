@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SQLite;
+using System.Text.RegularExpressions;
 
 namespace Examenmonitor
 {
     public static class DatabankConnector
     {
-        
+        private static string SanitizeHtml(string html)
+        {
+            string acceptable = "";
+            string stringPattern = @"</?(?(?=" + acceptable + @")notag|[a-zA-Z0-9]+)(?:\s[a-zA-Z0-9\-]+=?(?:(["",']?).*?\1?)?)*\s*/?>";
+            return Regex.Replace(html, stringPattern,"");
+        }
 
         public static List<int> GetData()
         {
@@ -31,7 +37,7 @@ namespace Examenmonitor
             return lijst;
         }
 
-        public static void Insert(int actief, int id, string email, string wachtwoord, string voornaam, string achternaam)
+        public static void InsertGebruiker( string email, string wachtwoord, string voornaam, string achternaam)
         {
             String pad = ConfigDB.getPad();
             var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
@@ -39,8 +45,13 @@ namespace Examenmonitor
 
             var cmd = conn.CreateCommand();
 
-            cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
+            
+            //cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
+            string SQL = "INSERT INTO tblUsers (actief, email,wachtwoord,achternaam,voornaam) VALUES";
+            SQL += "(0, '"+SanitizeHtml(email)+"','"+wachtwoord+"','"+SanitizeHtml(achternaam)+"','"+SanitizeHtml(voornaam)+"')";
 
+            cmd.CommandText = SQL;
+            cmd.ExecuteNonQuery();
             conn.Close();
         }
         
