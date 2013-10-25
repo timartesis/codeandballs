@@ -31,7 +31,7 @@ namespace Examenmonitor
             return lijst;
         }
 
-        public static void InsertGebruiker(int id, string email, string wachtwoord, string voornaam, string achternaam)
+        public static void InsertGebruiker( string email, string wachtwoord, string voornaam, string achternaam)
         {
             String pad = ConfigDB.getPad();
             var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
@@ -41,8 +41,8 @@ namespace Examenmonitor
 
             
             //cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
-            string SQL = "INSERT INTO tblUsers (actief, email,wachtwoord,achternaam,voornaam, id) VALUES";
-            SQL += "(0, '"+email+"','"+wachtwoord+"','"+achternaam+"','"+voornaam+"','"+ id+"')";
+            string SQL = "INSERT INTO tblUsers (actief, email,wachtwoord,achternaam,voornaam) VALUES";
+            SQL += "(0, '"+email+"','"+wachtwoord+"','"+achternaam+"','"+voornaam+"')";
 
             cmd.CommandText = SQL;
             cmd.ExecuteNonQuery();
