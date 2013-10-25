@@ -101,7 +101,6 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-
     <Compile Include="RegistratieForm.aspx.cs">
       <DependentUpon>RegistratieForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -109,6 +108,7 @@
     <Compile Include="RegistratieForm.aspx.designer.cs">
       <DependentUpon>RegistratieForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RegistratieMail.cs" />
     <Compile Include="Validatie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
