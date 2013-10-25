@@ -1,23 +1,12 @@
 ﻿body {
 }
 
+td { text-align: left; }
+
 
 
 /* Buttons*/
-.RegistreerButton {
+.RegistreerButton
+{
     /*TODO DIV POSITIONING*/
-   }
-
-/*Errors*/
-.message-error {
-    clear: both;
-    color: #e80c4d;
-    font-size: 1.1em;
-    font-weight: bold;
-    margin: 20px 0 10px 0;
-}
-
-.field-validation-error {
-    color: #e80c4d;
-    font-weight: bold;
 }
