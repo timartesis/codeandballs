@@ -14,7 +14,7 @@
      
      //Response.Write("<p>"+ConfigDB.getPad()+"</p>");
 
-     DatabankConnector.Insert(0, 3, "greg", "greg", "greg","greg");
+     DatabankConnector.InsertGebruiker(3, "greg", "greg", "greg","greg");
 
      List<int> lijst = DatabankConnector.GetData();
      foreach (int id in lijst) 
