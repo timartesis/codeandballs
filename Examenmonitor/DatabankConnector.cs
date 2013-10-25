@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SQLite;
+using System.Text.RegularExpressions;
 
 namespace Examenmonitor
 {
     public static class DatabankConnector
     {
-        
+        private static string SanitizeHtml(string html)
+        {
+            string acceptable = "";
+            string stringPattern = @"</?(?(?=" + acceptable + @")notag|[a-zA-Z0-9]+)(?:\s[a-zA-Z0-9\-]+=?(?:(["",']?).*?\1?)?)*\s*/?>";
+            return Regex.Replace(html, stringPattern,"");
+        }
 
         public static List<int> GetData()
         {
