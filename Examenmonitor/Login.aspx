@@ -44,14 +44,12 @@
         <%-- Einde fieldset --%>
 
         <%-- Begin fieldset --%>
-        <fieldset>
-            <legend>Registreer hier!</legend>
+        <div id="RegisterButton" >
                 <%-- Registreer button --%>
-                <% /*<asp:Button ID="buttonRegistreerHier" runat="server" CommandName="MoveNext" Text="Registreer hier!!" 
+                <asp:Button ID="buttonRegistreerHier" runat="server" CommandName="MoveNext" Text="Registreer hier!!" 
                     OnClick="buttonRegistreerHier_Click" OnClientClick="window.location.href='RegistratieForm.aspx'" 
-                    PostBackUrl="~/RegistratieForm.aspx" />*/ %>
-            <a href="RegistratieForm.aspx">Registreer</a>
-        </fieldset>
+                    PostBackUrl="~/RegistratieForm.aspx" CausesValidation="false"/>
+        </div>
         <%-- Einde fieldset --%>
 
     </div>
