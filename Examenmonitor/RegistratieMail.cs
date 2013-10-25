@@ -38,7 +38,7 @@ namespace Examenmonitor
             mailBericht.To.Add(ontvanger);
             mailBericht.Subject = ONDERWERP;
             mailBericht.Body = OpstellenBericht(naam, randomLink).ToString();
-            mailBericht.IsBodyHtml = false;
+            mailBericht.IsBodyHtml = true;
 
             try
             {
@@ -55,8 +55,21 @@ namespace Examenmonitor
         private StringBuilder OpstellenBericht(string naam, string randomLink)
         {
             StringBuilder bericht = new StringBuilder();
-            bericht.Append("Beste " + naam + ",\n\nDank u voor het maken van een account.\nNavigeer naar de volgende link om uw account te activeren.\nDeze link is 2 dagen geldig.\n\n"
-                + randomLink + "\nIndien u deze registratie niet had aangevraagd, gelieve dan deze mail te negeren.");
+            //bericht.Append("Beste " + naam + ",\n\nDank u voor het maken van een account.\nNavigeer naar de volgende link om uw account te activeren.\nDeze link is 2 dagen geldig.\n\n"
+            //    + randomLink + "\nIndien u deze registratie niet had aangevraagd, gelieve dan deze mail te negeren.");
+
+
+            const string beginUrl = "http://localhost:50157/";
+
+            bericht.Append("<h2>Beste " + naam + ", </h2>");
+            bericht.Append("<br /><br /><p> Bedankt voor het aanmaken van een account.</p>");
+            bericht.Append("<br /><br /><p> Navigeer naar onderstaande link om uw account te activeren. Deze link is 2 dagen geldig.</p>");
+            bericht.Append("<a href=" + beginUrl + randomLink + ">Activeer Account</a>");
+            bericht.Append("<br /><br /> Indien bovenstaande link niet werkt, kopieer dan volgende link in je browser: " + beginUrl + randomLink);
+            bericht.Append("<br /><br /> Indien u deze registratie niet had aangevraagd, gelieve deze mail dan te negeren!");
+            bericht.Append("<br /><br /> Vriendelijke Groeten,");
+            bericht.Append("<br /> Team Codeandballs.");
+
             return bericht;
         }
 
