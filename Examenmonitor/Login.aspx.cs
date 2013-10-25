@@ -13,5 +13,12 @@ namespace Examenmonitor
         {
 
         }
+
+        protected void buttonRegistreerHier_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        
     }
 }
