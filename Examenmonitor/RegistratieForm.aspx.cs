@@ -9,9 +9,10 @@ namespace Examenmonitor
 {
     public partial class RegistratieForm : System.Web.UI.Page
     {
+        private RegistratieMail registratieMail;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            registratieMail = RegistratieMail.getInstance();
         }
 
         
@@ -28,7 +29,8 @@ namespace Examenmonitor
                 string wachtwoord = ConfirmPassword.Text;
                 //TODO passen naar DB handler
                 //TODO terug naar home gaan
-
+                string volledigeNaam = voorNaam + " " + achterNaam;
+                registratieMail.ZendRegistratieMail(volledigeNaam, email, "Test Link");
                 DatabankConnector.InsertGebruiker(email, wachtwoord, voorNaam, achterNaam);
             }
 
