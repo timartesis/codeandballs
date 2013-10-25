@@ -11,7 +11,7 @@
         
     </script>
     <%-- CSS sheet link--%>
-    <link href="Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <form id="formRegistratie" runat="server">
