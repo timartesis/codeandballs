@@ -12,11 +12,13 @@
     <div>
  <%
      //code hier fucker
-
-     List<int> lijst = DatabankConnector.GetData();
-     foreach (int id in lijst) {
-         Response.Write(id);
+     DatabankConnector.RegistratieMail("tim@gmail.com");
+     NameValueCollection lijst1 = DatabankConnector.GetData();
+     foreach (string s in DatabankConnector.PrintKeysAndValues(lijst1))
+     {
+         Response.Write(s);
      }
+     
      
      
      

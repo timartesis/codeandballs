@@ -6,6 +6,8 @@ using System.Data.SQLite;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
 using System.Text;
+using System.Collections;
+using System.Collections.Specialized;
 
 namespace Examenmonitor
 {
@@ -64,27 +66,34 @@ namespace Examenmonitor
             conn.Close();
             
         }
+
+        public static List<string> PrintKeysAndValues(NameValueCollection myCol)
+        {
+            List<string> lijst = new List<string>();
+
+            foreach (String s in myCol.AllKeys)
+            {
+                lijst.Add(s + " " + myCol[s]);
+            }
+            return lijst;
+        }
         
         //voorbeeld code voor connecties, NIET GEBRUIKEN IN PRODUCTIE
-        public static List<int> GetData() 
+        public static NameValueCollection GetData() 
         {
             String pad = ConfigDB.getPad();
             var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
             conn.Open();
-            List<int> lijst = new List<int>();
+            List<string> lijst = new List<string>();
             
             //var conn = new SQLiteConnection(@"data source=E:\Users\Tim\Documents\Bedrijfontwikkelshit\Examenmonitor\codeandballs\Examenmonitor\Database\db");
             var cmd = conn.CreateCommand();
 
             cmd.CommandText = "SELECT last_insert_rowid()";
             var reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-            int id = reader.GetInt32(reader.GetOrdinal("id"));
-            lijst.Add(id);
-            }
+            NameValueCollection col = reader.GetValues();
             conn.Close();
-            return lijst;
+            return col;
         }
 
         public static void InsertGebruiker( string email, string wachtwoord, string voornaam, string achternaam)
