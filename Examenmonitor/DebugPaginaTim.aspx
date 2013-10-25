@@ -11,17 +11,8 @@
     <form id="form1" runat="server">
     <div>
  <%
+     //code hier fucker
      
-     //Response.Write("<p>"+ConfigDB.getPad()+"</p>");
-
-     DatabankConnector.InsertGebruiker(3, "greg", "greg", "greg","greg");
-
-     List<int> lijst = DatabankConnector.GetData();
-     foreach (int id in lijst) 
-     {
-         Response.Write("<p>"+id+"</p>");
-        
-     }
      
      
      
