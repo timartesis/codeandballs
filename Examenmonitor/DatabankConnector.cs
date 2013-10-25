@@ -75,8 +75,8 @@ namespace Examenmonitor
             
             //var conn = new SQLiteConnection(@"data source=E:\Users\Tim\Documents\Bedrijfontwikkelshit\Examenmonitor\codeandballs\Examenmonitor\Database\db");
             var cmd = conn.CreateCommand();
-            
-            cmd.CommandText = "SELECT * FROM tblUsers";
+
+            cmd.CommandText = "SELECT last_insert_rowid()";
             var reader = cmd.ExecuteReader();
             while (reader.Read())
             {

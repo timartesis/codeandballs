@@ -13,8 +13,11 @@
  <%
      //code hier fucker
 
-     DatabankConnector.RegistratieMail("tim@gmail.com");
-     //Response.Write();
+     List<int> lijst = DatabankConnector.GetData();
+     foreach (int id in lijst) {
+         Response.Write(id);
+     }
+     
      
      
       
