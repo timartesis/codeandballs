@@ -48,7 +48,7 @@ namespace Examenmonitor
             
             //cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
             string SQL = "INSERT INTO tblUsers (actief, email,wachtwoord,achternaam,voornaam) VALUES";
-            SQL += "(0, '"+email+"','"+wachtwoord+"','"+achternaam+"','"+voornaam+"')";
+            SQL += "(0, '"+SanitizeHtml(email)+"','"+wachtwoord+"','"+SanitizeHtml(achternaam)+"','"+SanitizeHtml(voornaam)+"')";
 
             cmd.CommandText = SQL;
             cmd.ExecuteNonQuery();
