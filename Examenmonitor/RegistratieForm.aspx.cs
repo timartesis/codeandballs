@@ -30,8 +30,9 @@ namespace Examenmonitor
                 //TODO passen naar DB handler
                 //TODO terug naar home gaan
                 string volledigeNaam = voorNaam + " " + achterNaam;
-                registratieMail.ZendRegistratieMail(volledigeNaam, email, "Test Link");
+                registratieMail.ZendRegistratieMail(volledigeNaam, email, "Login.aspx");
                 DatabankConnector.InsertGebruiker(email, wachtwoord, voorNaam, achterNaam);
+                Response.Redirect("~/RegistratieVoltooid.aspx");
             }
 
         }
