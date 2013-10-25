@@ -11,7 +11,6 @@ namespace Examenmonitor
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void buttonRegistreerHier_Click(object sender, EventArgs e)
