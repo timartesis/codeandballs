@@ -12,9 +12,9 @@
     <div>
  <%
      //code hier fucker
-     
-     
-     
+
+     DatabankConnector.RegistratieMail("tim@gmail.com");
+     //Response.Write();
      
      
       
