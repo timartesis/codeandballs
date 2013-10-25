@@ -28,6 +28,8 @@ namespace Examenmonitor
                 string wachtwoord = ConfirmPassword.Text;
                 //TODO passen naar DB handler
                 //TODO terug naar home gaan
+
+                DatabankConnector.InsertGebruiker(email, wachtwoord, voorNaam, achterNaam);
             }
 
         }
