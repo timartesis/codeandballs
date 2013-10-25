@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Data.SQLite;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Examenmonitor
 {
@@ -16,7 +18,21 @@ namespace Examenmonitor
             return Regex.Replace(html, stringPattern,"");
         }
 
-        public static List<int> GetData()
+        private static string getHashSha256(string text)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(text);
+            SHA256Managed hashstring = new SHA256Managed();
+            byte[] hash = hashstring.ComputeHash(bytes);
+            string hashString = string.Empty;
+            foreach (byte x in hash)
+            {
+                hashString += String.Format("{0:x2}", x);
+            }
+            return hashString;
+        }
+        
+        //voorbeeld code voor connecties, NIET GEBRUIKEN IN PRODUCTIE
+        public static List<int> GetData() 
         {
             String pad = ConfigDB.getPad();
             var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
@@ -44,11 +60,11 @@ namespace Examenmonitor
             conn.Open();
 
             var cmd = conn.CreateCommand();
-
+            string encryptedWachtwoord = getHashSha256(wachtwoord);
             
             //cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
             string SQL = "INSERT INTO tblUsers (actief, email,wachtwoord,achternaam,voornaam) VALUES";
-            SQL += "(0, '"+SanitizeHtml(email)+"','"+wachtwoord+"','"+SanitizeHtml(achternaam)+"','"+SanitizeHtml(voornaam)+"')";
+            SQL += "(0, '" + SanitizeHtml(email) + "','" + encryptedWachtwoord + "','" + SanitizeHtml(achternaam) + "','" + SanitizeHtml(voornaam) + "')";
 
             cmd.CommandText = SQL;
             cmd.ExecuteNonQuery();
