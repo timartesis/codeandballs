@@ -50,7 +50,7 @@
                 <% /*<asp:Button ID="buttonRegistreerHier" runat="server" CommandName="MoveNext" Text="Registreer hier!!" 
                     OnClick="buttonRegistreerHier_Click" OnClientClick="window.location.href='RegistratieForm.aspx'" 
                     PostBackUrl="~/RegistratieForm.aspx" />*/ %>
-            <a href="~/RegistratieForm.aspx">Registreer</a>
+            <a href="RegistratieForm.aspx">Registreer</a>
         </fieldset>
         <%-- Einde fieldset --%>
 
