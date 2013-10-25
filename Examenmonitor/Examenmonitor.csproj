@@ -68,6 +68,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="RegistratieVoltooid.aspx" />
     <Content Include="Resources\Site.css" />
     <Content Include="DebugPaginaTim.aspx" />
     <Content Include="MailTestYentl.aspx" />
@@ -109,6 +110,13 @@
       <DependentUpon>RegistratieForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="RegistratieMail.cs" />
+    <Compile Include="RegistratieVoltooid.aspx.cs">
+      <DependentUpon>RegistratieVoltooid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistratieVoltooid.aspx.designer.cs">
+      <DependentUpon>RegistratieVoltooid.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Validatie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

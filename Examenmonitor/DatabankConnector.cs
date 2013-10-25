@@ -31,15 +31,38 @@ namespace Examenmonitor
             return hashString;
         }
 
-        public static bool vergelijkPasswoorden(string serverHash, string ingegevenPasswoord) {
+        public static bool vergelijkPasswoorden(string serverHash, string ingegevenPasswoord) 
+        {
             string clientHash = getHashSha256(ingegevenPasswoord);
             return serverHash.Equals(clientHash);
         }
 
-        public static string genereerActivatieHash(string email)
+        private static string genereerActivatieHash(string email)
         {
+            Random generator = new Random();            
+            string randomString = generator.NextDouble().ToString();
+            return getHashSha256(email + randomString);
+        }
 
-            return null;
+        public static void RegistratieMail(string email)
+        {
+            String pad = ConfigDB.getPad();
+            var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
+            conn.Open();
+
+            string datum = DateTime.Today.ToShortDateString();
+            datum += " " + DateTime.Now.ToString("HH:mm:ss");
+
+            string activatieHash = genereerActivatieHash(email);
+
+            string SQL = "INSERT INTO tblActivatie (actief,datum,email,activatieHash) VALUES";
+            SQL += "(1, '" + datum + "','" + email + "','" + activatieHash + "')";
+
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = SQL;
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            
         }
         
         //voorbeeld code voor connecties, NIET GEBRUIKEN IN PRODUCTIE
@@ -52,8 +75,8 @@ namespace Examenmonitor
             
             //var conn = new SQLiteConnection(@"data source=E:\Users\Tim\Documents\Bedrijfontwikkelshit\Examenmonitor\codeandballs\Examenmonitor\Database\db");
             var cmd = conn.CreateCommand();
-            
-            cmd.CommandText = "SELECT * FROM tblUsers";
+
+            cmd.CommandText = "SELECT last_insert_rowid()";
             var reader = cmd.ExecuteReader();
             while (reader.Read())
             {
