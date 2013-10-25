@@ -30,6 +30,11 @@ namespace Examenmonitor
             }
             return hashString;
         }
+
+        public bool vergelijkPasswoorden(string serverHash, string ingegevenPasswoord) {
+            string clientHash = getHashSha256(ingegevenPasswoord);
+            return serverHash.Equals(clientHash);
+        }
         
         //voorbeeld code voor connecties, NIET GEBRUIKEN IN PRODUCTIE
         public static List<int> GetData() 
