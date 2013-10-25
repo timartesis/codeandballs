@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <%-- CSS sheet link--%>
-    <link href="Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
     <title>Log in pagina</title>
 
 </head>
@@ -36,11 +36,6 @@
                                 <%-- Validator om te zien of het veld is ingevuld--%>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="Password"
                                     CssClass="field-validation-error" ErrorMessage="Wachtwoord is een verplicht veld!" />
-                                <%-- Validator om te zien of er geen illegale expressions inzitten --%>
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorWachtwoord" runat="server" 
-                                    ControlToValidate="Password" CssClass="field-validation-error" Display="Dynamic" 
-                                    ValidationExpression="(?=^.{8,20}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$"
-                                    ErrorMessage="Een wachtwoord moet bestaan uit 8 tot 20 tekens en moet minstens 1 Uppercase, 1 lowercase en 1 cijfer bevatten."></asp:RegularExpressionValidator>
                             </li>
                         </ol>
                         <%-- Registreer button --%>
