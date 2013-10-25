@@ -31,7 +31,8 @@ namespace Examenmonitor
             return hashString;
         }
 
-        public bool vergelijkPasswoorden(string serverHash, string ingegevenPasswoord) {
+        public static bool vergelijkPasswoorden(string serverHash, string ingegevenPasswoord) 
+        {
             string clientHash = getHashSha256(ingegevenPasswoord);
             return serverHash.Equals(clientHash);
         }

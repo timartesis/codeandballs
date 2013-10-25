@@ -16,7 +16,7 @@
         <%
             
             RegistratieMail registratieMail = RegistratieMail.getInstance();
-            registratieMail.ZendRegistratieMail("Yentl", "maethe_desmet18@msn.com", "teststringvoorhtmlrandomgeneratedlink");
+            registratieMail.ZendRegistratieMail("Yentl", "yentlfeys@hotmail.com", "teststringvoorhtmlrandomgeneratedlink");
             
         %>
 
