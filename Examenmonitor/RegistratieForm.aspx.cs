@@ -16,20 +16,22 @@ namespace Examenmonitor
 
         
 
-        protected void wwValidator(object sender, ServerValidateEventArgs e)
+        protected void buttonRegistreer_Click(object sender, EventArgs e)
         {
-            e.IsValid = Validatie.ControleerWachtwoord(e.ToString());
+            if (Page.IsValid)
+            {
+                //Code om values uit de form te halen
+                //@tim moet da hier al gehashed worden of nog niet ? 
+                string voorNaam = Voornaam.Text;
+                string achterNaam = AchterNaam.Text;
+                string email = Email.Text;
+                string wachtwoord = ConfirmPassword.Text;
+                //TODO passen naar DB handler
+                //TODO terug naar home gaan
+            }
+
         }
 
-        protected void TextBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void CustomValidatorVoorNaam_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            args.IsValid = Validatie.ControleerNaam(args.ToString());
-            //args.IsValid = false;
-        }
+        
     }
 }

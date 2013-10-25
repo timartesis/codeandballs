@@ -16,7 +16,8 @@ namespace Examenmonitor
         //tussen 8 en 20 karakters, bevat minstens 1 cijfer, minstens 1 hoofdletter en minstens 1 kleine letter en geen whitespaces.
 
         private static string wachtwoordPatroon = @"(?=^.{8,20}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$";
-        private static string naamPatroon = @"(?=^.{2,255}$)[a-zA-Z]+$";
+        private static string voorNaamPatroon = @"(?=^.{1,40}$)[a-zA-Zéëäïöü]+$";
+        private static string achterNaamPatroon = @"(?=^.{1,40}$)[a-zA-Zéëäïöü\s]+$";
 
         //Reguliere expressies die het patroon van een email, gebruikersnaam, wachtwoord en naam zullen controleren om te zien of deze juist zijn,
         //controleren NIET of het adres geldig is.
@@ -24,7 +25,8 @@ namespace Examenmonitor
         private static Regex JuisteMailRegex = new Regex(mailPatroon, RegexOptions.IgnoreCase);
         private static Regex JuisteGebrNaamRegex = new Regex(gebrNaamPatroon, RegexOptions.Compiled);
         private static Regex JuistWachtwRegex = new Regex(wachtwoordPatroon, RegexOptions.Compiled);
-        private static Regex JuisteNaamRegex = new Regex(naamPatroon, RegexOptions.Compiled);
+        private static Regex JuisteVoorNaamRegex = new Regex(voorNaamPatroon, RegexOptions.Compiled);
+        private static Regex JuisteAchterNaamRegex = new Regex(achterNaamPatroon, RegexOptions.Compiled);
 
         public static bool ControleerEmail(string mail)
         {
@@ -41,9 +43,14 @@ namespace Examenmonitor
             return JuistWachtwRegex.IsMatch(wachtwoord);
         }
 
-        public static bool ControleerNaam(string naam)
+        public static bool ControleerVoorNaam(string voorNaam)
         {
-            return JuisteNaamRegex.IsMatch(naam);
+            return JuisteVoorNaamRegex.IsMatch(voorNaam);
+        }
+
+        public static bool ControleerAchterNaam(string achterNaam)
+        {
+            return JuisteAchterNaamRegex.IsMatch(achterNaam);
         }
     }
 }
