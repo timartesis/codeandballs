@@ -29,13 +29,13 @@ namespace Examenmonitor
             client.UseDefaultCredentials = false;
             loginInfo = new NetworkCredential(LOGIN, PASSWOORD);
             client.Credentials = loginInfo;
-            mailBericht = new MailMessage();
         }
+
+        //Onderstaande methode gebruiken voor het zenden van de registratie mail
 
         public bool ZendRegistratieMail(string naam, string ontvanger, string randomLink)
         {
-            mailBericht.From = new MailAddress(ZENDER);
-            mailBericht.To.Add(ontvanger);
+            mailBericht = new MailMessage(new MailAddress(LOGIN, ZENDER), new MailAddress(ontvanger, naam));
             mailBericht.Subject = ONDERWERP;
             mailBericht.Body = OpstellenBericht(naam, randomLink).ToString();
             mailBericht.IsBodyHtml = true;
@@ -52,12 +52,11 @@ namespace Examenmonitor
 
         }
 
+        //Onderstaande methode zal het bericht gaan opstellen met de randomlink
+
         private StringBuilder OpstellenBericht(string naam, string randomLink)
         {
             StringBuilder bericht = new StringBuilder();
-            //bericht.Append("Beste " + naam + ",\n\nDank u voor het maken van een account.\nNavigeer naar de volgende link om uw account te activeren.\nDeze link is 2 dagen geldig.\n\n"
-            //    + randomLink + "\nIndien u deze registratie niet had aangevraagd, gelieve dan deze mail te negeren.");
-
 
             const string beginUrl = "http://localhost:50157/";
 
@@ -72,6 +71,8 @@ namespace Examenmonitor
 
             return bericht;
         }
+
+        //Singleton voor deze klasse, aangezien hier maar 1 instantie van nodig is
 
         public static RegistratieMail getInstance()
         {

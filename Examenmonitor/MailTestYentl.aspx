@@ -16,7 +16,7 @@
         <%
             
             RegistratieMail registratieMail = RegistratieMail.getInstance();
-            registratieMail.ZendRegistratieMail("Yentl", "yentlfeys@hotmail.com", "RegistratieForm.aspx");
+            registratieMail.ZendRegistratieMail("Maëthé Desmet", "maethe_desmet18@msn.com", "RegistratieForm.aspx");
             
         %>
 
