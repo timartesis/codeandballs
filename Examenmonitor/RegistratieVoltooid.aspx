@@ -10,8 +10,8 @@
     <form id="form1" runat="server">
     <div>
         Registratie Voltooid!
-    
     </div>
+        <asp:Button ID="buttonLogin" runat="server" CommandName="MoveNext" Text="Login" OnClick="buttonLogin_Click" />
     </form>
 </body>
 </html>
