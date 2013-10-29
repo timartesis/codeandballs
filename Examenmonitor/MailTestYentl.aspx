@@ -15,8 +15,10 @@
     
         <%
             
-            RegistratieMail registratieMail = RegistratieMail.getInstance();
-            registratieMail.ZendRegistratieMail("Maëthé Desmet", "maethe_desmet18@msn.com", "RegistratieForm.aspx");
+            MailVersturingen mails = MailVersturingen.getInstance();
+            mails.ZendRegistratieMail("Maëthé Desmet", "maethe_desmet18@msn.com", "Login.aspx");
+            mails.ZendPaswoordResetMail("Maëthé Desmet", "maethe_desmet18@msn.com", "Login.aspx");
+            
             
         %>
 

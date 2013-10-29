@@ -109,7 +109,7 @@
     <Compile Include="RegistratieForm.aspx.designer.cs">
       <DependentUpon>RegistratieForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="RegistratieMail.cs" />
+    <Compile Include="MailVersturingen.cs" />
     <Compile Include="RegistratieVoltooid.aspx.cs">
       <DependentUpon>RegistratieVoltooid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

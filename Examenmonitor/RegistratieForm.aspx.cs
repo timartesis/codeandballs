@@ -9,10 +9,10 @@ namespace Examenmonitor
 {
     public partial class RegistratieForm : System.Web.UI.Page
     {
-        private RegistratieMail registratieMail;
+        private MailVersturingen registratieMail;
         protected void Page_Load(object sender, EventArgs e)
         {
-            registratieMail = RegistratieMail.getInstance();
+            registratieMail = MailVersturingen.getInstance();
         }
 
         
