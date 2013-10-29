@@ -75,7 +75,8 @@ namespace Examenmonitor
             bericht.Append("<br /><br /><p> U ontvangt deze mail omdat u een paswoord reset heeft aangevraagd.</p>");
             bericht.Append("<br /><br /><p> Navigeer naar onderstaande link om uw paswoord te resetten. Deze link is 2 dagen geldig.</p>");
             bericht.Append("<a href=" + beginUrl + randomLink + ">Reset Paswoord</a>");
-            bericht.Append("<br /><br /> Indien bovenstaande link niet werkt, kopieer dan volgende link in je browser: " + beginUrl + randomLink);
+            bericht.Append("<br /><br /> Indien bovenstaande link niet werkt, kopieer dan volgende link in je browser:");
+            bericht.Append("<br />" + beginUrl + randomLink);
             bericht.Append("<br /><br /> Indien u deze reset niet had aangevraagd, gelieve deze mail dan te negeren!");
             bericht.Append("<br /><br /> Vriendelijke Groeten,");
             bericht.Append("<br /> Team Codeandballs.");
@@ -93,7 +94,8 @@ namespace Examenmonitor
             bericht.Append("<br /><br /><p> Bedankt voor het aanmaken van een account.</p>");
             bericht.Append("<br /><br /><p> Navigeer naar onderstaande link om uw account te activeren. Deze link is 2 dagen geldig.</p>");
             bericht.Append("<a href=" + beginUrl + randomLink + ">Activeer Account</a>");
-            bericht.Append("<br /><br /> Indien bovenstaande link niet werkt, kopieer dan volgende link in je browser: " + beginUrl + randomLink);
+            bericht.Append("<br /><br /> Indien bovenstaande link niet werkt, kopieer dan volgende link in je browser:");
+            bericht.Append("<br />" + beginUrl + randomLink);
             bericht.Append("<br /><br /> Indien u deze registratie niet had aangevraagd, gelieve deze mail dan te negeren!");
             bericht.Append("<br /><br /> Vriendelijke Groeten,");
             bericht.Append("<br /> Team Codeandballs.");
