@@ -15,7 +15,7 @@ namespace Examenmonitor
         private const string PASSWOORD = "plantesis";
         private const string SMTPCLIENT = "smtp.gmail.com";
         private const string ONDERWERPREGISTRATIE = "Account activatie";
-        private const string ONDERWERPRESET = "Resetten paswoord";
+        private const string ONDERWERPASWOORDRECOVERY = "Resetten paswoord";
         private const int POORT = 587; 
 
         private SmtpClient client;
@@ -31,9 +31,9 @@ namespace Examenmonitor
             client.Credentials = loginInfo;
         }
 
-        private bool ZendMail(string naam, string ontvanger, string randomLink, string onderwerp, StringBuilder body)
+        private bool ZendMail(string naam, string ontvangerMail, string randomLink, string onderwerp, StringBuilder body)
         {
-            MailMessage mailBericht = new MailMessage(new MailAddress(LOGIN, ZENDER), new MailAddress(ontvanger, naam));
+            MailMessage mailBericht = new MailMessage(new MailAddress(LOGIN, ZENDER), new MailAddress(ontvangerMail, naam));
             mailBericht.Subject = onderwerp;
             mailBericht.Body = body.ToString();
             mailBericht.IsBodyHtml = true;
@@ -51,14 +51,16 @@ namespace Examenmonitor
 
         //Onderstaande methode gebruiken voor het zenden van de registratie mail
 
-        public bool ZendRegistratieMail(string naam, string ontvanger, string randomLink)
+        public bool ZendRegistratieMail(string naam, string ontvangerMail, string randomLink)
         {
-            return ZendMail(naam, ontvanger, randomLink, ONDERWERPREGISTRATIE, OpstellenBerichtRegistratie(naam, randomLink));
+            return ZendMail(naam, ontvangerMail, randomLink, ONDERWERPREGISTRATIE, OpstellenBerichtRegistratie(naam, randomLink));
         }
 
-        public bool ZendPaswoordResetMail(string naam, string ontvanger, string randomLink)
+        //Onderstaande methode gebruiken voor het zenden van de paswoord recovery mail
+
+        public bool ZendPaswoordResetMail(string naam, string ontvangerMail, string randomLink)
         {
-            return ZendMail(naam, ontvanger, randomLink, ONDERWERPRESET, OpstellenBerichtResetten(naam, randomLink));
+            return ZendMail(naam, ontvangerMail, randomLink, ONDERWERPASWOORDRECOVERY, OpstellenBerichtResetten(naam, randomLink));
         }
 
         //Onderstaande methode zal het bericht gaan opstellen met de randomlink
