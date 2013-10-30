@@ -74,6 +74,7 @@
     <Content Include="MailTestYentl.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="RegistratieForm.aspx" />
+    <Content Include="WachtwoordVergeten.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -119,6 +120,13 @@
     </Compile>
     <Compile Include="Validatie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WachtwoordVergeten.aspx.cs">
+      <DependentUpon>WachtwoordVergeten.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WachtwoordVergeten.aspx.designer.cs">
+      <DependentUpon>WachtwoordVergeten.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
