@@ -88,19 +88,21 @@ namespace Examenmonitor
             string datum = GetHuidigeDatum();
 
             string activatieHash = genereerActivatieHash(email);
-
-            string SQL = "INSERT INTO tblActivatie (actief,datum,email,activatieHash) VALUES";
+            
+            //alle andere instanties van deze email op non actief zetten
+            var cmd2 = conn.CreateCommand();
+            string SQL = "UPDATE tblActivatie SET actief = '0' WHERE email = '" + email + "'";
+            cmd2.CommandText = SQL;
+            cmd2.ExecuteNonQuery();
+            
+            SQL = "INSERT INTO tblActivatie (actief,datum,email,activatieHash) VALUES";
             SQL += "(1, '" + datum + "','" + email + "','" + activatieHash + "')";
 
             var cmd = conn.CreateCommand();
             cmd.CommandText = SQL;
             cmd.ExecuteNonQuery();
 
-            //alle andere instanties van deze email op non actief zetten
-            var cmd2 = conn.CreateCommand();
-            SQL = "UPDATE tblActivatie SET actief = '0' WHERE email = '" + email + "'";
-            cmd2.CommandText = SQL;
-            cmd2.ExecuteNonQuery();
+            
 
             conn.Close();
             
