@@ -212,7 +212,7 @@ namespace Examenmonitor
                 }                
             }
 
-            if (!(mail.Equals("")))
+            if (!result)
             {
                 var cmd2 = conn.CreateCommand();
                 SQL = "UPDATE tblUsers SET actief='1' WHERE email = '" + mail + "'";
