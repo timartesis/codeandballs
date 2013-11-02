@@ -58,6 +58,26 @@ namespace Examenmonitor
             return datum;
         }
 
+        
+        public static DateTime StringDatumNaarDateTime(string datum)
+        {
+            string[] splittedDatum = datum.Split(' ');
+            string[] splittedDagen = splittedDatum[0].Split('/');
+            string[] splittedUren = splittedDatum[1].Split(':');
+
+            int dag = Convert.ToInt32(splittedDagen[0]);
+            int maand = Convert.ToInt32(splittedDagen[1]);
+            int jaar = Convert.ToInt32(splittedDagen[2]);
+
+            int uur = Convert.ToInt32(splittedUren[0]);
+            int minuut = Convert.ToInt32(splittedUren[1]);
+            int seconde = Convert.ToInt32(splittedUren[2]);
+
+            DateTime geconverteerdeDatum = new DateTime(jaar, maand, dag, uur, minuut, seconde);
+            return geconverteerdeDatum;
+            
+        }
+
         //slaagt de registratie gegevens op en stuurt da activatiehash terug die in de mail kan worden gebruikt
         public static string RegistratieMail(string email)
         {
@@ -75,6 +95,13 @@ namespace Examenmonitor
             var cmd = conn.CreateCommand();
             cmd.CommandText = SQL;
             cmd.ExecuteNonQuery();
+
+            //alle andere instanties van deze email op non actief zetten
+            var cmd2 = conn.CreateCommand();
+            SQL = "UPDATE tblActivatie SET actief = '0' WHERE email = '" + email + "'";
+            cmd2.CommandText = SQL;
+            cmd2.ExecuteNonQuery();
+
             conn.Close();
             
             return activatieHash;
@@ -151,6 +178,53 @@ namespace Examenmonitor
             }
             conn.Close();
             return result;
-        }        
+        }
+
+        //controleert of de hash overeen komt met nen mail, 2 dagen odu check en stuurt terug op alle wijzingen zijn gelukt
+        public static bool ControleerActivatieHash(string hash)
+        {
+            string mail = "";
+            bool result = false;
+            String pad = ConfigDB.getPad();
+            var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+
+
+            //cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
+            string SQL = "SELECT * FROM tblActivatie WHERE activatiehash = '" + hash + "' AND actief = '1'";
+
+            cmd.CommandText = SQL;
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                string datum = reader.GetString(reader.GetOrdinal("datum"));
+                DateTime geconverteerdeDatum = StringDatumNaarDateTime(datum);
+                DateTime vandaag = StringDatumNaarDateTime(GetHuidigeDatum());
+                TimeSpan tijdspanne = vandaag.Subtract(geconverteerdeDatum);
+                if (tijdspanne.TotalDays < 2.0)
+                {
+                        result = true;
+                        mail = reader.GetString(reader.GetOrdinal("email"));
+                }                
+            }
+
+            if (!(mail.Equals("")))
+            {
+                var cmd2 = conn.CreateCommand();
+                SQL = "UPDATE tblUsers SET actief='1' WHERE email = '" + mail + "'";
+                cmd2.CommandText = SQL;
+                cmd2.ExecuteNonQuery();
+
+                var cmd3 = conn.CreateCommand();
+                SQL = "UPDATE tblActivatie SET actief='0' WHERE email = '" + mail + "'";
+                cmd3.CommandText = SQL;
+                cmd3.ExecuteNonQuery();
+            }
+            
+            conn.Close();
+            return result;
+        }
     }
 }
