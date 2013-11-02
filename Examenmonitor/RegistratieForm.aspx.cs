@@ -33,7 +33,7 @@ namespace Examenmonitor
                 if (DatabankConnector.ControleerEmail(email))
                 {
                     registratieMail.ZendRegistratieMail(volledigeNaam, email, DatabankConnector.RegistratieMail(email));
-                    //DatabankConnector.InsertGebruiker(email, wachtwoord, voorNaam, achterNaam);
+                    DatabankConnector.InsertGebruiker(email, wachtwoord, voorNaam, achterNaam);
                     //in commentaar zodat de databank niet constant geupdate wordt
                     Response.Redirect("~/MailCheck.aspx");
                 }
