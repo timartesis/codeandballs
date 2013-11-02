@@ -12,14 +12,17 @@
     <div>
  <%
      //code hier fucker
-     DatabankConnector.RegistratieMail("tim@gmail.com");
-     NameValueCollection lijst1 = DatabankConnector.GetData();
-     foreach (string s in DatabankConnector.PrintKeysAndValues(lijst1))
+     bool test = DatabankConnector.ControleerEmail("tim@gmail.com");
+     bool test2 = DatabankConnector.ControleerEmail("yentlfeys@hotmail.com");
+
+     if (test)
      {
-         Response.Write(s);
+         Response.Write("<p>er klopt iets ni</p>");
      }
-     
-     
+     if (test2)
+     {
+         Response.Write("<p>het klopt</p>");
+     }
      
      
       

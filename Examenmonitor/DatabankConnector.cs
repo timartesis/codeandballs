@@ -13,6 +13,7 @@ namespace Examenmonitor
 {
     public static class DatabankConnector
     {
+        //Haalt alle html tags uit een string
         private static string SanitizeHtml(string html)
         {
             string acceptable = "";
@@ -20,6 +21,7 @@ namespace Examenmonitor
             return Regex.Replace(html, stringPattern,"");
         }
 
+        //zet een stuk tekst om in onomkeerbare sha256 string
         private static string getHashSha256(string text)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(text);
@@ -33,12 +35,14 @@ namespace Examenmonitor
             return hashString;
         }
 
+        //Stuur een hash + ee, ongehashed passwoord mee om deze te vergelijken
         public static bool vergelijkPasswoorden(string serverHash, string ingegevenPasswoord) 
         {
             string clientHash = getHashSha256(ingegevenPasswoord);
             return serverHash.Equals(clientHash);
         }
 
+        //genereert een activatiehash op basis van email en random getal tussen 0.0 en 1.0
         private static string genereerActivatieHash(string email)
         {
             Random generator = new Random();            
@@ -46,14 +50,22 @@ namespace Examenmonitor
             return getHashSha256(email + randomString);
         }
 
-        public static void RegistratieMail(string email)
+        //krijg de huidige systeemtijd terug
+        public static string GetHuidigeDatum()
+        {
+            string datum = DateTime.Today.ToShortDateString();
+            datum += " " + DateTime.Now.ToString("HH:mm:ss");
+            return datum;
+        }
+
+        //slaagt de registratie gegevens op en stuurt da activatiehash terug die in de mail kan worden gebruikt
+        public static string RegistratieMail(string email)
         {
             String pad = ConfigDB.getPad();
             var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
             conn.Open();
 
-            string datum = DateTime.Today.ToShortDateString();
-            datum += " " + DateTime.Now.ToString("HH:mm:ss");
+            string datum = GetHuidigeDatum();
 
             string activatieHash = genereerActivatieHash(email);
 
@@ -65,8 +77,10 @@ namespace Examenmonitor
             cmd.ExecuteNonQuery();
             conn.Close();
             
+            return activatieHash;
         }
 
+        //neemt een lijst me keys + values uit een databank en zet deze om in een printbare string
         public static List<string> PrintKeysAndValues(NameValueCollection myCol)
         {
             List<string> lijst = new List<string>();
@@ -96,6 +110,7 @@ namespace Examenmonitor
             return col;
         }
 
+        //voegt een gebruiker toe aan de db
         public static void InsertGebruiker( string email, string wachtwoord, string voornaam, string achternaam)
         {
             String pad = ConfigDB.getPad();
@@ -113,6 +128,29 @@ namespace Examenmonitor
             cmd.ExecuteNonQuery();
             conn.Close();
         }
-        
+
+        //als de opgegeven email ongebruikt is geeft deze functie true terug
+        public static bool ControleerEmail(string email)
+        {
+            bool result = true;
+            String pad = ConfigDB.getPad();
+            var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+            
+
+            //cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
+            string SQL = "SELECT * FROM tblUsers WHERE email = '"+SanitizeHtml(email)+"'";
+
+            cmd.CommandText = SQL;
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                result = false;
+            }
+            conn.Close();
+            return result;
+        }        
     }
 }
