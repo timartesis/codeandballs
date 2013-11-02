@@ -91,7 +91,7 @@ namespace Examenmonitor
             const string beginUrl = "http://localhost:50157/RegistratieVoltooid.aspx?hash=";
 
             bericht.Append("<h2>Beste " + naam + ", </h2>");
-            bericht.Append("<br /><br /><p> Bedankt voor het aanmaken van een account.</p>");
+            bericht.Append("<br /><br /><p> Bedankt voor het aanmaken van een account. Nadat u uw account geactiveerd hebt, zal u toegang krijgen tot de planning betreffende examenroosters.</p>");
             bericht.Append("<br /><br /><p> Navigeer naar onderstaande link om uw account te activeren. Deze link is 2 dagen geldig.</p>");
             bericht.Append("<a href=" + beginUrl + randomLink + ">Activeer Account</a>");
             bericht.Append("<br /><br /> Indien bovenstaande link niet werkt, kopieer dan volgende link in je browser:");
