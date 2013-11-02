@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="RegistratieVoltooid.aspx" />
+    <Content Include="ResendMail.aspx" />
     <Content Include="Resources\Site.css" />
     <Content Include="DebugPaginaTim.aspx" />
     <Content Include="MailTestYentl.aspx" />
@@ -118,6 +119,13 @@
     </Compile>
     <Compile Include="RegistratieVoltooid.aspx.designer.cs">
       <DependentUpon>RegistratieVoltooid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ResendMail.aspx.cs">
+      <DependentUpon>ResendMail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResendMail.aspx.designer.cs">
+      <DependentUpon>ResendMail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Validatie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

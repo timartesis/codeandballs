@@ -10,7 +10,7 @@
 namespace Examenmonitor {
     
     
-    public partial class RegistratieVoltooid {
+    public partial class ResendMail {
         
         /// <summary>
         /// form1 control.
@@ -22,39 +22,48 @@ namespace Examenmonitor {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// hash control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label hash;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// hashControle control.
+        /// Email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label hashControle;
+        protected global::System.Web.UI.WebControls.TextBox Email;
         
         /// <summary>
-        /// buttonLogin control.
+        /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button buttonLogin;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
-        /// buttonResend control.
+        /// RegularExpressionValidatorEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button buttonResend;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorEmail;
+        
+        /// <summary>
+        /// buttonResendMail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button buttonResendMail;
     }
 }

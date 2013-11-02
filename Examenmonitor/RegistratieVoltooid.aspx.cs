@@ -18,13 +18,36 @@ namespace Examenmonitor
             activatieHash = Request.QueryString["hash"];
             hash.Text = activatieHash;
             
+            //Gewoon om te checken, mag later weg!
             hash.Text += " : " + DatabankConnector.ControleerActivatieHash(activatieHash).ToString();
+
+            //Zet de knoppen op onzichtbaar
+            buttonLogin.Visible = false;
+            buttonResend.Visible = false;
+
+            //Controleert of de meegestuurde hash overeenkomt met de hash in de Databank.
+            if (!DatabankConnector.ControleerActivatieHash(activatieHash))
+            {
+                hashControle.Text = "Activatie is succesvol beëindigd! Ga via onderstaande button naar de login pagina!";
+                buttonLogin.Visible = true;
+            }
+            else
+            {
+                hashControle.Text = "Er doet zich een probleem voor! Ga via onderstaande button naar de pagina om de email opnieuw te verzenden!";
+                buttonResend.Visible = true;
+            }
         }
 
         protected void buttonLogin_Click(object sender, EventArgs e)
         {
             //Doorverwijzing naar de login pagina!
             Response.Redirect("~/Login.aspx");
+        }
+
+        protected void buttonResend_Click(object sender, EventArgs e)
+        {
+            //Doorverwijzing naar de login pagina!
+            Response.Redirect("~/ResendMail.aspx");
         }
     }
 }

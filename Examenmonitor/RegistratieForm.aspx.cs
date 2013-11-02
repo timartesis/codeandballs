@@ -29,7 +29,7 @@ namespace Examenmonitor
                 string wachtwoord = ConfirmPassword.Text;
                 string volledigeNaam = voorNaam + " " + achterNaam;
                 
-                
+                //Controleert of de email al bestaat in ons systeem.
                 if (DatabankConnector.ControleerEmail(email))
                 {
                     registratieMail.ZendRegistratieMail(volledigeNaam, email, DatabankConnector.RegistratieMail(email));
