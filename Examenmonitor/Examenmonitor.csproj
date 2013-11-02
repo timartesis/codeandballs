@@ -78,6 +78,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="MailCheck.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigDB.cs" />
@@ -126,6 +127,13 @@
     </Compile>
     <Compile Include="WachtwoordVergeten.aspx.designer.cs">
       <DependentUpon>WachtwoordVergeten.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MailCheck.aspx.cs">
+      <DependentUpon>MailCheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MailCheck.aspx.designer.cs">
+      <DependentUpon>MailCheck.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

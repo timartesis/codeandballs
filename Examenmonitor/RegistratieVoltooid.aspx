@@ -11,6 +11,7 @@
     <div>
         Registratie Voltooid!
     </div>
+        <asp:Label ID="hash" runat="server" ></asp:Label>
         <asp:Button ID="buttonLogin" runat="server" CommandName="MoveNext" Text="Login" OnClick="buttonLogin_Click" />
     </form>
 </body>

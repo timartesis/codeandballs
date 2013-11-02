@@ -69,7 +69,7 @@ namespace Examenmonitor
         {
             StringBuilder bericht = new StringBuilder();
 
-            const string beginUrl = "http://localhost:50157/";
+            const string beginUrl = "http://localhost:50157/RegistratieVoltooid.aspx";
 
             bericht.Append("<h2>Beste " + naam + ", </h2>");
             bericht.Append("<br /><br /><p> U ontvangt deze mail omdat u een paswoord reset heeft aangevraagd.</p>");
@@ -88,7 +88,7 @@ namespace Examenmonitor
         {
             StringBuilder bericht = new StringBuilder();
 
-            const string beginUrl = "http://localhost:50157/";
+            const string beginUrl = "http://localhost:50157/RegistratieVoltooid.aspx?hash=";
 
             bericht.Append("<h2>Beste " + naam + ", </h2>");
             bericht.Append("<br /><br /><p> Bedankt voor het aanmaken van een account.</p>");
