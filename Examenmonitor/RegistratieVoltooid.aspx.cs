@@ -17,6 +17,8 @@ namespace Examenmonitor
             //Haalt de hash terug uit de url, om nadien te controleren of deze overeenkomt met de DB-waarde om deze nadien op actief te zetten!
             activatieHash = Request.QueryString["hash"];
             hash.Text = activatieHash;
+            
+            hash.Text += " : " + DatabankConnector.ControleerActivatieHash(activatieHash).ToString();
         }
 
         protected void buttonLogin_Click(object sender, EventArgs e)

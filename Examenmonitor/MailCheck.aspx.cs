@@ -13,5 +13,11 @@ namespace Examenmonitor
         {
 
         }
+
+        protected void buttonLogin_Click(object sender, EventArgs e)
+        {
+            //Doorverwijzing naar de login pagina!
+            Response.Redirect("~/Login.aspx");
+        }
     }
 }
