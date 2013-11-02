@@ -12,9 +12,9 @@
     <div>
  <%
      //code hier fucker
-     string test = DatabankConnector.GetHuidigeDatum();
-     DateTime test2 = DatabankConnector.StringDatumNaarDateTime(test);
-     Response.Write(test2.ToString());
+     DatabankConnector.ControleerActivatieHash("test");
+     
+     
      
      
       
