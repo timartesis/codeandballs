@@ -58,6 +58,17 @@ namespace Examenmonitor
             return datum;
         }
 
+        
+        public static DateTime StringDatumNaarDateTime(string datum)
+        {
+            string[] splittedDatum = datum.Split(' ');
+            string[] splittedDagen = splittedDatum[0].Split('/');
+            string[] splittedUren = splittedDatum[1].Split(':');
+
+            DateTime geconverteerdeDatum = new DateTime(Convert.ToInt32(splittedDatum[2]), Convert.ToInt32(splittedDatum[1]), Convert.ToInt32(splittedDatum[0]), Convert.ToInt32(splittedUren[0]), Convert.ToInt32(splittedUren[1]), Convert.ToInt32(splittedUren[2]));
+            return geconverteerdeDatum;
+        }
+
         //slaagt de registratie gegevens op en stuurt da activatiehash terug die in de mail kan worden gebruikt
         public static string RegistratieMail(string email)
         {
@@ -75,6 +86,12 @@ namespace Examenmonitor
             var cmd = conn.CreateCommand();
             cmd.CommandText = SQL;
             cmd.ExecuteNonQuery();
+
+            //alle andere instanties van deze email op non actief zetten
+            SQL = "UPDATE tblActivatie SET actief = '0' WHERE email = '" + email + "'";
+            cmd.CommandText = SQL;
+            cmd.ExecuteNonQuery();
+
             conn.Close();
             
             return activatieHash;
@@ -151,6 +168,31 @@ namespace Examenmonitor
             }
             conn.Close();
             return result;
-        }        
+        }
+
+        public static bool ControleerActivatieHash(string hash)
+        {
+
+            bool result = false;
+            String pad = ConfigDB.getPad();
+            var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+
+
+            //cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
+            string SQL = "SELECT * FROM tblUsers WHERE activatiehash = '" + hash + "' AND actief = '1'";
+
+            cmd.CommandText = SQL;
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                string datum = reader.GetString(reader.GetOrdinal("datum"));
+                result = false;
+            }
+            conn.Close();
+            return result;
+        }
     }
 }

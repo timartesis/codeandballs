@@ -12,17 +12,9 @@
     <div>
  <%
      //code hier fucker
-     bool test = DatabankConnector.ControleerEmail("tim@gmail.com");
-     bool test2 = DatabankConnector.ControleerEmail("yentlfeys@hotmail.com");
-
-     if (test)
-     {
-         Response.Write("<p>er klopt iets ni</p>");
-     }
-     if (test2)
-     {
-         Response.Write("<p>het klopt</p>");
-     }
+     string test = DatabankConnector.GetHuidigeDatum();
+     DateTime test2 = DatabankConnector.StringDatumNaarDateTime(test);
+     Response.Write(test2.ToString());
      
      
       
