@@ -19,14 +19,15 @@ namespace Examenmonitor
             hash.Text = activatieHash;
             
             //Gewoon om te checken, mag later weg!
-            hash.Text += " : " + DatabankConnector.ControleerActivatieHash(activatieHash).ToString();
+            bool controleActivatieHash = DatabankConnector.ControleerActivatieHash(activatieHash);
+            hash.Text += " : " + controleActivatieHash.ToString();
 
             //Zet de knoppen op onzichtbaar
             buttonLogin.Visible = false;
             buttonResend.Visible = false;
 
             //Controleert of de meegestuurde hash overeenkomt met de hash in de Databank.
-            if (!DatabankConnector.ControleerActivatieHash(activatieHash))
+            if (controleActivatieHash)
             {
                 hashControle.Text = "Activatie is succesvol beëindigd! Ga via onderstaande button naar de login pagina!";
                 buttonLogin.Visible = true;
