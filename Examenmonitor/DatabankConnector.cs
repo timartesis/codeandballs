@@ -186,44 +186,69 @@ namespace Examenmonitor
 
         //voegt een gebruiker toe aan de db
         public static void InsertGebruiker( string email, string wachtwoord, string voornaam, string achternaam)
-        {
-            String pad = ConfigDB.getPad();
-            var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
-            conn.Open();
-
-            var cmd = conn.CreateCommand();
+        {            
             string encryptedWachtwoord = getHashSha256(wachtwoord);
-            
+            /*
             //cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
             string SQL = "INSERT INTO tblUsers (actief, email,wachtwoord,achternaam,voornaam) VALUES";
             SQL += "(0, '" + SanitizeHtml(email) + "','" + encryptedWachtwoord + "','" + SanitizeHtml(achternaam) + "','" + SanitizeHtml(voornaam) + "')";
 
             cmd.CommandText = SQL;
             cmd.ExecuteNonQuery();
-            conn.Close();
+            conn.Close();*/
+
+            string SQL = "";
+            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
+            {
+                c.Open();
+                SQL = "INSERT INTO tblUsers (actief, email,wachtwoord,achternaam,voornaam) VALUES";
+                SQL += "(0, '" + SanitizeHtml(email) + "','" + encryptedWachtwoord + "','" + SanitizeHtml(achternaam) + "','" + SanitizeHtml(voornaam) + "')";
+                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         //als de opgegeven email ongebruikt is geeft deze functie true terug
         public static bool ControleerBestaandeEmail(string email)
         {
             bool result = true;
-            String pad = ConfigDB.getPad();
+           /* String pad = ConfigDB.getPad();
             var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
             conn.Open();
 
-            var cmd = conn.CreateCommand();
+            var cmd = conn.CreateCommand();*/
             
 
             //cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
-            string SQL = "SELECT * FROM tblUsers WHERE email = '"+SanitizeHtml(email)+"'";
+            //string SQL = "SELECT * FROM tblUsers WHERE email = '"+SanitizeHtml(email)+"'";
 
-            cmd.CommandText = SQL;
+           /* cmd.CommandText = SQL;
             var reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 result = false;
             }
-            conn.Close();
+            conn.Close();*/
+            
+
+            string SQL = "";
+            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
+            {
+                c.Open();
+                SQL = "SELECT * FROM tblUsers WHERE email = '" + SanitizeHtml(email) + "'";
+                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result = false;
+                        }
+                    }
+                }
+            }
             return result;
         }
 
