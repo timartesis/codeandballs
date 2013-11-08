@@ -68,6 +68,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="Main.aspx" />
     <Content Include="RegistratieVoltooid.aspx" />
     <Content Include="ResendMail.aspx" />
@@ -91,6 +92,9 @@
     </Compile>
     <Compile Include="DebugPaginaTim.aspx.designer.cs">
       <DependentUpon>DebugPaginaTim.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="MailTestYentl.aspx.cs">
       <DependentUpon>MailTestYentl.aspx</DependentUpon>
