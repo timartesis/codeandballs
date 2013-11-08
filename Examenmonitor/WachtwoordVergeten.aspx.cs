@@ -19,10 +19,20 @@ namespace Examenmonitor
         {
             if (Page.IsValid)
             {
+                //code om values uit de form te halen
                 string email = Email.Text;
-                //TODO: code toevoegen die de VOORNAAM en NAAM uit de database haalt als deze in de database zit!
-                //TODO: random link voor paswoord resetten!
-                wachtwoordMail.ZendPaswoordResetMail("DEZE STRING MOET VOORNAAM + NAAM BEVATTEN", email, "HIERIN LINK VOOR PASWOORD RESET");
+
+                if (!DatabankConnector.ControleerBestaandeEmail(email) && DatabankConnector.ControleerActivatieEmail(email))
+                {
+                    string volledigeNaam = DatabankConnector.GetVoornaamEnAchternaam(email);
+
+                    wachtwoordMail.ZendPaswoordResetMail(volledigeNaam, email, DatabankConnector.PassResetMail(email));
+                    Response.Redirect("~/MailCheck.aspx");
+                }
+                else
+                {
+                    throw new Exception();
+                }
             }
         }
     }
