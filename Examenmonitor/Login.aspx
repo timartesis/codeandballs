@@ -41,11 +41,11 @@
                                     CssClass="field-validation-error" ErrorMessage="Wachtwoord is een verplicht veld!" />
                                 </asp:TableCell></asp:TableRow><asp:TableRow>
                                 <asp:TableCell>
-                                    <%-- Registreer button --%>
-                                    <asp:Button ID="buttonLogIn" runat="server" CommandName="MoveNext" Text="Log in" />
+                                    <%-- Inlogbutton --%>
+                                    <asp:Button ID="buttonLogIn" runat="server" CommandName="MoveNext" Text="Log in" OnClick="buttonLogin_Click" />
                                 </asp:TableCell></asp:TableRow></asp:Table></div><%-- Email label, textbox en validator --%><br />
         <%-- Validator om te zien of het veld is ingevuld --%><div id="RegisterButton" >
-                <%-- Passwoord label en textbox --%><asp:Button ID="buttonRegistreerHier" runat="server" CommandName="MoveNext" Text="Registreer hier!!" 
+                <%-- Registreer button --%><asp:Button ID="buttonRegistreerHier" runat="server" CommandName="MoveNext" Text="Registreer hier!!" 
                     OnClick="buttonRegistreerHier_Click" OnClientClick="window.location.href='RegistratieForm.aspx'" 
                     PostBackUrl="~/RegistratieForm.aspx" CausesValidation="false"/>
             <%-- Wachtwoord vergeten button --%>

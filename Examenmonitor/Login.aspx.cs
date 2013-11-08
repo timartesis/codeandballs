@@ -15,7 +15,12 @@ namespace Examenmonitor
 
         protected void buttonRegistreerHier_Click(object sender, EventArgs e)
         {
-            
+            //Response.Redirect("~/RegistratieForm.aspx");
+        }
+
+        protected void buttonLogin_Click(object sender, EventArgs e)
+        {
+
         }
 
         
