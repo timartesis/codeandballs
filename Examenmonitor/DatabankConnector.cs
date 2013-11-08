@@ -228,5 +228,50 @@ namespace Examenmonitor
             conn.Close();
             return result;
         }
+
+
+        //int 0 = succes, int 1= ongeactiveerd account, int 2= verkeerde login gegevens, int 3 = unexpected error
+        public static int login(string email, string passwoord)
+        {
+            int actief;
+            int result = 3;
+            String pad = ConfigDB.getPad();
+            var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            string SQL = "SELECT * FROM tblUsers WHERE email = '" + SanitizeHtml(email);
+            var reader = cmd.ExecuteReader();
+            if (reader.HasRows) //controleer of de email in de db zit
+            {
+                while (reader.Read())
+                {
+                     actief = reader.GetInt32(reader.GetOrdinal("actief"));
+                     if (actief == 1) //controleer of het account actief is
+                     {
+                         string hash = reader.GetString(reader.GetOrdinal("wachtwoord"));
+                         if (vergelijkPasswoorden(hash, passwoord)) //vergelijk de passwoorden
+                         {
+                             result = 0;
+                             return result;
+                         }
+                         else
+                         {
+                             result = 2;
+                             return result;
+                         }
+                     }
+                     else //account is inactief
+                     {
+                         result = 1;
+                         return result;
+                     }
+                }
+            }
+            else //zo niet verkeerde login gegevens
+            {
+                result = 2;
+            }
+            return result;
+        }
     }
 }
