@@ -15,6 +15,12 @@
 
                     <asp:Label ID="debugLabel" runat="server" Text="Label"></asp:Label>
 
+                    <asp:Button ID="btnAddNewRow" runat="server" OnClick="btnAddNewRow_Click" Style="z-index: 100;
+                    left: 66px; position: absolute; top: 287px" Text="Add New Row" Width="145px" />
+
+                    <asp:Panel ID="Panel1" runat="server" Height="50px" Style="z-index: 102; left: 73px;
+                    position: absolute; top: 8px" Width="125px">
+                    </asp:Panel>
                 </fieldset>
             </div>
 

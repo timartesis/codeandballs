@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace Examenmonitor
 {
@@ -14,6 +15,7 @@ namespace Examenmonitor
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            MailVersturingen pasresetmail = MailVersturingen.getInstance();
             //Haalt de hash terug uit de url, om nadien te controleren of deze overeenkomt met de DB-waarde om deze nadien op actief te zetten!
             passresetHash = Request.QueryString["hash"];
             hash.Text = passresetHash;
@@ -30,6 +32,11 @@ namespace Examenmonitor
             //Controleert of de meegestuurde hash overeenkomt met de hash in de Databank.
             if (controlePassresetHash)
             {
+                string randomPass = Membership.GeneratePassword(8, 2);
+                string email = DatabankConnector.getEmailTroughPassResetHash(passresetHash);
+                string volledigeNaam = DatabankConnector.GetVoornaamEnAchternaam(email);
+                pasresetmail.ZendPaswoordResetMail(volledigeNaam, email, randomPass);
+
                 hashControle.Text = "Passwoord is verstuurd, gelieve uw mail te checken.";
                 buttonLogin.Visible = true;
             }
