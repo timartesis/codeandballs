@@ -13,6 +13,8 @@
                 <fieldset>
                     <legend>Filter</legend>
 
+                    <asp:Label ID="debugLabel" runat="server" Text="Label"></asp:Label>
+
                 </fieldset>
             </div>
 
