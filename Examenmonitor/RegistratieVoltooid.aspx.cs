@@ -18,8 +18,10 @@ namespace Examenmonitor
             activatieHash = Request.QueryString["hash"];
             hash.Text = activatieHash;
             
-            //Gewoon om te checken, mag later weg!
+            
             bool controleActivatieHash = DatabankConnector.ControleerActivatieHash(activatieHash);
+            
+            //Gewoon om te checken, mag later weg!
             hash.Text += " : " + controleActivatieHash.ToString();
 
             //Zet de knoppen op onzichtbaar
