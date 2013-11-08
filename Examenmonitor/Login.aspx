@@ -6,7 +6,7 @@
 <head runat="server">
     <%-- CSS sheet link--%>
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
-    <title>Log in pagina</title>
+    <title>Login pagina</title>
 
 </head>
 <body>
