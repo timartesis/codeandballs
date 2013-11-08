@@ -10,10 +10,11 @@
 
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-        <%-- Begin div --%>
-        <div>
+    <div class="PageContent">
+        <form id="form1" runat="server">
+            <div>
+                <%-- Begin div --%>
+                    <div>
                         <asp:Table ID="Table1" runat="server" CellPadding="5"
                             GridLines="horizontal" BorderColor="Transparent" >
                             <asp:TableRow>
@@ -50,4 +51,4 @@
                     OnClick="buttonRegistreerHier_Click" OnClientClick="window.location.href='RegistratieForm.aspx'" 
                     PostBackUrl="~/RegistratieForm.aspx" CausesValidation="false"/>
             <%-- REGEX Validator --%><asp:Button ID="wachtwoordVergetenButton" runat="server" CommandName="MoveNext" Text="Wachtwoord vergeten?"
-            OnClientClick="window.location.href='WachtwoordVergeten.aspx'" PostBackUrl="~/WachtwoordVergeten.aspx" CausesValidation="false"/><asp:Label ID="Debug" runat="server" Text="label"></asp:Label></div>/div> </form></body></html>
+            OnClientClick="window.location.href='WachtwoordVergeten.aspx'" PostBackUrl="~/WachtwoordVergeten.aspx" CausesValidation="false"/><asp:Label ID="Debug" runat="server" Text="label"></asp:Label></div></div> </form></div></body></html>
