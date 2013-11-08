@@ -8,9 +8,18 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Collections;
 using System.Collections.Specialized;
-
 namespace Examenmonitor
 {
+    /* voorbeeld code voor connectie pooling
+     using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
+                {
+                    c.Open();
+                    SQL = "UPDATE tblUsers SET actief='1' WHERE email = '" + mail + "'";
+                    using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                } */
     public static class DatabankConnector
     {
         //Haalt alle html tags uit een string
