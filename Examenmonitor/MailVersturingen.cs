@@ -63,6 +63,11 @@ namespace Examenmonitor
             return ZendMail(naam, ontvangerMail, randomLink, ONDERWERPASWOORDRECOVERY, OpstellenBerichtResetten(naam, randomLink));
         }
 
+        public bool ZendPaswoordAanvraagMail(string naam, string ontvangerMail, string paswoord)
+        {
+            return ZendMail(naam, ontvangerMail, paswoord, ONDERWERPASWOORDRECOVERY, OpstellenBerichtRandomPaswoord(naam, paswoord));
+        }
+
         //Onderstaande methode zal het bericht gaan opstellen met de randomlink
 
         private StringBuilder OpstellenBerichtResetten(string naam, string randomLink)
@@ -84,6 +89,21 @@ namespace Examenmonitor
             return bericht;
         }
 
+        //Onderstaande methode zal het bericht gaan opstellen met het random passwoord
+
+        private StringBuilder OpstellenBerichtRandomPaswoord(string naam, string paswoord)
+        {
+            StringBuilder bericht = new StringBuilder();
+
+            bericht.Append("<h2>Beste " + naam + ", </h2>");
+            bericht.Append("<br /><br /><p> U ontvangt deze mail omdat u een paswoord reset heeft aangevraagd.</p>");
+            bericht.Append("<br /><p> Gebruik onderstaand paswoord om in te loggen.</p>");
+            bericht.Append("<br /><br /><b>" + paswoord + "</b>");
+            bericht.Append("<br /><br /> Vriendelijke Groeten,");
+            bericht.Append("<br /> Team Codeandballs.");
+
+            return bericht;
+        }
         private StringBuilder OpstellenBerichtRegistratie(string naam, string randomLink)
         {
             StringBuilder bericht = new StringBuilder();

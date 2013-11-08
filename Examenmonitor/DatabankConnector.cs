@@ -30,6 +30,30 @@ namespace Examenmonitor
             return Regex.Replace(html, stringPattern,"");
         }
 
+        public static string getEmailTroughPassResetHash(string hash)
+        {
+            string result = "";
+            string SQL = "";
+            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
+            {
+                c.Open();
+                SQL = "SELECT * FROM tblPassreset WHERE activatiehash = '" + SanitizeHtml(hash) + "'";
+                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
+                {                    
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read()) {
+                            result = reader.GetString(reader.GetOrdinal("email"));
+                        }                        
+                    }
+                }
+            }
+            return result;
+        }
+        
+        public static void changePassword(string email, string pass) {
+
+        }
         //zet een stuk tekst om in onomkeerbare sha256 string
         private static string getHashSha256(string text)
         {
