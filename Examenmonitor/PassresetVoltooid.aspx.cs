@@ -35,7 +35,7 @@ namespace Examenmonitor
                 string randomPass = Membership.GeneratePassword(8, 2);
                 string email = DatabankConnector.getEmailTroughPassResetHash(passresetHash);
                 string volledigeNaam = DatabankConnector.GetVoornaamEnAchternaam(email);
-                pasresetmail.ZendPaswoordResetMail(volledigeNaam, email, randomPass);
+                pasresetmail.ZendPaswoordAanvraagMail(volledigeNaam, email, randomPass);
 
                 hashControle.Text = "Passwoord is verstuurd, gelieve uw mail te checken.";
                 buttonLogin.Visible = true;
