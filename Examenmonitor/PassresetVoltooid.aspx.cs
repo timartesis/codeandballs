@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace Examenmonitor
 {
@@ -30,6 +31,7 @@ namespace Examenmonitor
             //Controleert of de meegestuurde hash overeenkomt met de hash in de Databank.
             if (controlePassresetHash)
             {
+                string randomPass = Membership.GeneratePassword(8, 2);
                 hashControle.Text = "Passwoord is verstuurd, gelieve uw mail te checken.";
                 buttonLogin.Visible = true;
             }
