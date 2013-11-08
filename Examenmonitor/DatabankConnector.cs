@@ -211,15 +211,39 @@ namespace Examenmonitor
             string mail = "";
             bool result = false;
             String pad = ConfigDB.getPad();
-            var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
-            conn.Open();
+            //var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
+            string SQL = "SELECT * FROM tblActivatie WHERE activatiehash = '" + hash + "' AND actief = '1'";
+            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
+                {
 
-            var cmd = conn.CreateCommand();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string datum = reader.GetString(reader.GetOrdinal("datum"));
+                            DateTime geconverteerdeDatum = StringDatumNaarDateTime(datum);
+                            DateTime vandaag = StringDatumNaarDateTime(GetHuidigeDatum());
+                            TimeSpan tijdspanne = vandaag.Subtract(geconverteerdeDatum);
+                            if (tijdspanne.TotalDays < 2.0)
+                            {
+                                result = true;
+                                mail = reader.GetString(reader.GetOrdinal("email"));
+                            }
+                        }
+                    }
+                }
+            }
+            //conn.Open();
+
+            //var cmd = conn.CreateCommand();
 
 
             //cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
-            string SQL = "SELECT * FROM tblActivatie WHERE activatiehash = '" + hash + "' AND actief = '1'";
-
+            
+            /*
             cmd.CommandText = SQL;
             var reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -233,22 +257,76 @@ namespace Examenmonitor
                         result = true;
                         mail = reader.GetString(reader.GetOrdinal("email"));
                 }                
-            }
+            }*/
 
             if (result)
             {
-                var cmd2 = conn.CreateCommand();
-                SQL = "UPDATE tblUsers SET actief='1' WHERE email = '" + mail + "'";
-                cmd2.CommandText = SQL;
-                cmd2.ExecuteNonQuery();
-
-                var cmd3 = conn.CreateCommand();
-                SQL = "UPDATE tblActivatie SET actief='0' WHERE email = '" + mail + "'";
-                cmd3.CommandText = SQL;
-                cmd3.ExecuteNonQuery();
-            }
+                using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
+                {
+                    c.Open();
+                    SQL = "UPDATE tblUsers SET actief='1' WHERE email = '" + mail + "'";
+                    using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+               using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
+                {
+                    c.Open();
+                    SQL = "UPDATE tblActivatie SET actief='0' WHERE email = '" + mail + "'";
+                    using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }            
             
-            conn.Close();
+            return result;
+        }
+
+
+        //int 0 = succes, int 1= ongeactiveerd account, int 2= verkeerde login gegevens, int 3 = unexpected error
+        public static int login(string email, string passwoord)
+        {
+            int actief;
+            int result = 3;
+            String pad = ConfigDB.getPad();
+            var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            string SQL = "SELECT * FROM tblUsers WHERE email = '" + SanitizeHtml(email) + "'";
+            cmd.CommandText = SQL;
+            var reader = cmd.ExecuteReader();
+            if (reader.HasRows) //controleer of de email in de db zit
+            {
+                while (reader.Read())
+                {
+                     actief = reader.GetInt32(reader.GetOrdinal("actief"));
+                     if (actief == 1) //controleer of het account actief is
+                     {
+                         string hash = reader.GetString(reader.GetOrdinal("wachtwoord"));
+                         if (vergelijkPasswoorden(hash, passwoord)) //vergelijk de passwoorden
+                         {
+                             result = 0;
+                             return result;
+                         }
+                         else
+                         {
+                             result = 2;
+                             return result;
+                         }
+                     }
+                     else //account is inactief
+                     {
+                         result = 1;
+                         return result;
+                     }
+                }
+            }
+            else //zo niet verkeerde login gegevens
+            {
+                result = 2;
+            }
             return result;
         }
 
