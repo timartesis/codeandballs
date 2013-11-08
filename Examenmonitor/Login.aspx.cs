@@ -20,7 +20,29 @@ namespace Examenmonitor
 
         protected void buttonLogin_Click(object sender, EventArgs e)
         {
+            if (Page.IsValid)
+            {
+                string email = Email.Text.ToString();
+                string password = Password.Text.ToString();
 
+                int code = DatabankConnector.login(email, password);
+
+                switch (code)
+                {
+                    case 0:
+                        Debug.Text = "Ok";
+                        break;
+                    case 1:
+                        Debug.Text = "Ongeactiveerde email";
+                        break;
+                    case 2:
+                        Debug.Text = "Verkeerde login";
+                        break;
+                    default:
+                        Debug.Text = "Unexpected error";
+                        break;
+                }
+            }
         }
 
         

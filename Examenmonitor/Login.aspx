@@ -44,22 +44,10 @@
                                 <asp:TableCell>
                                     <%-- Inlogbutton --%>
                                     <asp:Button ID="buttonLogIn" runat="server" CommandName="MoveNext" Text="Log in" OnClick="buttonLogin_Click" />
-                                </asp:TableCell>
-                            </asp:TableRow>
-                         </asp:Table>
-        </div>
-        <br />
-        <%-- Register en recovery buttons --%>
-        <div id="RegisterRecovery" >
-            <%-- Registreer button --%>
-            <asp:Button ID="buttonRegistreerHier" runat="server" CommandName="MoveNext" Text="Registreer hier!!" 
+                                </asp:TableCell></asp:TableRow></asp:Table></div><br />
+        <%-- Email label en textbox --%><div id="RegisterRecovery" >
+            <%-- Validator om te zien of het veld is ingevuld --%><asp:Button ID="buttonRegistreerHier" runat="server" CommandName="MoveNext" Text="Registreer hier!!" 
                     OnClick="buttonRegistreerHier_Click" OnClientClick="window.location.href='RegistratieForm.aspx'" 
                     PostBackUrl="~/RegistratieForm.aspx" CausesValidation="false"/>
-            <%-- Wachtwoord vergeten button --%>
-            <asp:Button ID="wachtwoordVergetenButton" runat="server" CommandName="MoveNext" Text="Wachtwoord vergeten?"
-            OnClientClick="window.location.href='WachtwoordVergeten.aspx'" PostBackUrl="~/WachtwoordVergeten.aspx" CausesValidation="false"/></div>
-        /div>
-        
-    </form>
-</body>
-</html>
+            <%-- REGEX Validator --%><asp:Button ID="wachtwoordVergetenButton" runat="server" CommandName="MoveNext" Text="Wachtwoord vergeten?"
+            OnClientClick="window.location.href='WachtwoordVergeten.aspx'" PostBackUrl="~/WachtwoordVergeten.aspx" CausesValidation="false"/><asp:Label ID="Debug" runat="server" Text="label"></asp:Label></div>/div> </form></body></html>
