@@ -51,9 +51,20 @@ namespace Examenmonitor
             return result;
         }
         
-        public static void changePassword(string email, string pass) {
-
+        public static void changePassword(string email, string pass) {            
+            string hash = getHashSha256(SanitizeHtml(pass));
+            string SQL = "";
+            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
+            {
+                c.Open();
+                SQL = "UPDATE tblUsers SET wachtwoord='"+hash+"' WHERE email = '" + SanitizeHtml(email) + "'";
+                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }            
         }
+
         //zet een stuk tekst om in onomkeerbare sha256 string
         private static string getHashSha256(string text)
         {
@@ -143,7 +154,7 @@ namespace Examenmonitor
             using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
             {
                 c.Open();
-                SQL = "UPDATE tblActivatie SET actief = '0' WHERE email = '" + email + "'";
+                SQL = "UPDATE tblActivatie SET actief = '0' WHERE email = '" + SanitizeHtml(email) + "'";
                 using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
                 {
                     cmd.ExecuteNonQuery();
@@ -153,7 +164,7 @@ namespace Examenmonitor
             {
                 c.Open();
                 SQL = "INSERT INTO tblActivatie (actief,datum,email,activatieHash) VALUES";
-                SQL += "(1, '" + datum + "','" + email + "','" + activatieHash + "')";
+                SQL += "(1, '" + datum + "','" + SanitizeHtml(email) + "','" + activatieHash + "')";
                 using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
                 {
                     cmd.ExecuteNonQuery();
@@ -165,14 +176,15 @@ namespace Examenmonitor
         //slaagt de paswoord reset gegevens op en stuurt de activatiehash terug die in de mail kan worden gebruikt
         public static string PassResetMail(string email)
         {
-            String pad = ConfigDB.getPad();
+            /*String pad = ConfigDB.getPad();
             var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
-            conn.Open();
+            conn.Open();*/
 
             string datum = GetHuidigeDatum();
 
             string activatieHash = genereerActivatieHash(email);
 
+            /*
             //alle andere instanties van deze email op non actief zetten
             var cmd2 = conn.CreateCommand();
             string SQL = "UPDATE tblPassreset SET actief = '0' WHERE email = '" + email + "'";
@@ -188,8 +200,29 @@ namespace Examenmonitor
 
 
 
-            conn.Close();
+            conn.Close();*/
 
+            
+            string SQL = "";
+            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
+            {
+                c.Open();
+                SQL = "UPDATE tblPassreset SET actief = '0' WHERE email = '" + SanitizeHtml(email) + "'";
+                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }            
+            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
+            {
+                c.Open();
+                SQL = "INSERT INTO tblPassreset (actief,datum,email,activatieHash) VALUES";
+                SQL += "(1, '" + datum + "','" + SanitizeHtml(email) + "','" + activatieHash + "')";
+                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
             return activatieHash;
         }
 
@@ -481,16 +514,7 @@ namespace Examenmonitor
             }*/
 
             if (result)
-            {
-                using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
-                {
-                    c.Open();
-                    SQL = "UPDATE tblPassreset SET actief='1' WHERE email = '" + mail + "'";
-                    using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                }
+            {                
                 using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
                 {
                     c.Open();
