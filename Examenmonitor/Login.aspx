@@ -54,7 +54,7 @@
             OnClientClick="window.location.href='WachtwoordVergeten.aspx'" PostBackUrl="~/WachtwoordVergeten.aspx" CausesValidation="false"/><asp:Label ID="Debug" runat="server" Text="label"></asp:Label>
 
             <asp:Button ID="resendMailButton" runat="server" CommandName="MoveNext" Text="Activatiemail opnieuw verzenden." 
-                    OnClick="buttonResendMail_Click" OnClientClick="window.location.href='ResendMail.aspx'" 
+                     OnClientClick="window.location.href='ResendMail.aspx'" 
                     PostBackUrl="~/ResendMail.aspx" CausesValidation="false"/>
 
                                         </div></div> </form></div></body></html>
