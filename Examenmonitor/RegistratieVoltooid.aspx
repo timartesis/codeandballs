@@ -7,6 +7,7 @@
     <title>Registratie voltooid</title>
 </head>
 <body>
+    <div class="PageContent">
     <form id="form1" runat="server">
     <div>
     </div>
@@ -15,5 +16,6 @@
         <asp:Button ID="buttonLogin" runat="server" CommandName="MoveNext" Text="Login" OnClick="buttonLogin_Click" />
         <asp:Button ID="buttonResend" runat="server" CommandName="MoveNext" Text="Mail opnieuw versturen" OnClick="buttonResend_Click" />
     </form>
+        </div>
 </body>
 </html>

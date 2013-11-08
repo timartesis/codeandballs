@@ -7,6 +7,7 @@
     <title>Opnieuw verzenden</title>
 </head>
 <body>
+    <div class="PageContent">
     <form id="form1" runat="server">
     <div>
         <asp:Label ID="Label2" runat="server" AssociatedControlID="Email">Email: </asp:Label>
@@ -21,5 +22,6 @@
                         <asp:Button ID="buttonResendMail" runat="server" CommandName="MoveNext" Text="Opnieuw versturen" OnClick="buttonResendMail_Click" />
     </div>
     </form>
+        </div>
 </body>
 </html>

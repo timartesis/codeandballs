@@ -14,11 +14,13 @@
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <form id="formRegistratie" runat="server">
-    <div style="height: 94px; width: 920px">
+    <div class="PageContent">
+        <form id="formRegistratie" runat="server">
+        
+            <div style="height: 94px; width: 920px">
     
-        <%-- Begin fieldset --%>
-        <fieldset>
+                <%-- Begin fieldset --%>
+                <fieldset>
                         <legend>Registration Form</legend>
                         <ol>
                             <li>
@@ -90,5 +92,6 @@
     
     </div>
     </form>
+    </div>
 </body>
 </html>

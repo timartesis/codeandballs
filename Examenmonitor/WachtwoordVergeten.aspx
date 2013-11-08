@@ -10,6 +10,7 @@
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <div class="PageContent">
     <form id="formWachtwoordVergeten" runat="server">
     <div style="height: 94px; width: 920px">
         <fieldset>
@@ -32,5 +33,6 @@
     </fieldset>
     </div>
     </form>
+        </div>
 </body>
 </html>
