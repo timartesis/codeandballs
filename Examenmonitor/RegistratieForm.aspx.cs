@@ -30,7 +30,7 @@ namespace Examenmonitor
                 string volledigeNaam = voorNaam + " " + achterNaam;
                 
                 //Controleert of de email al bestaat in ons systeem.
-                if (DatabankConnector.ControleerEmail(email))
+                if (DatabankConnector.ControleerBestaandeEmail(email))
                 {
                     registratieMail.ZendRegistratieMail(volledigeNaam, email, DatabankConnector.RegistratieMail(email));
                     DatabankConnector.InsertGebruiker(email, wachtwoord, voorNaam, achterNaam);

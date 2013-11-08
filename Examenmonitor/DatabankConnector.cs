@@ -159,7 +159,7 @@ namespace Examenmonitor
         }
 
         //als de opgegeven email ongebruikt is geeft deze functie true terug
-        public static bool ControleerEmail(string email)
+        public static bool ControleerBestaandeEmail(string email)
         {
             bool result = true;
             String pad = ConfigDB.getPad();
@@ -181,6 +181,29 @@ namespace Examenmonitor
             conn.Close();
             return result;
         }
+
+        //als de opgegeven email geactiveerd is, geeft deze functie true terug
+        public static bool ControleerActivatieEmail(string email)
+        {
+            bool result = false;
+            String pad = ConfigDB.getPad();
+            var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+
+            string SQL = "SELECT * FROM tblUsers WHERE email = '" + SanitizeHtml(email) + "' AND actief = '1'";
+
+            cmd.CommandText = SQL;
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                result = true;
+            }
+            conn.Close();
+            return result;
+        }
+
 
         //controleert of de hash overeen komt met nen mail, 2 dagen odu check en stuurt terug op alle wijzingen zijn gelukt
         public static bool ControleerActivatieHash(string hash)
@@ -306,5 +329,27 @@ namespace Examenmonitor
             }
             return result;
         }
+
+        //halen van naam en voornaam uit DB voor het opnieuw versturen van activatiemail
+        public static string GetVoornaamEnAchternaam(string email)
+        {
+            string result = "";
+            String pad = ConfigDB.getPad();
+            var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+
+            string SQL = "SELECT * FROM tblUsers WHERE email = '" + SanitizeHtml(email) + "'";
+            cmd.CommandText = SQL;
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                result = reader.GetString(reader.GetOrdinal("voornaam")) + " " + reader.GetString(reader.GetOrdinal("achternaam"));
+            }
+            return result;
+        }
+
+
     }
 }
