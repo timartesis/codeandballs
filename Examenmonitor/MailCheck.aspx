@@ -7,11 +7,13 @@
     <title>Mail verstuurd</title>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-        Controleer uw email om uw account te activeren!
-        <asp:Button ID="buttonLogin" runat="server" CommandName="MoveNext" Text="Login" OnClick="buttonLogin_Click" />
-    </div>
-    </form>
+    <div class="PageContent">
+        <form id="form1" runat="server">
+            <div>
+                <p>Controleer uw email om uw account te activeren!</p>
+                <asp:Button ID="buttonLogin" runat="server" CommandName="MoveNext" Text="Login" OnClick="buttonLogin_Click" />
+            </div>
+        </form>
+        </div>
 </body>
 </html>
