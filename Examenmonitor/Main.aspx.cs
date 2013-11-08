@@ -15,10 +15,12 @@ namespace Examenmonitor
             {
                 Response.Redirect("Login.aspx");
             }
-            else
-            {
-                Response.Redirect("Main.aspx");
-            }
+
+            debugLabel.Text = Session["User"].ToString();
+            //else
+            //{
+            //    Response.Redirect("Main.aspx");
+            //}
         }
     }
 }
