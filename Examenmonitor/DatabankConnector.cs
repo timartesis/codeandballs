@@ -138,6 +138,37 @@ namespace Examenmonitor
             return activatieHash;
         }
 
+        //slaagt de paswoord reset gegevens op en stuurt de activatiehash terug die in de mail kan worden gebruikt
+        public static string PassResetMail(string email)
+        {
+            String pad = ConfigDB.getPad();
+            var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
+            conn.Open();
+
+            string datum = GetHuidigeDatum();
+
+            string activatieHash = genereerActivatieHash(email);
+
+            //alle andere instanties van deze email op non actief zetten
+            var cmd2 = conn.CreateCommand();
+            string SQL = "UPDATE tblPassreset SET actief = '0' WHERE email = '" + email + "'";
+            cmd2.CommandText = SQL;
+            cmd2.ExecuteNonQuery();
+
+            SQL = "INSERT INTO tblPassreset (actief,datum,email,activatieHash) VALUES";
+            SQL += "(1, '" + datum + "','" + email + "','" + activatieHash + "')";
+
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = SQL;
+            cmd.ExecuteNonQuery();
+
+
+
+            conn.Close();
+
+            return activatieHash;
+        }
+
         //neemt een lijst me keys + values uit een databank en zet deze om in een printbare string
 
         //handig voor debug code te printen op een scherm uit een db
