@@ -30,14 +30,10 @@ namespace Examenmonitor
 
             table.ID = "table1";
             Panel1.Controls.Add(table);
+            this.GenerateTable(numOfColumns);
         }
 
-        protected void btnAddNewRow_Click(object sender, EventArgs e)
-        {
-            numOfColumns = 12;
-            //Generate the Table based from the inputs
-            GenerateTable(numOfColumns);
-        }
+        
         private void GenerateTable(int colsCount)
         {
             ctr++;
