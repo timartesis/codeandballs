@@ -10,7 +10,7 @@
 namespace Examenmonitor {
     
     
-    public partial class RegistratieVoltooid {
+    public partial class WebForm1 {
         
         /// <summary>
         /// form1 control.
@@ -22,24 +22,6 @@ namespace Examenmonitor {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// hash control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label hash;
-        
-        /// <summary>
-        /// hashControle control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label hashControle;
-        
-        /// <summary>
         /// buttonLogin control.
         /// </summary>
         /// <remarks>
@@ -47,14 +29,5 @@ namespace Examenmonitor {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button buttonLogin;
-        
-        /// <summary>
-        /// buttonResend control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button buttonResend;
     }
 }

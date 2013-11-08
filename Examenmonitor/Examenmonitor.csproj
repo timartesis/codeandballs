@@ -69,14 +69,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="RegistratieVoltooid.aspx" />
+    <Content Include="ResendMail.aspx" />
     <Content Include="Resources\Site.css" />
     <Content Include="DebugPaginaTim.aspx" />
     <Content Include="MailTestYentl.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="RegistratieForm.aspx" />
+    <Content Include="WachtwoordVergeten.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="MailCheck.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigDB.cs" />
@@ -109,7 +112,7 @@
     <Compile Include="RegistratieForm.aspx.designer.cs">
       <DependentUpon>RegistratieForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="RegistratieMail.cs" />
+    <Compile Include="MailVersturingen.cs" />
     <Compile Include="RegistratieVoltooid.aspx.cs">
       <DependentUpon>RegistratieVoltooid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -117,8 +120,29 @@
     <Compile Include="RegistratieVoltooid.aspx.designer.cs">
       <DependentUpon>RegistratieVoltooid.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ResendMail.aspx.cs">
+      <DependentUpon>ResendMail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResendMail.aspx.designer.cs">
+      <DependentUpon>ResendMail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Validatie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WachtwoordVergeten.aspx.cs">
+      <DependentUpon>WachtwoordVergeten.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WachtwoordVergeten.aspx.designer.cs">
+      <DependentUpon>WachtwoordVergeten.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MailCheck.aspx.cs">
+      <DependentUpon>MailCheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MailCheck.aspx.designer.cs">
+      <DependentUpon>MailCheck.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">

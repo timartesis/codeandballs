@@ -9,30 +9,38 @@ namespace Examenmonitor
 {
     public partial class RegistratieForm : System.Web.UI.Page
     {
+        private RegistratieMail registratieMail;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            registratieMail = RegistratieMail.getInstance();
         }
 
-        protected void wwValidator(object sender, ServerValidateEventArgs e)
-        {
-            e.IsValid = Validatie.ControleerWachtwoord(e.ToString());
-        }
-
-        protected void TextBox2_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        protected void CustomValidatorVoorNaam_ServerValidate(object source, ServerValidateEventArgs e)
-        {
-            args.IsValid = Validatie.ControleerNaam(args.Value.ToString());
-            //e.IsValid = false;
-        }
-
-        protected void registeerButton_Click(object sender, EventArgs e)
-        {
         
+
+        protected void buttonRegistreer_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                //Code om values uit de form te halen
+                //@tim moet da hier al gehashed worden of nog niet ? 
+                string voorNaam = Voornaam.Text;
+                string achterNaam = AchterNaam.Text;
+                string email = Email.Text;
+                string wachtwoord = ConfirmPassword.Text;
+                //TODO passen naar DB handler
+                //TODO terug naar home gaan
+                string volledigeNaam = voorNaam + " " + achterNaam;
+<<<<<<< HEAD
+                registratieMail.ZendRegistratieMail(volledigeNaam, email, "Login.aspx");
+=======
+                registratieMail.ZendRegistratieMail(volledigeNaam, email, "DebugPaginaTim.aspx");
+>>>>>>> f6db962066ce19f5baabeac071500977080f1c9d
+                DatabankConnector.InsertGebruiker(email, wachtwoord, voorNaam, achterNaam);
+                Response.Redirect("~/RegistratieVoltooid.aspx");
+            }
+
         }
+
+        
     }
 }

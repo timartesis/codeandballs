@@ -12,11 +12,8 @@
     <div>
  <%
      //code hier fucker
-
-     List<int> lijst = DatabankConnector.GetData();
-     foreach (int id in lijst) {
-         Response.Write(id);
-     }
+     DatabankConnector.ControleerActivatieHash("test");
+     
      
      
      
