@@ -30,6 +30,7 @@ namespace Examenmonitor
             return Regex.Replace(html, stringPattern,"");
         }
 
+        //Haalt het email adress van iemand die pass reset heeft aangevraagd uit de Passreset tabel
         public static string getEmailTroughPassResetHash(string hash)
         {
             string result = "";
@@ -51,6 +52,7 @@ namespace Examenmonitor
             return result;
         }
         
+        //veranderd het paswoord van een bepaalde user
         public static void changePassword(string email, string pass) {            
             string hash = getHashSha256(SanitizeHtml(pass));
             string SQL = "";
@@ -94,7 +96,7 @@ namespace Examenmonitor
             return getHashSha256(email + randomString);
         }
 
-        //krijg de huidige systeemtijd terug
+        //krijg de huidige systeemtijd terug als string
         public static string GetHuidigeDatum()
         {
             string datum = DateTime.Today.ToShortDateString();
@@ -102,7 +104,7 @@ namespace Examenmonitor
             return datum;
         }
 
-        
+        //zet de string datum om naar een DateTime
         public static DateTime StringDatumNaarDateTime(string datum)
         {
             string[] splittedDatum = datum.Split(' ');
@@ -227,7 +229,6 @@ namespace Examenmonitor
         }
 
         //neemt een lijst me keys + values uit een databank en zet deze om in een printbare string
-
         //handig voor debug code te printen op een scherm uit een db
         public static List<string> PrintKeysAndValues(NameValueCollection myCol)
         {
@@ -460,6 +461,7 @@ namespace Examenmonitor
             return result;
         }
 
+        //controleert of de hash overeenkomt met aanvraag op passreset
         public static bool ControleerPassresetHash(string hash)
         {
             string mail = "";
@@ -618,7 +620,7 @@ namespace Examenmonitor
             return result;
         }
 
-        //halen van naam en voornaam uit DB voor het opnieuw versturen van activatiemail
+        //halen van naam en voornaam uit DB
         public static string GetVoornaamEnAchternaam(string email)
         {
             string result = "";/*
