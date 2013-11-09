@@ -58,6 +58,24 @@ namespace Examenmonitor {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorEmail;
         
         /// <summary>
+        /// mailBestaatLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label mailBestaatLabel;
+        
+        /// <summary>
+        /// activatieLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label activatieLabel;
+        
+        /// <summary>
         /// buttonResendMail control.
         /// </summary>
         /// <remarks>

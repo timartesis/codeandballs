@@ -19,19 +19,30 @@ namespace Examenmonitor
         {
             if (Page.IsValid)
             {
+                activatieLabel.Visible = false;
+                mailBestaatLabel.Visible = false;
                 //code om values uit de form te halen
                 string email = Email.Text;
-
-                if (!DatabankConnector.ControleerBestaandeEmail(email) && DatabankConnector.ControleerActivatieEmail(email))
+                
+                //controleert of het gegeven email bestaat in de tabel Users
+                if (!DatabankConnector.ControleerBestaandeEmail(email))
                 {
-                    string volledigeNaam = DatabankConnector.GetVoornaamEnAchternaam(email);
+                    //controleert of het gegeven email al geactiveerd is
+                    if (DatabankConnector.ControleerActivatieEmail(email))
+                    {
+                        string volledigeNaam = DatabankConnector.GetVoornaamEnAchternaam(email);
 
-                    wachtwoordMail.ZendPaswoordResetMail(volledigeNaam, email, DatabankConnector.PassResetMail(email));
-                    Response.Redirect("~/MailCheck.aspx");
+                        wachtwoordMail.ZendPaswoordResetMail(volledigeNaam, email, DatabankConnector.PassResetMail(email));
+                        Response.Redirect("~/MailCheck.aspx");
+                    }
+                    else
+                    {
+                        activatieLabel.Visible = true;
+                    }
                 }
                 else
                 {
-                    throw new Exception();
+                    mailBestaatLabel.Visible = true;
                 }
             }
         }

@@ -19,10 +19,16 @@ namespace Examenmonitor
         {
             if (Page.IsValid)
             {
+                activatieLabel.Visible = false;
+                mailBestaatLabel.Visible = false;
                 //Controle op mail aanwezigheid + geen activatie in databank
                 string email = Email.Text;
 
-                if (!DatabankConnector.ControleerBestaandeEmail(email) && !DatabankConnector.ControleerActivatieEmail(email))
+                //controleert of het gegeven email bestaat in de tabel Users
+                if (!DatabankConnector.ControleerBestaandeEmail(email))
+                {
+                    //controleert of het gegeven email nog niet geactiveerd is
+                    if (!DatabankConnector.ControleerActivatieEmail(email))
                     {
                         //Code om values uit de form te halen
                         string volledigeNaam = DatabankConnector.GetVoornaamEnAchternaam(email);
@@ -30,11 +36,16 @@ namespace Examenmonitor
                         registratieMail.ZendRegistratieMail(volledigeNaam, email, DatabankConnector.RegistratieMail(email));
                         Response.Redirect("~/MailCheck.aspx");
                     }
-                else
+                    else
                     {
-                        throw new Exception();
+                        activatieLabel.Visible = true;
                     }
+                }
+                else
+                {
+                    mailBestaatLabel.Visible = true;
                 }
             }
         }
     }
+}
