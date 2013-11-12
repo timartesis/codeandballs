@@ -658,5 +658,10 @@ namespace Examenmonitor
             }
             return result;
         }
+
+        public static string GetAllLocaties()
+        {
+            return "";
+        }
     }
 }
