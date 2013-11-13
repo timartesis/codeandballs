@@ -13,9 +13,10 @@ namespace Examenmonitor
         public bool Gereserveerd { get; set; }
         public bool Digitaal { get; set; }
         public string Locatie { get; set; }
+        public int Id { get; set; }
 
         //TODO
-        public Examen(DateTime datum, DateTime einddatum, int capaciteit, bool gereserveerd, bool digitaal, string locatie)
+        public Examen(DateTime datum, DateTime einddatum, int capaciteit, bool gereserveerd, bool digitaal, string locatie, int id)
         {
             this.Datum = datum;
             this.Einddatum = einddatum;
@@ -23,6 +24,12 @@ namespace Examenmonitor
             this.Gereserveerd = gereserveerd;
             this.Digitaal = digitaal;
             this.Locatie = locatie;
+            this.Id = id;
+        }
+
+        public override bool Equals(Examen obj)
+        {
+            return obj.Id == this.Id;            
         }
     }
 }

@@ -8,9 +8,10 @@ using System.Collections.Specialized;
 namespace Examenmonitor
 {
     /* het examen model is een singleton die instaat voor het opvragen van alle examen gerelateerde data */
+    /* singleton opgebouwd om lock fouten te voorkomen (possie stijl) */
     public class ExamenModel
     {
-        private static ExamenModel model = new ExamenModel();
+        private static ExamenModel model = new ExamenModel(); 
         private List<Examen> examens;
 
         private ExamenModel()
@@ -18,7 +19,7 @@ namespace Examenmonitor
             this.examens = new List<Examen>();
         }
 
-        public static ExamenModel getInstance() {
+        public static ExamenModel getInstance() { //hiermee verkrijg je de instantie van het model
             return model;
         }
 
@@ -32,7 +33,7 @@ namespace Examenmonitor
             return this.examens;
         }
 
-        private static List<Examen> DatabankExamensToList() 
+        private static List<Examen> DatabankExamensToList() //databank connectie en conversie van de key value pairs in een lijst
         {
             List<Examen> lijst = new List<Examen>();
 
@@ -41,7 +42,7 @@ namespace Examenmonitor
             return lijst;
         }
 
-        public List<string> GetAllLocaties()
+        public List<string> GetAllLocaties() //haal uit de lijst alle locaties op en geef deze terug in een string lijst, dubbele locaties worden gefilterd
         {
             List<string> lijst = new List<string>();
             bool compare = false;
