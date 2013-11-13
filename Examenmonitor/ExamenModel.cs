@@ -7,13 +7,19 @@ using System.Collections.Specialized;
 
 namespace Examenmonitor
 {
+    /* het examen model is een singleton die instaat voor het opvragen van alle examen gerelateerde data */
     public class ExamenModel
     {
+        private static ExamenModel model = new ExamenModel();
         private List<Examen> examens;
 
-        public ExamenModel()
+        private ExamenModel()
         {
             this.examens = new List<Examen>();
+        }
+
+        public static ExamenModel getInstance() {
+            return model;
         }
 
         public void ReloadData()

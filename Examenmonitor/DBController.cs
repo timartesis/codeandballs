@@ -9,12 +9,12 @@ namespace Examenmonitor
     public class DBController
     {
         public String SQL { get; set; }
-        public DBController(String SQL)
+        public DBController(String SQL) //elke controller vereist initiele SQL querries
         {
             this.SQL = SQL;
         }
 
-        public void ExecuteNonQuery()
+        public void ExecuteNonQuery() //voert de opgegeven query code uit zonder resultaat terug te geven
         {
             using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
             {
@@ -26,7 +26,7 @@ namespace Examenmonitor
             }
         }
 
-        public string ExecuteReaderQueryReturnSingleString(string tabelnaam)
+        public string ExecuteReaderQueryReturnSingleString(string tabelnaam) //haalt 1 stringresult uit 1 row op basis van een tabelnaam op
         {
             string result = "";
             using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
@@ -45,7 +45,7 @@ namespace Examenmonitor
             return result;
         }
 
-        public int ExecuteReaderQueryReturnSingleInt(string tabelnaam)
+        public int ExecuteReaderQueryReturnSingleInt(string tabelnaam) //haalt 1 int op uit 1 row op basis van een tabelnaam
         {
             int result = -1;
             using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
@@ -65,7 +65,7 @@ namespace Examenmonitor
             return result;
         }
 
-        public bool ExecuteReaderQueryReturnSingleResult()
+        public bool ExecuteReaderQueryReturnSingleResult() //haalt op of er rijen zijn in opgegeven query
         {
             bool result;
             using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
@@ -112,6 +112,12 @@ namespace Examenmonitor
 
         public List<List<KeyValuePair<string, string>>> ExecuteReaderQueryReturnMultipleResultsMultipleRow(string[] tabelnamen) //deze parameer moet veranderen naar een variabele die oneindig strings accepteert            
         {
+            /*
+             * Werkt met volgende structuur:
+             * Alle rijen zitten in een lijst, in de volgende lijst vindt je een lijst met alle key value pairs voor 1 row
+             * elke key value paar staat voor 1 opgehaalde waarde
+             * Rij->Data->KeyValue
+             */
             List<List<KeyValuePair<string, string>>> rijen = new List<List<KeyValuePair<string, string>>>();
             List<KeyValuePair<string, string>> lijst;
             KeyValuePair<string, string> data;

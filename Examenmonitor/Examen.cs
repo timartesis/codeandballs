@@ -14,6 +14,7 @@ namespace Examenmonitor
         public bool Digitaal { get; set; }
         public string Locatie { get; set; }
 
+        //TODO
         public Examen(DateTime datum, DateTime einddatum, int capaciteit, bool gereserveerd, bool digitaal, string locatie)
         {
             this.Datum = datum;
