@@ -37,27 +37,14 @@ namespace Examenmonitor
                     using(var reader = cmd.ExecuteReader()) {
                         while (reader.Read())
                         {
-                            result = reader.GetString(reader.GetOrdinal(tabelnaam));
-                        }
-                    }
-                }
-            }
-            return result;
-        }
-
-        public int ExecuteReaderQueryReturnSingleInt(string tabelnaam) //haalt 1 int op uit 1 row op basis van een tabelnaam
-        {
-            int result = -1;
-            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
-            {
-                c.Open();
-                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
-                {
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            result = reader.GetInt32(reader.GetOrdinal(tabelnaam));
+                            try
+                            {
+                                result = reader.GetString(reader.GetOrdinal(tabelnaam));
+                            }
+                            catch (Exception e)
+                            {
+                                result = reader.GetInt32(reader.GetOrdinal(tabelnaam)).ToString();
+                            }
                         }
                     }
                 }
@@ -99,7 +86,14 @@ namespace Examenmonitor
                         {                            
                             foreach (string tabelnaam in tabelnamen)
                             {
-                                value = reader.GetString(reader.GetOrdinal(tabelnaam));
+                                try
+                                {
+                                    value = reader.GetString(reader.GetOrdinal(tabelnaam));
+                                }
+                                catch (Exception e)
+                                {
+                                    value = reader.GetInt32(reader.GetOrdinal(tabelnaam)).ToString();
+                                }
                                 data = new KeyValuePair<string, string>(tabelnaam, value);
                                 lijst.Add(data);
                             }
@@ -134,8 +128,15 @@ namespace Examenmonitor
                         {
                             lijst = new List<KeyValuePair<string, string>>();
                             foreach (string tabelnaam in tabelnamen)
-                            {                                
-                                value = reader.GetString(reader.GetOrdinal(tabelnaam));
+                            {
+                                try
+                                {
+                                    value = reader.GetString(reader.GetOrdinal(tabelnaam));
+                                }
+                                catch (Exception e)
+                                {
+                                    value = reader.GetInt32(reader.GetOrdinal(tabelnaam)).ToString();
+                                }
                                 data = new KeyValuePair<string, string>(tabelnaam, value);
                                 lijst.Add(data);
                             }

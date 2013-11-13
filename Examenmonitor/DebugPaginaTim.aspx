@@ -12,9 +12,16 @@
     <div>
  <%
      //code hier fucker
-     KeyValuePair<string, string> test = new KeyValuePair<string, string>("sluetel", "waarde");
-
-     Response.Write(test.ToString());
+     string sql = "select * from tblUsers";
+     DBController controller = new DBController(sql);
+     var test = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "email", "wachtwoord");
+     foreach (var t in test)
+     {
+         foreach (var b in t)
+         {
+             Response.Write(b.ToString());
+         }
+     }
      
      
       
