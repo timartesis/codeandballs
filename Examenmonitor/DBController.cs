@@ -82,10 +82,12 @@ namespace Examenmonitor
             return result;
         }
 
-        public List<string[]> ExecuteReaderQueryReturnMultipleResults(string[] tabelnamen) //deze parameer moet veranderen naar een variabele die oneindig strings accepteert
-            // test string['test'];
+        public List<KeyValuePair<string, string>> ExecuteReaderQueryReturnMultipleResultsOneRow(string[] tabelnamen) //deze parameer moet veranderen naar een variabele die oneindig strings accepteert            
         {
-            List<string[]> lijst = new List<string[]>();
+            List<KeyValuePair<string, string>> lijst = new List<KeyValuePair<string, string>>();
+            KeyValuePair<string, string> data;
+            string value = "";
+
             using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
             {
                 c.Open();
@@ -97,14 +99,46 @@ namespace Examenmonitor
                         {                            
                             foreach (string tabelnaam in tabelnamen)
                             {
-                                
-                                
+                                value = reader.GetString(reader.GetOrdinal(tabelnaam));
+                                data = new KeyValuePair<string, string>(tabelnaam, value);
+                                lijst.Add(data);
                             }
                         }
                     }
                 }
             }
-            return null;
+            return lijst;
+        }
+
+        public List<List<KeyValuePair<string, string>>> ExecuteReaderQueryReturnMultipleResultsMultipleRow(string[] tabelnamen) //deze parameer moet veranderen naar een variabele die oneindig strings accepteert            
+        {
+            List<List<KeyValuePair<string, string>>> rijen = new List<List<KeyValuePair<string, string>>>();
+            List<KeyValuePair<string, string>> lijst;
+            KeyValuePair<string, string> data;
+            string value = "";
+
+            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            lijst = new List<KeyValuePair<string, string>>();
+                            foreach (string tabelnaam in tabelnamen)
+                            {                                
+                                value = reader.GetString(reader.GetOrdinal(tabelnaam));
+                                data = new KeyValuePair<string, string>(tabelnaam, value);
+                                lijst.Add(data);
+                            }
+                            rijen.Add(lijst);
+                        }
+                    }
+                }
+            }
+            return rijen;
         }
     }
 }
