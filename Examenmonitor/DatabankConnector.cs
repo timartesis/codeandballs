@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Data.SQLite;
 using System.Text.RegularExpressions;
-using System.Security.Cryptography;
 using System.Text;
 using System.Collections;
 using System.Collections.Specialized;
@@ -22,19 +21,13 @@ namespace Examenmonitor
                 } */
     public static class DatabankConnector
     {
-        //Haalt alle html tags uit een string
-        private static string SanitizeHtml(string html)
-        {
-            string acceptable = "";
-            string stringPattern = @"</?(?(?=" + acceptable + @")notag|[a-zA-Z0-9]+)(?:\s[a-zA-Z0-9\-]+=?(?:(["",']?).*?\1?)?)*\s*/?>";
-            return Regex.Replace(html, stringPattern,"");
-        }
+        
 
         //Haalt het email adress van iemand die pass reset heeft aangevraagd uit de Passreset tabel
         public static string getEmailTroughPassResetHash(string hash)
         {
             string result = "";
-            string SQL = "SELECT * FROM tblPassreset WHERE activatiehash = '" + SanitizeHtml(hash) + "'";
+            string SQL = "SELECT * FROM tblPassreset WHERE activatiehash = '" + IOConverter.SanitizeHtml(hash) + "'";
             DBController controller = new DBController(SQL);
             result = controller.ExecuteReaderQueryReturnSingleString("email");
 
@@ -42,7 +35,7 @@ namespace Examenmonitor
             using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
             {
                 c.Open();
-                SQL = "SELECT * FROM tblPassreset WHERE activatiehash = '" + SanitizeHtml(hash) + "'";
+                SQL = "SELECT * FROM tblPassreset WHERE activatiehash = '" + IOConverter.SanitizeHtml(hash) + "'";
                 using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
                 {                    
                     using (var reader = cmd.ExecuteReader())
@@ -59,30 +52,18 @@ namespace Examenmonitor
         
         //veranderd het paswoord van een bepaalde user
         public static void changePassword(string email, string pass) {            
-            string hash = getHashSha256(SanitizeHtml(pass));
-            string SQL = "UPDATE tblUsers SET wachtwoord='" + hash + "' WHERE email = '" + SanitizeHtml(email) + "'";
+            string hash = IOConverter.getHashSha256(IOConverter.SanitizeHtml(pass));
+            string SQL = "UPDATE tblUsers SET wachtwoord='" + hash + "' WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
             DBController controller = new DBController(SQL);
             controller.ExecuteNonQuery();
         }
 
-        //zet een stuk tekst om in onomkeerbare sha256 string
-        private static string getHashSha256(string text)
-        {
-            byte[] bytes = Encoding.UTF8.GetBytes(text);
-            SHA256Managed hashstring = new SHA256Managed();
-            byte[] hash = hashstring.ComputeHash(bytes);
-            string hashString = string.Empty;
-            foreach (byte x in hash)
-            {
-                hashString += String.Format("{0:x2}", x);
-            }
-            return hashString;
-        }
+        
 
         //Stuur een hash + ee, ongehashed passwoord mee om deze te vergelijken
         public static bool vergelijkPasswoorden(string serverHash, string ingegevenPasswoord) 
         {
-            string clientHash = getHashSha256(ingegevenPasswoord);
+            string clientHash = IOConverter.getHashSha256(ingegevenPasswoord);
             return serverHash.Equals(clientHash);
         }
 
@@ -91,49 +72,25 @@ namespace Examenmonitor
         {
             Random generator = new Random();            
             string randomString = generator.NextDouble().ToString();
-            return getHashSha256(email + randomString);
+            return IOConverter.getHashSha256(email + randomString);
         }
 
-        //krijg de huidige systeemtijd terug als string
-        public static string GetHuidigeDatum()
-        {
-            string datum = DateTime.Today.ToShortDateString();
-            datum += " " + DateTime.Now.ToString("HH:mm:ss");
-            return datum;
-        }
+        
 
-        //zet de string datum om naar een DateTime
-        public static DateTime StringDatumNaarDateTime(string datum)
-        {
-            string[] splittedDatum = datum.Split(' ');
-            string[] splittedDagen = splittedDatum[0].Split('/');
-            string[] splittedUren = splittedDatum[1].Split(':');
-
-            int dag = Convert.ToInt32(splittedDagen[0]);
-            int maand = Convert.ToInt32(splittedDagen[1]);
-            int jaar = Convert.ToInt32(splittedDagen[2]);
-
-            int uur = Convert.ToInt32(splittedUren[0]);
-            int minuut = Convert.ToInt32(splittedUren[1]);
-            int seconde = Convert.ToInt32(splittedUren[2]);
-
-            DateTime geconverteerdeDatum = new DateTime(jaar, maand, dag, uur, minuut, seconde);
-            return geconverteerdeDatum;
-            
-        }
+        
 
         //slaagt de registratie gegevens op en stuurt da activatiehash terug die in de mail kan worden gebruikt
         public static string RegistratieMail(string email)
         {        
-            string datum = GetHuidigeDatum();
+            string datum = IOConverter.GetHuidigeDatum();
             string activatieHash = genereerActivatieHash(email);
             
-            String SQL = "UPDATE tblActivatie SET actief = '0' WHERE email = '" + SanitizeHtml(email) + "'";
+            String SQL = "UPDATE tblActivatie SET actief = '0' WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
             DBController controller = new DBController(SQL);
             controller.ExecuteNonQuery();
 
             SQL = "INSERT INTO tblActivatie (actief,datum,email,activatieHash) VALUES";
-            SQL += "(1, '" + datum + "','" + SanitizeHtml(email) + "','" + activatieHash + "')";
+            SQL += "(1, '" + datum + "','" + IOConverter.SanitizeHtml(email) + "','" + activatieHash + "')";
             controller.SQL = SQL;            
             controller.ExecuteNonQuery();
 
@@ -147,7 +104,7 @@ namespace Examenmonitor
             var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
             conn.Open();*/
 
-            string datum = GetHuidigeDatum();
+            string datum = IOConverter.GetHuidigeDatum();
 
             string activatieHash = genereerActivatieHash(email);
 
@@ -170,7 +127,7 @@ namespace Examenmonitor
             conn.Close();*/
 
 
-            string SQL = "UPDATE tblPassreset SET actief = '0' WHERE email = '" + SanitizeHtml(email) + "'";
+            string SQL = "UPDATE tblPassreset SET actief = '0' WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
             DBController controller = new DBController(SQL);
             controller.ExecuteNonQuery();
 
@@ -178,7 +135,7 @@ namespace Examenmonitor
             using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
             {
                 c.Open();
-                SQL = "UPDATE tblPassreset SET actief = '0' WHERE email = '" + SanitizeHtml(email) + "'";
+                SQL = "UPDATE tblPassreset SET actief = '0' WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
                 using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
                 {
                     cmd.ExecuteNonQuery();
@@ -188,7 +145,7 @@ namespace Examenmonitor
             {
                 c.Open();
                 SQL = "INSERT INTO tblPassreset (actief,datum,email,activatieHash) VALUES";
-                SQL += "(1, '" + datum + "','" + SanitizeHtml(email) + "','" + activatieHash + "')";
+                SQL += "(1, '" + datum + "','" + IOConverter.SanitizeHtml(email) + "','" + activatieHash + "')";
                 using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
                 {
                     cmd.ExecuteNonQuery();
@@ -196,7 +153,7 @@ namespace Examenmonitor
             }*/
 
             SQL = "INSERT INTO tblPassreset (actief,datum,email,activatieHash) VALUES";
-            SQL += "(1, '" + datum + "','" + SanitizeHtml(email) + "','" + activatieHash + "')";
+            SQL += "(1, '" + datum + "','" + IOConverter.SanitizeHtml(email) + "','" + activatieHash + "')";
             controller.SQL = SQL;
             controller.ExecuteNonQuery();
 
@@ -205,19 +162,19 @@ namespace Examenmonitor
 
         //voegt een gebruiker toe aan de db
         public static void InsertGebruiker( string email, string wachtwoord, string voornaam, string achternaam)
-        {            
-            string encryptedWachtwoord = getHashSha256(wachtwoord);
+        {
+            string encryptedWachtwoord = IOConverter.getHashSha256(wachtwoord);
             /*
             //cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
             string SQL = "INSERT INTO tblUsers (actief, email,wachtwoord,achternaam,voornaam) VALUES";
-            SQL += "(0, '" + SanitizeHtml(email) + "','" + encryptedWachtwoord + "','" + SanitizeHtml(achternaam) + "','" + SanitizeHtml(voornaam) + "')";
+            SQL += "(0, '" + IOConverter.SanitizeHtml(email) + "','" + encryptedWachtwoord + "','" + IOConverter.SanitizeHtml(achternaam) + "','" + IOConverter.SanitizeHtml(voornaam) + "')";
 
             cmd.CommandText = SQL;
             cmd.ExecuteNonQuery();
             conn.Close();*/
 
             string SQL = "INSERT INTO tblUsers (actief, email,wachtwoord,achternaam,voornaam) VALUES";
-            SQL += "(0, '" + SanitizeHtml(email) + "','" + encryptedWachtwoord + "','" + SanitizeHtml(achternaam) + "','" + SanitizeHtml(voornaam) + "')";
+            SQL += "(0, '" + IOConverter.SanitizeHtml(email) + "','" + encryptedWachtwoord + "','" + IOConverter.SanitizeHtml(achternaam) + "','" + IOConverter.SanitizeHtml(voornaam) + "')";
             DBController controller = new DBController(SQL);
             controller.ExecuteNonQuery();
             /*
@@ -225,7 +182,7 @@ namespace Examenmonitor
             {
                 c.Open();
                 SQL = "INSERT INTO tblUsers (actief, email,wachtwoord,achternaam,voornaam) VALUES";
-                SQL += "(0, '" + SanitizeHtml(email) + "','" + encryptedWachtwoord + "','" + SanitizeHtml(achternaam) + "','" + SanitizeHtml(voornaam) + "')";
+                SQL += "(0, '" + IOConverter.SanitizeHtml(email) + "','" + encryptedWachtwoord + "','" + IOConverter.SanitizeHtml(achternaam) + "','" + IOConverter.SanitizeHtml(voornaam) + "')";
                 using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
                 {
                     cmd.ExecuteNonQuery();
@@ -238,7 +195,7 @@ namespace Examenmonitor
         {
             bool result;
 
-            string SQL = "SELECT * FROM tblUsers WHERE email = '" + SanitizeHtml(email) + "'";
+            string SQL = "SELECT * FROM tblUsers WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
             DBController controller = new DBController(SQL);
             result = !controller.ExecuteReaderQueryReturnSingleResult();
             
@@ -251,7 +208,7 @@ namespace Examenmonitor
         {
             bool result;
 
-            string SQL = "SELECT * FROM tblUsers WHERE email = '" + SanitizeHtml(email) + "' AND actief = '1'";
+            string SQL = "SELECT * FROM tblUsers WHERE email = '" + IOConverter.SanitizeHtml(email) + "' AND actief = '1'";
             DBController controller = new DBController(SQL);
             result = controller.ExecuteReaderQueryReturnSingleResult();
             
@@ -273,8 +230,8 @@ namespace Examenmonitor
             /*
             DBController controller = new DBController(SQL);
             string datum = controller.ExecuteReaderQueryReturnMultipleResults("datum,"email");
-            DateTime geconverteerdeDatum = StringDatumNaarDateTime(datum);  //omzette naar IO
-            DateTime vandaag = StringDatumNaarDateTime(GetHuidigeDatum());
+            DateTime geconverteerdeDatum = IOConverter.StringDatumNaarDateTime(datum);  //omzette naar IO
+            DateTime vandaag = IOConverter.StringDatumNaarDateTime(GetHuidigeDatum());
             TimeSpan tijdspanne = vandaag.Subtract(geconverteerdeDatum);
             if (tijdspanne.TotalDays < 2.0)
             {
@@ -294,8 +251,8 @@ namespace Examenmonitor
                         while (reader.Read())
                         {
                             string datum = reader.GetString(reader.GetOrdinal("datum"));
-                            DateTime geconverteerdeDatum = StringDatumNaarDateTime(datum);
-                            DateTime vandaag = StringDatumNaarDateTime(GetHuidigeDatum());
+                            DateTime geconverteerdeDatum = IOConverter.StringDatumNaarDateTime(datum);
+                            DateTime vandaag = IOConverter.StringDatumNaarDateTime(IOConverter.GetHuidigeDatum());
                             TimeSpan tijdspanne = vandaag.Subtract(geconverteerdeDatum);
                             if (tijdspanne.TotalDays < 2.0)
                             {
@@ -360,8 +317,8 @@ namespace Examenmonitor
                         while (reader.Read())
                         {
                             string datum = reader.GetString(reader.GetOrdinal("datum"));
-                            DateTime geconverteerdeDatum = StringDatumNaarDateTime(datum);
-                            DateTime vandaag = StringDatumNaarDateTime(GetHuidigeDatum());
+                            DateTime geconverteerdeDatum = IOConverter.StringDatumNaarDateTime(datum);
+                            DateTime vandaag = IOConverter.StringDatumNaarDateTime(IOConverter.GetHuidigeDatum());
                             TimeSpan tijdspanne = vandaag.Subtract(geconverteerdeDatum);
                             if (tijdspanne.TotalDays < 2.0)
                             {
@@ -385,8 +342,8 @@ namespace Examenmonitor
             while (reader.Read())
             {
                 string datum = reader.GetString(reader.GetOrdinal("datum"));
-                DateTime geconverteerdeDatum = StringDatumNaarDateTime(datum);
-                DateTime vandaag = StringDatumNaarDateTime(GetHuidigeDatum());
+                DateTime geconverteerdeDatum = IOConverter.StringDatumNaarDateTime(datum);
+                DateTime vandaag = IOConverter.StringDatumNaarDateTime(GetHuidigeDatum());
                 TimeSpan tijdspanne = vandaag.Subtract(geconverteerdeDatum);
                 if (tijdspanne.TotalDays < 2.0)
                 {
@@ -427,7 +384,7 @@ namespace Examenmonitor
             using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
             {
                 c.Open();
-                SQL = "SELECT * FROM tblUsers WHERE email = '" + SanitizeHtml(email) + "'";
+                SQL = "SELECT * FROM tblUsers WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
                 using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
                 {
                     using (var reader = cmd.ExecuteReader())
@@ -477,7 +434,7 @@ namespace Examenmonitor
             string SQL = "";
             using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
             {
-                SQL = "SELECT * FROM tblUsers WHERE email = '" + SanitizeHtml(email) + "'";
+                SQL = "SELECT * FROM tblUsers WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
                 c.Open();
                 using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
                 {
