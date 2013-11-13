@@ -9,20 +9,8 @@ using System.Collections;
 using System.Collections.Specialized;
 namespace Examenmonitor
 {
-    /* voorbeeld code voor connectie pooling
-     using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
-                {
-                    c.Open();
-                    SQL = "UPDATE tblUsers SET actief='1' WHERE email = '" + mail + "'";
-                    using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                } */
     public static class DatabankConnector
     {
-        
-
         //Haalt het email adress van iemand die pass reset heeft aangevraagd uit de Passreset tabel
         public static string getEmailTroughPassResetHash(string hash)
         {
@@ -30,22 +18,6 @@ namespace Examenmonitor
             string SQL = "SELECT * FROM tblPassreset WHERE activatiehash = '" + IOConverter.SanitizeHtml(hash) + "'";
             DBController controller = new DBController(SQL);
             result = controller.ExecuteReaderQueryReturnSingleString("email");
-
-            /*
-            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
-            {
-                c.Open();
-                SQL = "SELECT * FROM tblPassreset WHERE activatiehash = '" + IOConverter.SanitizeHtml(hash) + "'";
-                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
-                {                    
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read()) {
-                            result = reader.GetString(reader.GetOrdinal("email"));
-                        }                        
-                    }
-                }
-            } */
            
             return result;
         }
@@ -58,9 +30,7 @@ namespace Examenmonitor
             controller.ExecuteNonQuery();
         }
 
-        
-
-        //Stuur een hash + ee, ongehashed passwoord mee om deze te vergelijken
+        //Stuur een hash + een ongehashed passwoord mee om deze te vergelijken
         public static bool vergelijkPasswoorden(string serverHash, string ingegevenPasswoord) 
         {
             string clientHash = IOConverter.getHashSha256(ingegevenPasswoord);
@@ -75,17 +45,13 @@ namespace Examenmonitor
             return IOConverter.getHashSha256(email + randomString);
         }
 
-        
-
-        
-
         //slaagt de registratie gegevens op en stuurt da activatiehash terug die in de mail kan worden gebruikt
         public static string RegistratieMail(string email)
         {        
             string datum = IOConverter.GetHuidigeDatum();
             string activatieHash = genereerActivatieHash(email);
             
-            String SQL = "UPDATE tblActivatie SET actief = '0' WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
+            String SQL = "UPDATE tblActivatie SET actief = '0' WHERE email = '" + IOConverter.SanitizeHtml(email) + "'"; //alle andere mails deactiveren
             DBController controller = new DBController(SQL);
             controller.ExecuteNonQuery();
 
@@ -100,57 +66,12 @@ namespace Examenmonitor
         //slaagt de paswoord reset gegevens op en stuurt de activatiehash terug die in de mail kan worden gebruikt
         public static string PassResetMail(string email)
         {
-            /*String pad = ConfigDB.getPad();
-            var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
-            conn.Open();*/
-
             string datum = IOConverter.GetHuidigeDatum();
-
             string activatieHash = genereerActivatieHash(email);
 
-            /*
-            //alle andere instanties van deze email op non actief zetten
-            var cmd2 = conn.CreateCommand();
-            string SQL = "UPDATE tblPassreset SET actief = '0' WHERE email = '" + email + "'";
-            cmd2.CommandText = SQL;
-            cmd2.ExecuteNonQuery();
-
-            SQL = "INSERT INTO tblPassreset (actief,datum,email,activatieHash) VALUES";
-            SQL += "(1, '" + datum + "','" + email + "','" + activatieHash + "')";
-
-            var cmd = conn.CreateCommand();
-            cmd.CommandText = SQL;
-            cmd.ExecuteNonQuery();
-
-
-
-            conn.Close();*/
-
-
-            string SQL = "UPDATE tblPassreset SET actief = '0' WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
+            string SQL = "UPDATE tblPassreset SET actief = '0' WHERE email = '" + IOConverter.SanitizeHtml(email) + "'"; //alle andere mails deactiveren
             DBController controller = new DBController(SQL);
             controller.ExecuteNonQuery();
-
-            /*
-            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
-            {
-                c.Open();
-                SQL = "UPDATE tblPassreset SET actief = '0' WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
-                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-            }           
-            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
-            {
-                c.Open();
-                SQL = "INSERT INTO tblPassreset (actief,datum,email,activatieHash) VALUES";
-                SQL += "(1, '" + datum + "','" + IOConverter.SanitizeHtml(email) + "','" + activatieHash + "')";
-                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-            }*/
 
             SQL = "INSERT INTO tblPassreset (actief,datum,email,activatieHash) VALUES";
             SQL += "(1, '" + datum + "','" + IOConverter.SanitizeHtml(email) + "','" + activatieHash + "')";
@@ -164,30 +85,10 @@ namespace Examenmonitor
         public static void InsertGebruiker( string email, string wachtwoord, string voornaam, string achternaam)
         {
             string encryptedWachtwoord = IOConverter.getHashSha256(wachtwoord);
-            /*
-            //cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
-            string SQL = "INSERT INTO tblUsers (actief, email,wachtwoord,achternaam,voornaam) VALUES";
-            SQL += "(0, '" + IOConverter.SanitizeHtml(email) + "','" + encryptedWachtwoord + "','" + IOConverter.SanitizeHtml(achternaam) + "','" + IOConverter.SanitizeHtml(voornaam) + "')";
-
-            cmd.CommandText = SQL;
-            cmd.ExecuteNonQuery();
-            conn.Close();*/
-
             string SQL = "INSERT INTO tblUsers (actief, email,wachtwoord,achternaam,voornaam) VALUES";
             SQL += "(0, '" + IOConverter.SanitizeHtml(email) + "','" + encryptedWachtwoord + "','" + IOConverter.SanitizeHtml(achternaam) + "','" + IOConverter.SanitizeHtml(voornaam) + "')";
             DBController controller = new DBController(SQL);
-            controller.ExecuteNonQuery();
-            /*
-            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
-            {
-                c.Open();
-                SQL = "INSERT INTO tblUsers (actief, email,wachtwoord,achternaam,voornaam) VALUES";
-                SQL += "(0, '" + IOConverter.SanitizeHtml(email) + "','" + encryptedWachtwoord + "','" + IOConverter.SanitizeHtml(achternaam) + "','" + IOConverter.SanitizeHtml(voornaam) + "')";
-                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-            }*/
+            controller.ExecuteNonQuery();            
         }
 
         //als de opgegeven email ongebruikt is geeft deze functie true terug
@@ -203,7 +104,7 @@ namespace Examenmonitor
             return result;
         }
 
-        //als de opgegeven email geactiveerd is, geeft deze functie true terug
+        //als de opgegeven gebruiker geactiveerd is, geeft deze functie true terug
         public static bool ControleerActivatieEmail(string email)
         {
             bool result;
@@ -217,6 +118,7 @@ namespace Examenmonitor
 
 
         //controleert of de hash overeen komt met nen mail, 2 dagen odu check en stuurt terug op alle wijzingen zijn gelukt
+        //TO DO
         public static bool ControleerActivatieHash(string hash)
         {
             string mail = "";
@@ -299,6 +201,7 @@ namespace Examenmonitor
         }
 
         //controleert of de hash overeenkomt met aanvraag op passreset
+        //TO DO
         public static bool ControleerPassresetHash(string hash)
         {
             string mail = "";
@@ -375,6 +278,7 @@ namespace Examenmonitor
 
 
         //int 0 = succes, int 1= ongeactiveerd account, int 2= verkeerde login gegevens, int 3 = unexpected error
+        //TO DO
         public static int login(string email, string passwoord)
         {
             int actief;
@@ -425,7 +329,8 @@ namespace Examenmonitor
             return result;
         }
 
-        //halen van naam en voornaam uit DB
+        //halen van naam en voornaam uit DB aan de hand van email
+        //todo
         public static string GetVoornaamEnAchternaam(string email)
         {
             string result = "";
