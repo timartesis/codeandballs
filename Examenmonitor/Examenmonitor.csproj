@@ -87,6 +87,7 @@
   <ItemGroup>
     <Compile Include="ConfigDB.cs" />
     <Compile Include="DatabankConnector.cs" />
+    <Compile Include="DBController.cs" />
     <Compile Include="DebugPaginaTim.aspx.cs">
       <DependentUpon>DebugPaginaTim.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -97,6 +98,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IOConverter.cs" />
     <Compile Include="MailTestYentl.aspx.cs">
       <DependentUpon>MailTestYentl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

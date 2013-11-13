@@ -12,7 +12,8 @@
     <div>
  <%
      //code hier fucker
-     DatabankConnector.ControleerActivatieHash("test");
+     string tim = DatabankConnector.getEmailTroughPassResetHash("tim");
+     Response.Write(tim);
      
      
      
