@@ -23,7 +23,7 @@ namespace Examenmonitor
 
         }
         
-        public Examen(DateTime datum, DateTime einddatum, int capaciteit, bool gereserveerd, bool digitaal, string locatie, int id)
+        public Examen(DateTime datum, int einddatum, int capaciteit, bool gereserveerd, bool digitaal, string locatie, int id)
         {
             this.Datum = datum;
             this.Einddatum = einddatum;
