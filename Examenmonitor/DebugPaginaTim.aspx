@@ -12,8 +12,8 @@
     <div>
  <%
      //code hier fucker
-     string tim = DatabankConnector.getEmailTroughPassResetHash("tim");
-     Response.Write(tim);
+     bool tim = DatabankConnector.ControleerBestaandeEmail("test"); 
+     Response.Write(tim.ToString());
      
      
      
