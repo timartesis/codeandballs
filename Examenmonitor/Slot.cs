@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Examenmonitor
 {
-    public class Slot
+    public class Reservatie
     {
         //IPV pure databank data mss al geformateerd!!! sneller
     }
