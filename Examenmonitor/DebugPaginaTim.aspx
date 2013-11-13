@@ -12,10 +12,9 @@
     <div>
  <%
      //code hier fucker
-     bool tim = DatabankConnector.ControleerBestaandeEmail("test"); 
-     Response.Write(tim.ToString());
-     
-     
+     KeyValuePair<string, string> test = new KeyValuePair<string, string>("sluetel", "waarde");
+
+     Response.Write(test.ToString());
      
      
       

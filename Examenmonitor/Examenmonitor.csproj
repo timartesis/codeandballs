@@ -95,6 +95,7 @@
     <Compile Include="DebugPaginaTim.aspx.designer.cs">
       <DependentUpon>DebugPaginaTim.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Examen.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

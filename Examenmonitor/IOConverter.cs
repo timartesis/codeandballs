@@ -61,6 +61,7 @@ namespace Examenmonitor
             DateTime geconverteerdeDatum = new DateTime(jaar, maand, dag, uur, minuut, seconde);
             return geconverteerdeDatum;
 
-        }
+        }       
+
     }
 }
