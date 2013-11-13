@@ -26,26 +26,38 @@ namespace Examenmonitor
             return this.examens;
         }
 
-        private static List<Examen> DatabankExamensToList(ArrayList data) //bestaat uit 2 arraylists, 1 voor de rows en 1 voor de data
+        private static List<Examen> DatabankExamensToList() 
         {
             List<Examen> lijst = new List<Examen>();
-            int teller;
 
-            foreach (ArrayList row in data)
-            {
-                teller = 0;
-                foreach (string value in row)
-                {
-                    //case schrijven met values
-                    //hashmaps uitzoeken
-                    //keyvaluepairs
 
-                    teller++;
-                }
-            }
-
+            
             return lijst;
+        }
 
+        public List<string> GetAllLocaties()
+        {
+            List<string> lijst = new List<string>();
+            bool compare = false;
+
+            foreach (var examen in this.examens)
+            {
+                string locatie = examen.Locatie;
+                foreach (string reedsOpgeslagenObject in lijst)
+                {
+                    if (reedsOpgeslagenObject.Equals(locatie))
+                    {
+                        compare = true;
+                    }
+                }
+                if (!compare)
+                {
+                    lijst.Add(locatie);
+                }
+                compare = false;
+            }
+            
+            return lijst;
         }
     }
 }
