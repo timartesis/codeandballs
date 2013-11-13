@@ -36,9 +36,45 @@ namespace Examenmonitor
         private static List<Examen> DatabankExamensToList() //databank connectie en conversie van de key value pairs in een lijst
         {
             List<Examen> lijst = new List<Examen>();
+            Examen examen;
+            string SQL = "SELECT * FROM tblSlots";
+            DBController controller = new DBController(SQL);
+            string[] tabelnamen = { "id", "datum","end", "capaciteit", "gereserveerd", "digitaal", "stad" };
+            List<List<KeyValuePair<string,string>>> resultset = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow(tabelnamen);
 
+            foreach (List<KeyValuePair<string,string>> row in resultset)
+            {
+                examen = new Examen();
+                foreach (KeyValuePair<string,string> waarde in row)
+                {
+                    switch (waarde.Key)
+                    {
+                        case "id":
+                            examen.Id = int.Parse(waarde.Value);
+                            break;
+                        case "datum":
+                            examen.Datum = IOConverter.StringDatumNaarDateTime(waarde.Value);
+                            break;                        
+                        case "end":
+                            examen.Einddatum = int.Parse(waarde.Value);
+                            break;
+                        case "capaciteit":
+                            examen.Capaciteit = int.Parse(waarde.Value);
+                            break;
+                        case "gereserveerd":
+                            examen.Gereserveerd = int.Parse(waarde.Value) == 1;
+                            break;
+                        case "digitaal":
+                            examen.Digitaal = int.Parse(waarde.Value) == 1;
+                            break;
+                        case "stad":
+                            examen.Locatie = waarde.Value;
+                            break;
+                    }                    
+                }
+                lijst.Add(examen);
+            }
 
-            
             return lijst;
         }
 
