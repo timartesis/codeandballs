@@ -8,6 +8,7 @@ namespace Examenmonitor
     public class Examen
     {
         //Examen naam?????
+        //to string methode voor mooie formatering
         public DateTime Datum { get; set; }
         public DateTime Einddatum { get; set; }
         public int Capaciteit { get; set; }
