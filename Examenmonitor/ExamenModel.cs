@@ -38,9 +38,8 @@ namespace Examenmonitor
             List<Examen> lijst = new List<Examen>();
             Examen examen;
             string SQL = "SELECT * FROM tblSlots";
-            DBController controller = new DBController(SQL);
-            string[] tabelnamen = { "id", "datum","end", "capaciteit", "gereserveerd", "digitaal", "stad" };
-            List<List<KeyValuePair<string,string>>> resultset = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow(tabelnamen);
+            DBController controller = new DBController(SQL);            
+            List<List<KeyValuePair<string, string>>> resultset = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "datum", "end", "capaciteit", "gereserveerd", "digitaal", "stad");
 
             foreach (List<KeyValuePair<string,string>> row in resultset)
             {

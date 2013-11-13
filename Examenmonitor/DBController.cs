@@ -82,7 +82,7 @@ namespace Examenmonitor
             return result;
         }
 
-        public List<KeyValuePair<string, string>> ExecuteReaderQueryReturnMultipleResultsOneRow(string[] tabelnamen) //deze parameer moet veranderen naar een variabele die oneindig strings accepteert            
+        public List<KeyValuePair<string, string>> ExecuteReaderQueryReturnMultipleResultsOneRow(params string[] tabelnamen) //deze parameer moet veranderen naar een variabele die oneindig strings accepteert            
         {
             List<KeyValuePair<string, string>> lijst = new List<KeyValuePair<string, string>>();
             KeyValuePair<string, string> data;
@@ -110,7 +110,7 @@ namespace Examenmonitor
             return lijst;
         }
 
-        public List<List<KeyValuePair<string, string>>> ExecuteReaderQueryReturnMultipleResultsMultipleRow(string[] tabelnamen) //deze parameer moet veranderen naar een variabele die oneindig strings accepteert            
+        public List<List<KeyValuePair<string, string>>> ExecuteReaderQueryReturnMultipleResultsMultipleRow(params string[] tabelnamen) //deze parameer moet veranderen naar een variabele die oneindig strings accepteert            
         {
             /*
              * Werkt met volgende structuur:
