@@ -123,46 +123,20 @@ namespace Examenmonitor
         {
             string mail = "";
             bool result = false;
-            String pad = ConfigDB.getPad();
-            //var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
-
-            
             string SQL = "SELECT * FROM tblActivatie WHERE activatiehash = '" + hash + "' AND actief = '1'";
-
-            /*
             DBController controller = new DBController(SQL);
-            string datum = controller.ExecuteReaderQueryReturnMultipleResults("datum,"email");
-            DateTime geconverteerdeDatum = IOConverter.StringDatumNaarDateTime(datum);  //omzette naar IO
-            DateTime vandaag = IOConverter.StringDatumNaarDateTime(GetHuidigeDatum());
-            TimeSpan tijdspanne = vandaag.Subtract(geconverteerdeDatum);
-            if (tijdspanne.TotalDays < 2.0)
-            {
-                result = true;
-                mail = reader.GetString(reader.GetOrdinal("email"));
-            }
+            var resultList = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("datum", "email");
 
-            */
-            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
+            foreach (var lijst in resultList)
             {
-                c.Open();
-                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
+                string datum = lijst[0].Value;
+                DateTime geconverteerdeDatum = IOConverter.StringDatumNaarDateTime(datum);
+                DateTime vandaag = IOConverter.StringDatumNaarDateTime(IOConverter.GetHuidigeDatum());
+                TimeSpan tijdspanne = vandaag.Subtract(geconverteerdeDatum);
+                if (tijdspanne.TotalDays < 2.0)
                 {
-
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string datum = reader.GetString(reader.GetOrdinal("datum"));
-                            DateTime geconverteerdeDatum = IOConverter.StringDatumNaarDateTime(datum);
-                            DateTime vandaag = IOConverter.StringDatumNaarDateTime(IOConverter.GetHuidigeDatum());
-                            TimeSpan tijdspanne = vandaag.Subtract(geconverteerdeDatum);
-                            if (tijdspanne.TotalDays < 2.0)
-                            {
-                                result = true;
-                                mail = reader.GetString(reader.GetOrdinal("email"));
-                            }
-                        }
-                    }
+                    result = true;
+                    mail = lijst[1].Value;
                 }
             }
             
@@ -171,30 +145,10 @@ namespace Examenmonitor
                 SQL = "UPDATE tblUsers SET actief='1' WHERE email = '" + mail + "'";
                 DBController controller2 = new DBController(SQL);
                 controller2.ExecuteNonQuery();
-                /*
-                using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
-                {
-                    c.Open();
-                    SQL = "UPDATE tblUsers SET actief='1' WHERE email = '" + mail + "'";
-                    using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                }*/
 
                 SQL = "UPDATE tblActivatie SET actief='0' WHERE email = '" + mail + "'";
-                controller2.ExecuteNonQuery();
-                /*
-               using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
-                {
-                    c.Open();
-                    SQL = "UPDATE tblActivatie SET actief='0' WHERE email = '" + mail + "'";
-                    using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                 * */
+                DBController controller3 = new DBController(SQL);
+                controller3.ExecuteNonQuery();
             }            
             
             return result;
@@ -206,71 +160,28 @@ namespace Examenmonitor
         {
             string mail = "";
             bool result = false;
-            String pad = ConfigDB.getPad();
-            //var conn = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + "");
             string SQL = "SELECT * FROM tblPassreset WHERE activatiehash = '" + hash + "' AND actief = '1'";
-            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
+            DBController controller = new DBController(SQL);
+            var resultList = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("datum", "email");
+
+            foreach (var lijst in resultList)
             {
-                c.Open();
-                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
-                {
-
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string datum = reader.GetString(reader.GetOrdinal("datum"));
-                            DateTime geconverteerdeDatum = IOConverter.StringDatumNaarDateTime(datum);
-                            DateTime vandaag = IOConverter.StringDatumNaarDateTime(IOConverter.GetHuidigeDatum());
-                            TimeSpan tijdspanne = vandaag.Subtract(geconverteerdeDatum);
-                            if (tijdspanne.TotalDays < 2.0)
-                            {
-                                result = true;
-                                mail = reader.GetString(reader.GetOrdinal("email"));
-                            }
-                        }
-                    }
-                }
-            }
-            //conn.Open();
-
-            //var cmd = conn.CreateCommand();
-
-
-            //cmd.CommandText = "INSERT INTO tblUsers (actief,email,wachtwoord,achternaam,voornaam,id)VALUES (actief,email,wachtwoord,achternaam,voornaam,id)";
-
-            /*
-            cmd.CommandText = SQL;
-            var reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                string datum = reader.GetString(reader.GetOrdinal("datum"));
+                string datum = lijst[0].Value;
                 DateTime geconverteerdeDatum = IOConverter.StringDatumNaarDateTime(datum);
-                DateTime vandaag = IOConverter.StringDatumNaarDateTime(GetHuidigeDatum());
+                DateTime vandaag = IOConverter.StringDatumNaarDateTime(IOConverter.GetHuidigeDatum());
                 TimeSpan tijdspanne = vandaag.Subtract(geconverteerdeDatum);
                 if (tijdspanne.TotalDays < 2.0)
                 {
-                        result = true;
-                        mail = reader.GetString(reader.GetOrdinal("email"));
-                }                
-            }*/
+                    result = true;
+                    mail = lijst[1].Value;
+                }
+            }
 
             if (result)
             {
                 SQL = "UPDATE tblPassreset SET actief='0' WHERE email = '" + mail + "'";
                 DBController controller2 = new DBController(SQL);
                 controller2.ExecuteNonQuery();
-
-                /*
-                using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
-                {
-                    c.Open();
-                    SQL = "UPDATE tblPassreset SET actief='0' WHERE email = '" + mail + "'";
-                    using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                }*/
             }
 
             return result;

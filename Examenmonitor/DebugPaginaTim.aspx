@@ -23,7 +23,7 @@
      //    }
      //}
 
-     string naam = DatabankConnector.GetVoornaamEnAchternaam("codeandballs@gmail.com");
+     bool naam = DatabankConnector.ControleerPassresetHash("1486767e166298e99d0f85d42a040b42a3939d4c308ebc6d78ccee429ec2526b");
      Response.Write(naam); 
      
      
