@@ -334,25 +334,12 @@ namespace Examenmonitor
         public static string GetVoornaamEnAchternaam(string email)
         {
             string result = "";
-
-
-            string SQL = "";
-            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
-            {
-                SQL = "SELECT * FROM tblUsers WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
-                c.Open();
-                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
-                {
-
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            result = reader.GetString(reader.GetOrdinal("voornaam")) + " " + reader.GetString(reader.GetOrdinal("achternaam"));
-                        }
-                    }
-                }
-            }
+            string SQL = "SELECT * FROM tblUsers WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
+            DBController controller = new DBController(SQL);
+            var resultList = controller.ExecuteReaderQueryReturnMultipleResultsOneRow("voornaam", "achternaam");
+            string voornaam = resultList[0].Value;
+            string achternaam = resultList[1].Value;
+            result = voornaam + " " + achternaam;
             return result;
         }        
     }

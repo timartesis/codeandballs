@@ -12,16 +12,19 @@
     <div>
  <%
      //code hier fucker
-     string sql = "select * from tblUsers";
-     DBController controller = new DBController(sql);
-     var test = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "email", "wachtwoord");
-     foreach (var t in test)
-     {
-         foreach (var b in t)
-         {
-             Response.Write(b.ToString());
-         }
-     }
+     //string sql = "select * from tblUsers";
+     //DBController controller = new DBController(sql);
+     //var test = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "email", "wachtwoord");
+     //foreach (var t in test)
+     //{
+     //    foreach (var b in t)
+     //    {
+     //        Response.Write(b.ToString());
+     //    }
+     //}
+
+     string naam = DatabankConnector.GetVoornaamEnAchternaam("codeandballs@gmail.com");
+     Response.Write(naam); 
      
      
       
