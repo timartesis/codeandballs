@@ -194,49 +194,41 @@ namespace Examenmonitor
         {
             int actief;
             int result = 3;            
-            
-            string SQL = "";
-            using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
+            string SQL = "SELECT * FROM tblUsers WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
+            DBController controller = new DBController(SQL);
+            var resultLijst = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("actief","wachtwoord");
+
+            if (resultLijst.Count != 0) //controleer of de email in de db zit
             {
-                c.Open();
-                SQL = "SELECT * FROM tblUsers WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
-                using (SQLiteCommand cmd = new SQLiteCommand(SQL, c))
+                foreach (var rij in resultLijst)
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    actief =  int.Parse(rij[0].Value);
+                    if (actief == 1) //controleer of het account actief is
                     {
-                            if (reader.HasRows) //controleer of de email in de db zit
-                            {
-                                while (reader.Read())
-                                {
-                                    actief = reader.GetInt32(reader.GetOrdinal("actief"));
-                                    if (actief == 1) //controleer of het account actief is
-                                    {
-                                        string hash = reader.GetString(reader.GetOrdinal("wachtwoord"));
-                                        if (vergelijkPasswoorden(hash, passwoord)) //vergelijk de passwoorden
-                                        {
-                                            result = 0;
-                                            return result;
-                                        }
-                                        else
-                                        {
-                                            result = 2;
-                                            return result;
-                                        }
-                                    }
-                                    else //account is inactief
-                                    {
-                                        result = 1;
-                                        return result;
-                                    }
-                                }
-                            }
-                            else //zo niet verkeerde login gegevens
-                            {
-                                result = 2;
-                            }                        
+                        string hash = rij[1].Value;
+                        if (vergelijkPasswoorden(hash, passwoord)) //vergelijken van passwoorden
+                        {
+                            result = 0;
+                            return result;
+                        }
+                        else //verkeerd passwoord
+                        {
+                            result = 2;
+                            return result;
+                        }
+                    }
+                    else //account is inactief
+                    {
+                        result = 1;
+                        return result;
                     }
                 }
             }
+            else //zo niet verkeerde login gegevens
+            {
+                result = 2;
+            }
+
             return result;
         }
 
