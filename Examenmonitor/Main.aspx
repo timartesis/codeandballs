@@ -12,13 +12,14 @@
             <div id="Menu">
                 <div id="MenuFilter">
                     <asp:Label ID="titelLabel" runat="server" Text="Filter"></asp:Label>
-                    <asp:Panel ID="Panel1" runat="server" Height="50px" >
+                    <asp:Panel ID="PanelFilter" runat="server" Height="50px" >
                     </asp:Panel>
                 </div>
             </div>
 
             <div id="Data">
-
+                <asp:Panel ID="PanelData" runat="server" Height="50px" >
+                </asp:Panel>
             </div>
         </form>
     </div>
