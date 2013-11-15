@@ -41,10 +41,34 @@ namespace Examenmonitor
 
         public string VrijeSlots()
         {
-            int totaal = this.Capaciteit;
-            int vrij = totaal - Reservaties.Count;
+            string vrijeSlots = this.Reservaties.Count + "/" + this.Capaciteit;
+                if (this.Reservaties.Count == this.Capaciteit)
+                    vrijeSlots = "Volzet";
+                return vrijeSlots;
+        }
 
-            return totaal + "/" + vrij;
+        public string HaalDatumOp()
+        {
+            return Datum.ToString("dd/MM/yyyy");
+        }
+
+        public string HaalBeginUurOp()
+        {
+            return (Datum - Datum.Date).ToString();
+        }
+
+        public string HaalEindUurOp()
+        {
+            DateTime eindUur = Datum.AddHours(Lengte);
+            return (eindUur - eindUur.Date).ToString();
+        }
+
+        public string IsDigitaal()
+        {
+            string digitaal = "Nee";
+            if (Digitaal)
+                digitaal = "Ja";
+            return digitaal;
         }
 
         public override string ToString()
