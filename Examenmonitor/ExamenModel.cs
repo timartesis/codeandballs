@@ -34,9 +34,9 @@ namespace Examenmonitor
             ExamenModel.Work();
         }
 
-        public List<Examen> getExamens()
+        public static List<Examen> getExamens()
         {
-            return this.examens;
+            return ExamenModel.getInstance().examens;
         }
 
         private List<Examen> DatabankExamensToList() //databank connectie en conversie van de key value pairs in een lijst
@@ -118,6 +118,15 @@ namespace Examenmonitor
         {
             ExamenModel model = ExamenModel.getInstance();
             model.examens = model.DatabankExamensToList();
+            foreach (Examen ex in model.examens)
+            {
+                ex.Reservaties = model.GetReservatiesInExamen(ex.Id);
+            }
+        }
+
+        private List<Reservatie> GetReservatiesInExamen(int id)
+        {
+            return null;
         }
     }
 }

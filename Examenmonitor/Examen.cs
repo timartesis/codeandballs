@@ -30,7 +30,8 @@ namespace Examenmonitor
             
             this.Digitaal = digitaal;
             this.Locatie = locatie;
-            this.Id = id;            
+            this.Id = id;
+            this.Reservaties = new List<Reservatie>();
         }
 
         public bool Equals(Examen obj)
