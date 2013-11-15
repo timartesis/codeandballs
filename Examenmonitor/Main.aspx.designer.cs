@@ -22,13 +22,13 @@ namespace Examenmonitor {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// debugLabel control.
+        /// titelLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label debugLabel;
+        protected global::System.Web.UI.WebControls.Label titelLabel;
         
         /// <summary>
         /// Panel1 control.

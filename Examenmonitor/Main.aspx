@@ -9,18 +9,12 @@
 <body>
     <div class="PageContent">
         <form id="form1" runat="server">
-            <div id="Filter">
-                <fieldset>
-                    <legend>Filter</legend>
-
-                    <asp:Label ID="debugLabel" runat="server" Text="Label"></asp:Label>
-                    <div id="checkboxContainer">
-                        <asp:Panel ID="Panel1" runat="server" Height="50px" Style="z-index: 102; left: 73px;
-                        position: absolute; top: 8px" Width="125px">
-                        </asp:Panel>
-                    </div>
-                    
-                </fieldset>
+            <div id="Menu">
+                <div id="MenuFilter">
+                    <asp:Label ID="titelLabel" runat="server" Text="Filter"></asp:Label>
+                    <asp:Panel ID="Panel1" runat="server" Height="50px" >
+                    </asp:Panel>
+                </div>
             </div>
 
             <div id="Data">
