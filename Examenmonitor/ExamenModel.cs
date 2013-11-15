@@ -45,7 +45,7 @@ namespace Examenmonitor
             Examen examen;
             string SQL = "SELECT * FROM tblSlots";
             DBController controller = new DBController(SQL);            
-            List<List<KeyValuePair<string, string>>> resultset = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "datum", "lengte", "capaciteit", "digitaal", "locatie");
+            List<List<KeyValuePair<string, string>> > resultset = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "datum", "lengte", "capaciteit", "digitaal", "locatie");
 
             foreach (List<KeyValuePair<string,string>> row in resultset)
             {
@@ -124,9 +124,38 @@ namespace Examenmonitor
             }
         }
 
-        private List<Reservatie> GetReservatiesInExamen(int id)
+        private List<Reservatie> GetReservatiesInExamen(int examenid)
         {
-            return null;
+            List<Reservatie> lijst = new List<Reservatie>();
+            Reservatie reservatie;
+            string SQL = "SELECT * FROM tblReservations WHERE slotid = '" + examenid + "'";
+            DBController controller = new DBController(SQL);
+            List<List<KeyValuePair<string, string>>> resultset = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "slotid", "userid", "creatiedatum");
+
+            foreach (List<KeyValuePair<string, string>> row in resultset)
+            {
+                reservatie = new Reservatie();
+                foreach (KeyValuePair<string, string> waarde in row)
+                {
+                    switch (waarde.Key)
+                    {
+                        case "id":
+                            reservatie.Id = int.Parse(waarde.Value);
+                            break;
+                        case "creatiedatum":
+                            reservatie.CreatieDatum = IOConverter.StringDatumNaarDateTime(waarde.Value);
+                            break;
+                        case "userid":
+                            reservatie.UserId = int.Parse(waarde.Value);
+                            break;
+                        case "slotid":
+                            reservatie.ExamenId = int.Parse(waarde.Value);
+                            break;
+                    }
+                }
+                lijst.Add(reservatie);
+            }
+            return lijst;
         }
     }
 }

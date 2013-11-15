@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="Examen.cs" />
     <Compile Include="ExamenModel.cs" />
+    <Compile Include="FilterModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
