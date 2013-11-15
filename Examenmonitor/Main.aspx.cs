@@ -65,6 +65,30 @@ namespace Examenmonitor
                 row.Cells.Add(tempCell);
             }
             table.Rows.Add(row);
-        } 
+        }
+
+        private TableRow GenerateSortButtons()
+        {
+            TableRow row = new TableRow();
+
+            for (int i = 0; i <= 7; i++)
+            {
+                TableCell tempCell = new TableCell();
+                tempCell.ID = "Sort" + i;
+                Button btn1 = new Button();
+                btn1.ID = "Aflopend" + i;
+                Button btn2 = new Button();
+                btn2.ID = "Oplopend" + i;
+                btn1.Width = 100;
+                btn2.Width = 100;
+                btn1.Text = "Aflopend";
+                btn2.Text = "Oplopend";
+                tempCell.Controls.Add(btn1);
+                tempCell.Controls.Add(btn2);
+                row.Cells.Add(tempCell);
+            }
+
+            return row;
+        }
     }
 }

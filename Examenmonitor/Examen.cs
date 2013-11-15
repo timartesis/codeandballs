@@ -39,6 +39,14 @@ namespace Examenmonitor
             return obj.Id == this.Id;            
         }
 
+        public string VrijeSlots()
+        {
+            int totaal = this.Capaciteit;
+            int vrij = totaal - Reservaties.Count;
+
+            return totaal + "/" + vrij;
+        }
+
         public override string ToString()
         {
             return "Datum: " + Datum.ToShortDateString() + " lengte: " + Lengte + " capaciteit: " + Capaciteit + " digitaal: " + Digitaal +" locatie: "+ Locatie + " id: " + Id.ToString();
