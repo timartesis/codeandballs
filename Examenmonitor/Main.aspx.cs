@@ -11,10 +11,9 @@ namespace Examenmonitor
 {
     public partial class Main : System.Web.UI.Page
     {
-        private int AANTALKOLOMEN = 3;
         public static int ctr = 0;//Counter
         public static int ctr2 = 0;//Counter voor locaties
-        static Table table = new Table();
+        private Table table = new Table();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,9 +29,13 @@ namespace Examenmonitor
             table.ID = "table1";
             Panel1.Controls.Add(table);
             //Locaties ophalen uit de DataBase via ExamenModel
+            ExamenModel.ReloadData();
             ExamenModel ex = ExamenModel.getInstance();
-            //Methdoe oproepen om te genereren
-            this.GenerateCheckBoxes(ex.GetAllLocaties());
+            //Methode oproepen om te genereren
+            List<string> locaties = ex.GetAllLocaties();
+            locaties.Add("Mijn reservaties");
+            locaties.Add("Geen volzet tonen");
+            this.GenerateCheckBoxes(locaties);
         }
 
         
@@ -57,12 +60,13 @@ namespace Examenmonitor
                 CheckBox cb = new CheckBox();
                 cb.ID = "Checkbox " + item.ToString();
                 cb.AutoPostBack = false;
-                cb.Width = 10;
+                cb.Width = 200;
                 cb.Text = item.ToString();
                 // Add the control to the TableCell
                 tempCell.Controls.Add(cb);
                 row.Cells.Add(tempCell);
             }
+            table.Rows.Add(row);
 
             /*for (int i = 0; i < lijst.Count(); i+=3)
             {

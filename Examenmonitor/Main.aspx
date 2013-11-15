@@ -15,8 +15,7 @@
 
                     <asp:Label ID="debugLabel" runat="server" Text="Label"></asp:Label>
                     <div id="checkboxContainer">
-                        <asp:Panel ID="Panel1" runat="server" Height="50px" Style="z-index: 102; left: 73px;
-                        position: absolute; top: 8px" Width="125px">
+                        <asp:Panel ID="Panel1" runat="server" Height="50px" >
                         </asp:Panel>
                     </div>
                     
