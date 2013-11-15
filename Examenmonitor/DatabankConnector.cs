@@ -255,5 +255,14 @@ namespace Examenmonitor
             result = controller.ExecuteReaderQueryReturnSingleString("wachtwoord");
             return result;
         }
+
+        public static int GetIdMetMail(string email)
+        {
+            string result = "";
+            string SQL = "SELECT id FROM tblUsers WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
+            DBController controller = new DBController(SQL);
+            result = controller.ExecuteReaderQueryReturnSingleString("id");
+            return int.Parse(result);
+        }
     }
 }
