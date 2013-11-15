@@ -29,15 +29,18 @@ namespace Examenmonitor
             //Code voor generatie check boxes
             table.ID = "table1";
             Panel1.Controls.Add(table);
-
+            //Locaties ophalen uit de DataBase via ExamenModel
             ExamenModel ex = ExamenModel.getInstance();
+            //Methdoe oproepen om te genereren
             this.GenerateCheckBoxes(ex.GetAllLocaties());
         }
 
         
         private void GenerateCheckBoxes(List<string> lijst)
         {
+            //Teller om te zien wanneer we bij de 3 zijn
             int teller = 0;
+            //Nieuwe tabel row maken
             TableRow row = new TableRow();
             foreach (var item in lijst)
             {
@@ -51,10 +54,17 @@ namespace Examenmonitor
                 }
                 TableCell tempCell = new TableCell();
                 tempCell.ID = lijst[ctr2];
+                CheckBox cb = new CheckBox();
+                cb.ID = "Checkbox " + item.ToString();
+                cb.AutoPostBack = false;
+                cb.Width = 10;
+                cb.Text = item.ToString();
+                // Add the control to the TableCell
+                tempCell.Controls.Add(cb);
                 row.Cells.Add(tempCell);
             }
 
-            for (int i = 0; i < lijst.Count(); i+=3)
+            /*for (int i = 0; i < lijst.Count(); i+=3)
             {
                 ctr++;
                 TableRow row = new TableRow();
@@ -67,7 +77,7 @@ namespace Examenmonitor
                     row.Cells.Add(tempCell);
                 }
             }
-            /*ctr++;
+            ctr++;
             // Now iterate through the table and add your controls
             TableRow row = new TableRow();
             row.ID = "row" + ctr;
