@@ -71,6 +71,8 @@
     <Content Include="Global.asax" />
     <Content Include="Main.aspx" />
     <Content Include="PassresetVoltooid.aspx" />
+    <Content Include="PassWijzigen.aspx" />
+    <Content Include="PassWijzigenVoltooid.aspx" />
     <Content Include="RegistratieVoltooid.aspx" />
     <Content Include="ResendMail.aspx" />
     <Content Include="Resources\Site.css" />
@@ -128,6 +130,20 @@
     </Compile>
     <Compile Include="PassresetVoltooid.aspx.designer.cs">
       <DependentUpon>PassresetVoltooid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PassWijzigen.aspx.cs">
+      <DependentUpon>PassWijzigen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PassWijzigen.aspx.designer.cs">
+      <DependentUpon>PassWijzigen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PassWijzigenVoltooid.aspx.cs">
+      <DependentUpon>PassWijzigenVoltooid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PassWijzigenVoltooid.aspx.designer.cs">
+      <DependentUpon>PassWijzigenVoltooid.aspx</DependentUpon>
     </Compile>
     <Compile Include="RegistratieForm.aspx.cs">
       <DependentUpon>RegistratieForm.aspx</DependentUpon>
