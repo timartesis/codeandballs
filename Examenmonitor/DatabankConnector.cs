@@ -244,6 +244,16 @@ namespace Examenmonitor
             string achternaam = resultList[1].Value;
             result = voornaam + " " + achternaam;
             return result;
-        }        
+        }
+
+        //halen van passwoordhash uit de databank aan de hand van de mail
+        public static string GetPasswoordMetMail(string email)
+        {
+            string result = "";
+            string SQL = "SELECT wachtwoord FROM tblUsers WHERE email = '" + IOConverter.SanitizeHtml(email) + "'";
+            DBController controller = new DBController(SQL);
+            result = controller.ExecuteReaderQueryReturnSingleString("wachtwoord");
+            return result;
+        }
     }
 }
