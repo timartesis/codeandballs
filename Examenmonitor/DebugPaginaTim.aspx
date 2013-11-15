@@ -14,7 +14,7 @@
      ExamenModel model = ExamenModel.getInstance();
      //ExamenModel.ReloadDataAsync();
      ExamenModel.ReloadData();
-     List<Examen> list = model.getExamens();
+     List<Examen> list = ExamenModel.getExamens();
      foreach (Examen item in list )
      {
          Response.Write("<p>");

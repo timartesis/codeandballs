@@ -7,7 +7,31 @@ namespace Examenmonitor
 {
     public class Reservatie
     {
-        //IPV pure databank data mss al geformateerd!!! sneller
-        //to string methode voor mooie formatering
+        public int Id { get; set; }
+        public int ExamenId { get; set; }
+        public int UserId { get; set; }
+        public DateTime CreatieDatum { get; set; }
+
+        public Reservatie()
+        {
+        }
+
+        public Reservatie(int id, int examenid, int userid, DateTime creatiedatum)
+        {
+            this.Id = id;
+            this.ExamenId = examenid;
+            this.UserId = userid;
+            this.CreatieDatum = creatiedatum;
+        }
+
+        public bool Equals(Reservatie obj)
+        {
+            return obj.Id == this.Id;
+        }
+
+        public override string ToString()
+        {
+            return "Datum: " + CreatieDatum.ToShortDateString() + " id: " + Id + " examenid: " + ExamenId + " userid: " + UserId;
+        }
     }
 }
