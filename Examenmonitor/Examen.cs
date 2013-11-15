@@ -10,9 +10,8 @@ namespace Examenmonitor
         //Examen naam?????
         //to string methode voor mooie formatering
         public DateTime Datum { get; set; }
-        public int Einddatum { get; set; }
-        public int Capaciteit { get; set; }
-        public bool Gereserveerd { get; set; }
+        public double Lengte { get; set; }
+        public int Capaciteit { get; set; }        
         public bool Digitaal { get; set; }
         public string Locatie { get; set; }
         public int Id { get; set; }
@@ -23,10 +22,10 @@ namespace Examenmonitor
 
         }
         
-        public Examen(DateTime datum, int einddatum, int capaciteit, bool digitaal, string locatie, int id)
+        public Examen(DateTime datum, double lengte, int capaciteit, bool digitaal, string locatie, int id)
         {
             this.Datum = datum;
-            this.Einddatum = einddatum;
+            this.Lengte = lengte;
             this.Capaciteit = capaciteit;
             
             this.Digitaal = digitaal;
@@ -37,6 +36,11 @@ namespace Examenmonitor
         public bool Equals(Examen obj)
         {
             return obj.Id == this.Id;            
+        }
+
+        public override string ToString()
+        {
+            return "Datum: " + Datum.ToShortDateString() + " lengte: " + Lengte + " capaciteit: " + Capaciteit + " digitaal: " + Digitaal +" locatie: "+ Locatie + " id: " + Id.ToString();
         }
     }
 }

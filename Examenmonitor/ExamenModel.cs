@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Threading;
 
 namespace Examenmonitor
 {
@@ -23,9 +24,14 @@ namespace Examenmonitor
             return model;
         }
 
-        public void ReloadData()
+        public static void ReloadDataAsync()
         {
-            //haaal data uit DB en renew de examen lijst
+            ExamenModel.Init(ExamenModel.Work);  
+        }
+
+        public static void ReloadData()
+        {
+            ExamenModel.Work();
         }
 
         public List<Examen> getExamens()
@@ -33,13 +39,13 @@ namespace Examenmonitor
             return this.examens;
         }
 
-        private static List<Examen> DatabankExamensToList() //databank connectie en conversie van de key value pairs in een lijst
+        private List<Examen> DatabankExamensToList() //databank connectie en conversie van de key value pairs in een lijst
         {
             List<Examen> lijst = new List<Examen>();
             Examen examen;
             string SQL = "SELECT * FROM tblSlots";
             DBController controller = new DBController(SQL);            
-            List<List<KeyValuePair<string, string>>> resultset = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "datum", "end", "capaciteit", "digitaal", "locatie");
+            List<List<KeyValuePair<string, string>>> resultset = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "datum", "lengte", "capaciteit", "digitaal", "locatie");
 
             foreach (List<KeyValuePair<string,string>> row in resultset)
             {
@@ -54,8 +60,8 @@ namespace Examenmonitor
                         case "datum":
                             examen.Datum = IOConverter.StringDatumNaarDateTime(waarde.Value);
                             break;                        
-                        case "end":
-                            examen.Einddatum = int.Parse(waarde.Value);
+                        case "lengte":
+                            examen.Lengte = double.Parse(waarde.Value);
                             break;
                         case "capaciteit":
                             examen.Capaciteit = int.Parse(waarde.Value);
@@ -97,6 +103,21 @@ namespace Examenmonitor
             }
             
             return lijst;
+        }
+
+        public delegate void Worker();
+        private static Thread worker;
+
+        public static void Init(Worker work)
+        {
+            worker = new Thread(new ThreadStart(work));
+            worker.Start();
+        }
+
+        public static void Work()
+        {
+            ExamenModel model = ExamenModel.getInstance();
+            model.examens = model.DatabankExamensToList();
         }
     }
 }
