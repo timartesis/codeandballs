@@ -11,43 +11,68 @@ namespace Examenmonitor
 {
     public partial class Main : System.Web.UI.Page
     {
-        private int numOfColumns = 12;
-        public static int ctr = 0;
+        private int AANTALKOLOMEN = 3;
+        public static int ctr = 0;//Counter
+        public static int ctr2 = 0;//Counter voor locaties
         static Table table = new Table();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Valideren of de sessie geldig is
             if (Session["Logged"].Equals("No"))
             {
                 Response.Redirect("Login.aspx");
             }
-
+            //Debug label TODO verwijderen
             debugLabel.Text = Session["User"].ToString();
-            //else
-            //{
-            //    Response.Redirect("Main.aspx");
-            //}
 
+            //Code voor generatie check boxes
             table.ID = "table1";
             Panel1.Controls.Add(table);
-            this.GenerateTable(numOfColumns);
+
+            ExamenModel ex = ExamenModel.getInstance();
+            this.GenerateCheckBoxes(ex.GetAllLocaties());
         }
 
         
-        private void GenerateTable(int colsCount)
+        private void GenerateCheckBoxes(List<string> lijst)
         {
-            ctr++;
+            int teller = 0;
+            TableRow row = new TableRow();
+            foreach (var item in lijst)
+            {
+                teller++;
+                if (teller == 4)
+                {
+                    table.Rows.Add(row);
+                    row = new TableRow();
+                    row.ID = "row" + (teller);
+                    teller = 0;
+                }
+                TableCell tempCell = new TableCell();
+                tempCell.ID = lijst[ctr2];
+                row.Cells.Add(tempCell);
+            }
+
+            for (int i = 0; i < lijst.Count(); i+=3)
+            {
+                ctr++;
+                TableRow row = new TableRow();
+                row.ID = "row" + (ctr);
+                for (int j = 0; j < 3; j++)
+                {
+                    ctr2++;
+                    TableCell tempCell = new TableCell();
+                    tempCell.ID = lijst[ctr2];
+                    row.Cells.Add(tempCell);
+                }
+            }
+            /*ctr++;
             // Now iterate through the table and add your controls
             TableRow row = new TableRow();
             row.ID = "row" + ctr;
             TableCell cell1 = new TableCell();
-            DropDownList dl = new DropDownList();
-            dl.ID = "DrpDwnBrand" + ctr;
-            dl.AutoPostBack = false;
-            dl.Width = 135;
             // Add the control to the TableCell
-            cell1.Controls.Add(dl);
-            // Add the TableCell to the TableRow
             row.Cells.Add(cell1);
             for (int j = 1; j <= colsCount; j++)
             {
@@ -118,7 +143,7 @@ namespace Examenmonitor
             // Add the TableCell to the TableRow
             row.Cells.Add(cell3);
             // Add the TableRow to the Table
-            table.Rows.Add(row);
+            table.Rows.Add(row);*/
         } 
     }
 }
