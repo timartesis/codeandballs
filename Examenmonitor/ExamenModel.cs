@@ -39,7 +39,7 @@ namespace Examenmonitor
             Examen examen;
             string SQL = "SELECT * FROM tblSlots";
             DBController controller = new DBController(SQL);            
-            List<List<KeyValuePair<string, string>>> resultset = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "datum", "end", "capaciteit", "gereserveerd", "digitaal", "stad");
+            List<List<KeyValuePair<string, string>>> resultset = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "datum", "end", "capaciteit", "digitaal", "locatie");
 
             foreach (List<KeyValuePair<string,string>> row in resultset)
             {
@@ -59,14 +59,11 @@ namespace Examenmonitor
                             break;
                         case "capaciteit":
                             examen.Capaciteit = int.Parse(waarde.Value);
-                            break;
-                        case "gereserveerd":
-                            examen.Gereserveerd = int.Parse(waarde.Value) == 1;
-                            break;
+                            break;                        
                         case "digitaal":
                             examen.Digitaal = int.Parse(waarde.Value) == 1;
                             break;
-                        case "stad":
+                        case "locatie":
                             examen.Locatie = waarde.Value;
                             break;
                     }                    
