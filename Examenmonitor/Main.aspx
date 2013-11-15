@@ -13,7 +13,7 @@
                 <fieldset>
                     <legend>Filter</legend>
 
-                    <asp:Label ID="debugLabel" runat="server" Text="Label"></asp:Label>
+                    <asp:Label ID="titelLabel" runat="server" Text="Filter"></asp:Label>
                     <div id="checkboxContainer">
                         <asp:Panel ID="Panel1" runat="server" Height="50px" >
                         </asp:Panel>
