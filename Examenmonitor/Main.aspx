@@ -16,8 +16,9 @@
                     </asp:Panel>
                 </div>
             </div>
-
+            <br />
             <div id="Data">
+                <asp:Label ID="DataLabel" runat="server" Text="Examens"></asp:Label>
                 <asp:Panel ID="PanelData" runat="server" Height="50px" >
                 </asp:Panel>
             </div>

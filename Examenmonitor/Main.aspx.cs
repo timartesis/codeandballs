@@ -39,10 +39,6 @@ namespace Examenmonitor
             locaties.Add("Geen volzet tonen");
             this.GenerateCheckBoxes(locaties);
 
-            //Header renderen + sorteerbuttons
-            tableData.Rows.Add(this.GenerateSortButtons());
-            tableData.Rows.Add(this.GenerateHeaderRow());
-           
             //Methode om alle data te showen
             this.InitDataView(ExamenModel.getExamens());
         }
@@ -68,9 +64,10 @@ namespace Examenmonitor
                 tempCell.ID = item.ToString();
                 CheckBox cb = new CheckBox();
                 cb.ID = "Checkbox " + item.ToString();
-                cb.AutoPostBack = false;
+                cb.AutoPostBack = true;
                 cb.Width = 200;
                 cb.Text = item.ToString();
+                cb.CheckedChanged += new EventHandler(this.CheckedChangeFilter);
                 // Add the control to the TableCell
                 tempCell.Controls.Add(cb);
                 row.Cells.Add(tempCell);
@@ -80,6 +77,9 @@ namespace Examenmonitor
 
         private void InitDataView(List<Examen> lijst)
         {
+            //Header renderen + sorteerbuttons
+            tableData.Rows.Add(this.GenerateSortButtons());
+            tableData.Rows.Add(this.GenerateHeaderRow());
             foreach (var item in lijst)
             {
                 //Rij aanmaken per row uit de databank.
@@ -120,6 +120,8 @@ namespace Examenmonitor
                 ReserverenCell.ID = "Reserveren" + item.Id;
                 CheckBox check = new CheckBox();
                 check.ID = "Reservatie" + item.Id;
+                check.AutoPostBack = true;
+                check.CheckedChanged += new EventHandler(this.CheckedChangeData);
                 ReserverenCell.Controls.Add(check);
 
                 //Cellen toevoegen aan row
@@ -258,5 +260,22 @@ namespace Examenmonitor
             return row;
         }
 
+        //Event voor de checkboxes van de filter
+        protected void CheckedChangeFilter(object sender, EventArgs e)
+        {
+            CheckBox x = (CheckBox)sender;
+            //Test code
+            x.Text = "Clicked";
+
+            
+            //TODO filter code implementeren
+        }
+
+        //Event voor de checkboxes van de Dataview
+        protected void CheckedChangeData(object sender, EventArgs e)
+        {
+            CheckBox x = (CheckBox)sender;
+            //TODO code
+        }
     }
 }
