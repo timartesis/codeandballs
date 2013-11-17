@@ -11,8 +11,12 @@ namespace Examenmonitor
 {
     public partial class Main : System.Web.UI.Page
     {
+        private bool alGechecked = false;
         private Table table = new Table();
         private Table tableData = new Table();
+        private List<Examen> origineleLijst = new List<Examen>();
+        private List<Examen> filterLijst = new List<Examen>();
+        private List<CheckBox> checkboxLijst = new List<CheckBox>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,9 +42,10 @@ namespace Examenmonitor
             locaties.Add("Mijn reservaties");
             locaties.Add("Geen volzet tonen");
             this.GenerateCheckBoxes(locaties);
+            this.origineleLijst = ExamenModel.getExamens();
 
             //Methode om alle data te showen
-            this.InitDataView(ExamenModel.getExamens());
+            this.InitDataView(origineleLijst);
         }
 
         
@@ -71,6 +76,7 @@ namespace Examenmonitor
                 // Add the control to the TableCell
                 tempCell.Controls.Add(cb);
                 row.Cells.Add(tempCell);
+                checkboxLijst.Add(cb);
             }
             table.Rows.Add(row);
         }
@@ -267,12 +273,33 @@ namespace Examenmonitor
         //Event voor de checkboxes van de filter
         protected void CheckedChangeFilter(object sender, EventArgs e)
         {
-            CheckBox x = (CheckBox)sender;
+            CheckBox cb = (CheckBox)sender;
             //Test code
-            x.Text = "Clicked";
+            //cb.Text = "Clicked " + cb.ID + " " + checkboxLijst.Count;
 
             
             //TODO filter code implementeren
+            int aantalLocaties = checkboxLijst.Count - 2;
+            List<string> locaties = new List<string>();
+            for (int i = 0; i < aantalLocaties; i++)
+            {
+                if (checkboxLijst[i].Checked)
+                {
+                    locaties.Add(checkboxLijst[i].Text);
+                }
+            }
+
+            if (locaties.Count > 0)
+            {
+                filterLijst = FilterModel.filterExamensCities(origineleLijst, locaties);
+                InitDataView(filterLijst);
+            }
+            else
+            {
+                InitDataView(origineleLijst);
+            }
+
+
         }
 
         //Event voor de checkboxes van de Dataview
