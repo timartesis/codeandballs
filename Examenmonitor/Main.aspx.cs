@@ -77,9 +77,13 @@ namespace Examenmonitor
 
         private void InitDataView(List<Examen> lijst)
         {
+            //Clearen van de tabel voor hem opnieuw te renderen
+            tableData.Rows.Clear();
+
             //Header renderen + sorteerbuttons
             tableData.Rows.Add(this.GenerateSortButtons());
             tableData.Rows.Add(this.GenerateHeaderRow());
+
             foreach (var item in lijst)
             {
                 //Rij aanmaken per row uit de databank.
@@ -109,12 +113,12 @@ namespace Examenmonitor
                 TableCell DigitaalCell = new TableCell();
                 DigitaalCell.ID = "Digitaal" + item.Id;
                 DigitaalCell.Text = item.IsDigitaal();
-                
+
                 //Verhouding totale plaatsen tegenover vrije plaatsen
                 TableCell TotaalVrijCell = new TableCell();
                 TotaalVrijCell.ID = "TotaalVrij" + item.Id;
                 TotaalVrijCell.Text = item.VrijeSlots();
-                
+
                 //Mogelijkheid tot reserveren van het examen, dmv een checkbox
                 TableCell ReserverenCell = new TableCell();
                 ReserverenCell.ID = "Reserveren" + item.Id;
