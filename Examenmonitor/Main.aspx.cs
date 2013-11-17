@@ -42,7 +42,7 @@ namespace Examenmonitor
             //Methode oproepen om checkboxes te genereren
             List<string> locaties = ex.GetAllLocaties();
             locaties.Add("Mijn reservaties");
-            locaties.Add("Geen volzet tonen");
+            locaties.Add("Vrije plaatsen");
             this.GenerateCheckBoxes(locaties);
             this.origineleLijst = ExamenModel.getExamens();
             Filteren();
@@ -98,6 +98,11 @@ namespace Examenmonitor
                 //Rij aanmaken per row uit de databank.
                 TableRow tempRow = new TableRow();
 
+                //Toont de locaties
+                TableCell locatieCell = new TableCell();
+                locatieCell.ID = "Locatie" + item.Id;
+                locatieCell.Text = item.Locatie;
+
                 //Datum in tabel weergeven
                 TableCell datumCell = new TableCell();
                 datumCell.ID = "Datum" + item.Id;
@@ -138,6 +143,7 @@ namespace Examenmonitor
                 ReserverenCell.Controls.Add(check);
 
                 //Cellen toevoegen aan row
+                tempRow.Cells.Add(locatieCell);
                 tempRow.Cells.Add(datumCell);
                 tempRow.Cells.Add(beginUurCell);
                 tempRow.Cells.Add(EindUurCell);
@@ -157,6 +163,7 @@ namespace Examenmonitor
             TableRow row = new TableRow();
             row.ID = "Heading";
             //maken van de nodige cellen
+            TableCell locatieCell = new TableCell();
             TableCell datumCell = new TableCell();
             TableCell beginUurCell = new TableCell();
             TableCell EindUurCell = new TableCell();
@@ -166,6 +173,16 @@ namespace Examenmonitor
             TableCell ReserverenCell = new TableCell();
 
             //Opmaken van de cellen
+
+            //Locatie cell
+            locatieCell.ID = "Locatie";
+            Label locatieLabel = new Label();
+            locatieLabel.ID = "locatielabel";
+            locatieLabel.Width = 200;
+            locatieLabel.Text = "Locatie";
+            locatieLabel.Font.Bold = true;
+            locatieCell.Controls.Add(locatieLabel);
+
             //Datum cell
             datumCell.ID = "Datum";
             Label datumLabel = new Label();
@@ -230,6 +247,7 @@ namespace Examenmonitor
             ReserverenCell.Controls.Add(reserverenLabel);
 
             //Cellen toevoegen aan de row
+            row.Cells.Add(locatieCell);
             row.Cells.Add(datumCell);
             row.Cells.Add(beginUurCell);
             row.Cells.Add(EindUurCell);
