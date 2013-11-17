@@ -45,9 +45,10 @@ namespace Examenmonitor
             locaties.Add("Geen volzet tonen");
             this.GenerateCheckBoxes(locaties);
             this.origineleLijst = ExamenModel.getExamens();
+            Filteren();
 
             //Methode om alle data te showen
-            this.InitDataView(origineleLijst);
+            this.InitDataView(filterLijst);
         }
 
         
@@ -272,8 +273,7 @@ namespace Examenmonitor
             return row;
         }
 
-        //Event voor de checkboxes van de filter
-        protected void CheckedChangeFilter(object sender, EventArgs e)
+        protected void Filteren()
         {
             //CheckBox cb = (CheckBox)sender;
             //Test code
@@ -305,10 +305,16 @@ namespace Examenmonitor
             {
                 filterLijst = FilterModel.filterExamensCities(filterLijst, locaties);
             }
-            
+
             InitDataView(filterLijst);
 
 
+        }
+
+        //Event voor de checkboxes van de filter
+        protected void CheckedChangeFilter(object sender, EventArgs e)
+        {
+            Filteren();
         }
 
         //Event voor de checkboxes van de Dataview
