@@ -17,6 +17,7 @@ namespace Examenmonitor
         private List<Examen> origineleLijst = new List<Examen>();
         private List<Examen> filterLijst = new List<Examen>();
         private List<CheckBox> checkboxLijst = new List<CheckBox>();
+        private int userID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,6 +26,7 @@ namespace Examenmonitor
             {
                 Response.Redirect("Login.aspx");
             }
+            userID = DatabankConnector.GetIdMetMail(Session["User"].ToString());
             //Debug label TODO verwijderen
             //debugLabel.Text = Session["User"].ToString();
 
@@ -291,15 +293,25 @@ namespace Examenmonitor
         //Event voor de checkboxes van de filter
         protected void CheckedChangeFilter(object sender, EventArgs e)
         {
-            CheckBox cb = (CheckBox)sender;
+            //CheckBox cb = (CheckBox)sender;
             //Test code
             //cb.Text = "Clicked " + cb.ID + " " + checkboxLijst.Count;
 
-            
-            //TODO filter code implementeren
-            int aantalLocaties = checkboxLijst.Count - 2;
+            filterLijst = origineleLijst;
+
+            if (checkboxLijst[checkboxLijst.Count - 1].Checked) //filteren indien volzet filter gechecked is
+            {
+                filterLijst = FilterModel.filterExamensFullCapacity(filterLijst);
+            }
+
+            if (checkboxLijst[checkboxLijst.Count - 2].Checked) //filteren indien eigen reservatie filter gechecked is
+            {
+                filterLijst = FilterModel.filterExamensID(filterLijst, this.userID);
+            }
+
+            int aantalLocaties = checkboxLijst.Count - 2; //aantal locaties die getoond worden
             List<string> locaties = new List<string>();
-            for (int i = 0; i < aantalLocaties; i++)
+            for (int i = 0; i < aantalLocaties; i++) //zetten van locaties die gechecked zijn in een lijst
             {
                 if (checkboxLijst[i].Checked)
                 {
@@ -307,15 +319,12 @@ namespace Examenmonitor
                 }
             }
 
-            if (locaties.Count > 0)
+            if (locaties.Count > 0) //als er locaties gechecked zijn, zal het filteren ervan hier plaatsnemen
             {
-                filterLijst = FilterModel.filterExamensCities(origineleLijst, locaties);
-                InitDataView(filterLijst);
+                filterLijst = FilterModel.filterExamensCities(filterLijst, locaties);
             }
-            else
-            {
-                InitDataView(origineleLijst);
-            }
+            
+            InitDataView(filterLijst);
 
 
         }
