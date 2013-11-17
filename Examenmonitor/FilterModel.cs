@@ -20,7 +20,7 @@ namespace Examenmonitor
             return result;
         }
 
-        public static List<Examen> filterExamensCities(List<Examen> original, params string[] steden)
+        public static List<Examen> filterExamensCities(List<Examen> original, List<string> steden)
         {
             List<Examen> result = new List<Examen>();
 
