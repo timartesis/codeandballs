@@ -33,5 +33,26 @@ namespace Examenmonitor
             }
             return result;
         }
+
+        public static List<Examen> filterExamensID(List<Examen> original, int userID)
+        {
+            List<Examen> result = new List<Examen>();
+
+            foreach (Examen ex in original)
+            {
+                List<Reservatie> reservaties = ex.Reservaties;
+
+                foreach (Reservatie res in reservaties)
+                {
+
+                    if (res.UserId == userID)
+                    {
+                        result.Add(ex);
+                    }
+                }
+            }
+            return result;
+        }
+
     }
 }
