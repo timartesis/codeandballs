@@ -15,13 +15,20 @@
      //ExamenModel.ReloadDataAsync();
      ExamenModel.ReloadData();
      List<Examen> list = ExamenModel.getExamens();
-     foreach (Examen item in list )
+     //foreach (Examen item in list )
+     //{
+     //    Response.Write("<p>");
+     //    Response.Write(item.ToString());
+     //    Response.Write("</p>");
+     //}
+
+     List<Examen> list1 = FilterModel.filterExamensCities(ExamenModel.getExamens(), "Bouwmeesterstraat");
+     foreach (Examen item in list1)
      {
          Response.Write("<p>");
          Response.Write(item.ToString());
          Response.Write("</p>");
      }
-     
      
       
 %>

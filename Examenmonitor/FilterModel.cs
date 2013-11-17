@@ -19,5 +19,19 @@ namespace Examenmonitor
             }
             return result;
         }
+
+        public static List<Examen> filterExamensCities(List<Examen> original, string stad)
+        {
+            List<Examen> result = new List<Examen>();
+
+            foreach (Examen ex in original)
+            {
+                if (ex.Locatie == stad)
+                {
+                    result.Add(ex);
+                }
+            }
+            return result;
+        }
     }
 }
