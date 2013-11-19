@@ -144,6 +144,13 @@ namespace Examenmonitor
                 {
                     check.Enabled = false;
                 }
+                foreach (Reservatie res in item.Reservaties)
+                {
+                    if (res.UserId == userID)
+                    {
+                        check.Checked = true;
+                    }
+                }
 
                 //Cellen toevoegen aan row
                 tempRow.Cells.Add(locatieCell);
