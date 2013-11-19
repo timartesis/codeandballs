@@ -17,6 +17,7 @@ namespace Examenmonitor
         private List<Examen> filterLijst = new List<Examen>();
         private List<CheckBox> checkboxLijst = new List<CheckBox>();
         private int userID;
+        private List<string> Kolomnamen;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -100,36 +101,43 @@ namespace Examenmonitor
                 //Toont de locaties
                 TableCell locatieCell = new TableCell();
                 locatieCell.ID = "Locatie" + item.Id;
+                Kolomnamen.Add("Locatie");
                 locatieCell.Text = item.Locatie;
 
                 //Datum in tabel weergeven
                 TableCell datumCell = new TableCell();
                 datumCell.ID = "Datum" + item.Id;
+                Kolomnamen.Add("Datum");
                 datumCell.Text = item.HaalDatumOp();
 
                 //Beginuur in tabel weergeven
                 TableCell beginUurCell = new TableCell();
                 beginUurCell.ID = "BeginUur" + item.Id;
+                Kolomnamen.Add("BeginUur");
                 beginUurCell.Text = item.HaalBeginUurOp();
 
                 //Einduur in tabel weergeven
                 TableCell EindUurCell = new TableCell();
                 EindUurCell.ID = "EindUur" + item.Id;
+                Kolomnamen.Add("EindUur");
                 EindUurCell.Text = item.HaalEindUurOp();
 
                 //Duur van een examen in de tabel weergeven
                 TableCell DuurCell = new TableCell();
                 DuurCell.ID = "Duur" + item.Id;
+                Kolomnamen.Add("Duur");
                 DuurCell.Text = item.Lengte.ToString();
 
                 //Weergeven of het een digitaal examen is of niet
                 TableCell DigitaalCell = new TableCell();
                 DigitaalCell.ID = "Digitaal" + item.Id;
+                Kolomnamen.Add("Digitaal");
                 DigitaalCell.Text = item.IsDigitaal();
 
                 //Verhouding totale plaatsen tegenover vrije plaatsen
                 TableCell TotaalVrijCell = new TableCell();
                 TotaalVrijCell.ID = "TotaalVrij" + item.Id;
+                Kolomnamen.Add("totaalVrij");
                 TotaalVrijCell.Text = item.VrijeSlots();
 
                 //Mogelijkheid tot reserveren van het examen, dmv een checkbox
@@ -281,10 +289,12 @@ namespace Examenmonitor
                 tempCell.ID = "Sort" + i;
                 //Aflopende button per header toevoegen
                 Button btn1 = new Button();
-                btn1.ID = "Aflopend" + i;
+                btn1.ID = "Aflopend" + Kolomnamen[i];
+                btn1.Click += new EventHandler(SortAflopend);
                 //Oplopende button per header toevoegen
                 Button btn2 = new Button();
-                btn2.ID = "Oplopend" + i;
+                btn2.Click += new EventHandler(SortOplopend);
+                btn2.ID = "Oplopend" + Kolomnamen[i];
 
                 //Settings goed zetten voor de buttons
                 btn1.Width = 75;
@@ -344,6 +354,16 @@ namespace Examenmonitor
         {
             CheckBox x = (CheckBox)sender;
             //TODO code
+        }
+
+        protected void SortAflopend(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+        }
+
+        protected void SortOplopend(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
         }
     }
 }
