@@ -140,6 +140,10 @@ namespace Examenmonitor
                 check.AutoPostBack = true;
                 check.CheckedChanged += new EventHandler(this.CheckedChangeData);
                 ReserverenCell.Controls.Add(check);
+                if (item.VrijeSlots().Equals("Volzet"))
+                {
+                    check.Enabled = false;
+                }
 
                 //Cellen toevoegen aan row
                 tempRow.Cells.Add(locatieCell);
