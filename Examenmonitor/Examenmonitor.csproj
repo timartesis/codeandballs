@@ -169,6 +169,7 @@
       <DependentUpon>ResendMail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reservatie.cs" />
+    <Compile Include="SorteerModel.cs" />
     <Compile Include="Validatie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WachtwoordVergeten.aspx.cs">
