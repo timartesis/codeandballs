@@ -11,7 +11,6 @@ namespace Examenmonitor
 {
     public partial class Main : System.Web.UI.Page
     {
-        private bool alGechecked = false;
         private Table table = new Table();
         private Table tableData = new Table();
         private List<Examen> origineleLijst = new List<Examen>();
@@ -293,10 +292,6 @@ namespace Examenmonitor
 
         protected void Filteren()
         {
-            //CheckBox cb = (CheckBox)sender;
-            //Test code
-            //cb.Text = "Clicked " + cb.ID + " " + checkboxLijst.Count;
-
             filterLijst = origineleLijst;
 
             if (checkboxLijst[checkboxLijst.Count - 1].Checked) //filteren indien volzet filter gechecked is
@@ -325,8 +320,6 @@ namespace Examenmonitor
             }
 
             InitDataView(filterLijst);
-
-
         }
 
         //Event voor de checkboxes van de filter
