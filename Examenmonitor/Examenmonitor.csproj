@@ -75,8 +75,14 @@
     <Content Include="PassWijzigenVoltooid.aspx" />
     <Content Include="RegistratieVoltooid.aspx" />
     <Content Include="ResendMail.aspx" />
+    <Content Include="Resources\bootstrap-responsive.css" />
+    <Content Include="Resources\bootstrap-responsive.min.css" />
+    <Content Include="Resources\bootstrap.css" />
+    <Content Include="Resources\bootstrap.min.css" />
+    <Content Include="Resources\Scripts\bootstrap.js" />
+    <Content Include="Resources\Scripts\bootstrap.min.js" />
+    <Content Include="Resources\Scripts\jquery-2.0.3.min.js" />
     <Content Include="Resources\Site.css" />
-    <Content Include="DebugPaginaTim.aspx" />
     <Content Include="MailTestYentl.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="RegistratieForm.aspx" />
@@ -90,13 +96,6 @@
     <Compile Include="ConfigDB.cs" />
     <Compile Include="DatabankConnector.cs" />
     <Compile Include="DBController.cs" />
-    <Compile Include="DebugPaginaTim.aspx.cs">
-      <DependentUpon>DebugPaginaTim.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DebugPaginaTim.aspx.designer.cs">
-      <DependentUpon>DebugPaginaTim.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Examen.cs" />
     <Compile Include="ExamenModel.cs" />
     <Compile Include="FilterModel.cs" />

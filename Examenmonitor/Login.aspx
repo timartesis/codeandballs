@@ -5,13 +5,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <%-- CSS sheet link--%>
+    <link href="Resources/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
     <title>Login pagina</title>
 
 </head>
 <body>
     <div class="PageContent">
-        <form id="form1" runat="server">
+        <form id="form1" class="form-horizontal"  runat="server">
             <div>
                 <%-- Begin div --%>
                     <div>
@@ -44,17 +45,20 @@
                                 </asp:TableCell></asp:TableRow><asp:TableRow>
                                 <asp:TableCell>
                                     <%-- Inlogbutton --%>
-                                    <asp:Button ID="buttonLogIn" runat="server" CommandName="MoveNext" Text="Log in" OnClick="buttonLogin_Click" />
+                                    <asp:Button ID="buttonLogIn" class="btn" runat="server" CommandName="MoveNext" Text="Log in" OnClick="buttonLogin_Click" />
                                 </asp:TableCell></asp:TableRow></asp:Table></div><br />
-        <%-- Email label en textbox --%><div id="RegisterRecovery" >
-            <%-- Validator om te zien of het veld is ingevuld --%><asp:Button ID="buttonRegistreerHier" runat="server" CommandName="MoveNext" Text="Registreer hier!!" 
+                                <%-- Email label en textbox --%><div id="RegisterRecovery" >
+            <%-- Validator om te zien of het veld is ingevuld --%><asp:Button ID="buttonRegistreerHier" class="btn" runat="server" CommandName="MoveNext" Text="Registreer hier" 
                     OnClick="buttonRegistreerHier_Click" OnClientClick="window.location.href='RegistratieForm.aspx'" 
                     PostBackUrl="~/RegistratieForm.aspx" CausesValidation="false"/>
-            <%-- REGEX Validator --%><asp:Button ID="wachtwoordVergetenButton" runat="server" CommandName="MoveNext" Text="Wachtwoord vergeten?"
-            OnClientClick="window.location.href='WachtwoordVergeten.aspx'" PostBackUrl="~/WachtwoordVergeten.aspx" CausesValidation="false"/><asp:Label ID="Debug" runat="server" Text="label"></asp:Label>
-
-            <asp:Button ID="resendMailButton" runat="server" CommandName="MoveNext" Text="Activatiemail opnieuw verzenden." 
+            <%-- REGEX Validator --%><asp:Button ID="wachtwoordVergetenButton" class="btn" runat="server" CommandName="MoveNext" Text="Wachtwoord vergeten"
+            OnClientClick="window.location.href='WachtwoordVergeten.aspx'" PostBackUrl="~/WachtwoordVergeten.aspx" CausesValidation="false"/><asp:Button ID="resendMailButton" class="btn" runat="server" CommandName="MoveNext" Text="Activatiemail opnieuw verzenden" 
                      OnClientClick="window.location.href='ResendMail.aspx'" 
                     PostBackUrl="~/ResendMail.aspx" CausesValidation="false"/>
 
-                                        </div></div> </form></div></body></html>
+                                        </div></div> 
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+        </form></div></body></html>
