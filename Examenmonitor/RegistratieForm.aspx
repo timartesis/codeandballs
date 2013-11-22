@@ -15,6 +15,9 @@
 </head>
 <body>
     <div class="PageContent">
+        <div class="Header">
+
+            </div>
         <form id="formRegistratie" runat="server">
         
             <div style="height: 94px; width: 920px">
