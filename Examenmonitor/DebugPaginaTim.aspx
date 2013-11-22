@@ -11,7 +11,7 @@
     <form id="form1" runat="server">
     <div>
  <%
-     Response.Write(IOConverter.getServerName());
+     DatabankConnector.addReservation("test2",15);
 %>
     </div>
     </form>
