@@ -80,6 +80,7 @@
     <Content Include="MailTestYentl.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="RegistratieForm.aspx" />
+    <Content Include="Resources\test.css" />
     <Content Include="WachtwoordVergeten.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

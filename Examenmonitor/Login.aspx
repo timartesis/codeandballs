@@ -12,6 +12,9 @@
 <body>
     <div class="PageContent">
         <form id="form1" runat="server">
+            <div class="Header">
+
+            </div>
             <div>
                 <%-- Begin div --%>
                     <div>

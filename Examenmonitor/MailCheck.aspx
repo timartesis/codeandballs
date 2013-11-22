@@ -8,6 +8,9 @@
 </head>
 <body>
     <div class="PageContent">
+        <div class="Header">
+
+        </div>
         <form id="form1" runat="server">
             <div>
                 <p>Controleer uw email om uw account te activeren!</p>

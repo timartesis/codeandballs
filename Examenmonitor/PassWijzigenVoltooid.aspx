@@ -7,6 +7,11 @@
     <title></title>
 </head>
 <body>
+    <div class="PageContent">
+        <div class="Header">
+
+        </div>
+    
     <form id="form1" runat="server">
     <div>
     
@@ -15,5 +20,6 @@
     
     </div>
     </form>
+        </div>
 </body>
 </html>
