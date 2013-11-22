@@ -16,7 +16,7 @@ namespace Examenmonitor
         private List<Examen> origineleLijst = new List<Examen>();
         private List<Examen> filterLijst = new List<Examen>();
         private List<CheckBox> checkboxLijst = new List<CheckBox>();
-        private int userID;
+        private string userMail;
         private List<string> Kolomnamen = new List<string>();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -26,7 +26,7 @@ namespace Examenmonitor
             {
                 Response.Redirect("Login.aspx");
             }
-            userID = DatabankConnector.GetIdMetMail(Session["User"].ToString());
+            userMail = Session["User"].ToString();
             //Debug label TODO verwijderen
             //debugLabel.Text = Session["User"].ToString();
 
@@ -147,7 +147,7 @@ namespace Examenmonitor
                 }
                 foreach (Reservatie res in item.Reservaties)
                 {
-                    if (res.UserId == userID)
+                    if (res.Usermail.Equals(userMail))
                     {
                         check.Checked = true;
                     }
@@ -322,7 +322,7 @@ namespace Examenmonitor
 
             if (checkboxLijst[checkboxLijst.Count - 2].Checked) //filteren indien eigen reservatie filter gechecked is
             {
-                filterLijst = FilterModel.filterExamensID(filterLijst, this.userID);
+                filterLijst = FilterModel.filterExamensID(filterLijst, Session["User"].ToString());
             }
 
             int aantalLocaties = checkboxLijst.Count - 2; //aantal locaties die getoond worden

@@ -9,18 +9,18 @@ namespace Examenmonitor
     {
         public int Id { get; set; }
         public int ExamenId { get; set; }
-        public int UserId { get; set; }
+        public string Usermail { get; set; }
         public DateTime CreatieDatum { get; set; }
 
         public Reservatie()
         {
         }
 
-        public Reservatie(int id, int examenid, int userid, DateTime creatiedatum)
+        public Reservatie(int id, int examenid, string usermail, DateTime creatiedatum)
         {
             this.Id = id;
             this.ExamenId = examenid;
-            this.UserId = userid;
+            this.Usermail = usermail;
             this.CreatieDatum = creatiedatum;
         }
 
@@ -31,7 +31,7 @@ namespace Examenmonitor
 
         public override string ToString()
         {
-            return "Datum: " + CreatieDatum.ToShortDateString() + " id: " + Id + " examenid: " + ExamenId + " userid: " + UserId;
+            return "Datum: " + CreatieDatum.ToShortDateString() + " id: " + Id + " examenid: " + ExamenId + " userid: " + Usermail;
         }
     }
 }

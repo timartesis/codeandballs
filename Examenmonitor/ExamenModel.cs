@@ -130,7 +130,7 @@ namespace Examenmonitor
             Reservatie reservatie;
             string SQL = "SELECT * FROM tblReservations WHERE slotid = '" + examenid + "'";
             DBController controller = new DBController(SQL);
-            List<List<KeyValuePair<string, string>>> resultset = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "slotid", "userid", "creatiedatum");
+            List<List<KeyValuePair<string, string>>> resultset = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "slotid", "email", "creatiedatum");
 
             foreach (List<KeyValuePair<string, string>> row in resultset)
             {
@@ -145,8 +145,8 @@ namespace Examenmonitor
                         case "creatiedatum":
                             reservatie.CreatieDatum = IOConverter.StringDatumNaarDateTime(waarde.Value);
                             break;
-                        case "userid":
-                            reservatie.UserId = int.Parse(waarde.Value);
+                        case "email":
+                            reservatie.Usermail = waarde.Value;
                             break;
                         case "slotid":
                             reservatie.ExamenId = int.Parse(waarde.Value);
