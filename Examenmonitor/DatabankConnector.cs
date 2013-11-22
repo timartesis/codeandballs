@@ -11,6 +11,15 @@ namespace Examenmonitor
 {
     public static class DatabankConnector
     {
+        public static void addReservation(string email, int slotid)
+        {
+            string datum = IOConverter.GetHuidigeDatum();
+            string SQL = "INSERT INTO tblActivatie (email,slotid,creatiedatum) VALUES";            
+            SQL += "('"+IOConverter.SanitizeHtml(email)+"','"+slotid+"','"+datum+"')";
+            DBController controller = new DBController(SQL);
+            controller.ExecuteNonQuery();
+        }
+
         //Haalt het email adress van iemand die pass reset heeft aangevraagd uit de Passreset tabel
         public static string getEmailTroughPassResetHash(string hash)
         {
