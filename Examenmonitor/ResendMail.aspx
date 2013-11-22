@@ -8,6 +8,9 @@
 </head>
 <body>
     <div class="PageContent">
+        <div class="Header">
+
+        </div>
     <form id="form1" runat="server">
     <div>
         <asp:Label ID="Label2" runat="server" AssociatedControlID="Email">Email: </asp:Label>

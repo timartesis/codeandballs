@@ -11,6 +11,9 @@
 </head>
 <body>
     <div class="PageContent">
+    <div class="Header">
+
+    </div>
     <form id="formWachtwoordVergeten" runat="server">
     <div style="height: 94px; width: 920px">
         <fieldset>

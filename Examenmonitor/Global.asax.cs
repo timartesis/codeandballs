@@ -31,7 +31,12 @@ namespace Examenmonitor
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+            var app = (HttpApplication)sender;
+            if (app.Context.Request.Url.LocalPath.EndsWith("/"))
+            {
+                app.Context.RewritePath(
+                         string.Concat(app.Context.Request.Url.LocalPath, "Login.aspx"));
+            }
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

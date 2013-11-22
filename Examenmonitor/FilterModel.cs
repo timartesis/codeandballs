@@ -37,7 +37,7 @@ namespace Examenmonitor
             return result;
         }
 
-        public static List<Examen> filterExamensID(List<Examen> original, int userID)
+        public static List<Examen> filterExamensID(List<Examen> original, string userMail)
         {
             List<Examen> result = new List<Examen>();
 
@@ -48,7 +48,7 @@ namespace Examenmonitor
                 foreach (Reservatie res in reservaties)
                 {
 
-                    if (res.UserId == userID)
+                    if (res.Usermail.Equals(userMail))
                     {
                         result.Add(ex);
                     }

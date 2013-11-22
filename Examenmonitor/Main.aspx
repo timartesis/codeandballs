@@ -4,10 +4,23 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Resources/test.css" rel="stylesheet" type="text/css" />
     <title></title>
 </head>
 <body>
     <div class="PageContent">
+        <div class="Header" id="HeaderMain">
+            <ul id="menu">
+	            <li>
+		            <a href="#">ACCOUNTNAMELALATEST</a>
+		            <ul>
+			            <li><a href="#">Wachtwoord wijzigen</a></li>
+			            <li><a href="#">Logout</a></li>
+		            </ul>
+	            </li>
+            </ul>
+        </div>
         <form id="form1" runat="server">
             <div id="Menu">
                 <div id="MenuFilter">

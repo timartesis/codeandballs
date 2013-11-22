@@ -14,9 +14,9 @@ namespace Examenmonitor
         private Table table = new Table();
         private Table tableData = new Table();
         private List<Examen> origineleLijst = new List<Examen>();
-        private List<Examen> filterLijst = new List<Examen>();
+        private static List<Examen> filterLijst;
         private List<CheckBox> checkboxLijst = new List<CheckBox>();
-        private int userID;
+        private string userMail;
         private List<string> Kolomnamen = new List<string>();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -26,7 +26,7 @@ namespace Examenmonitor
             {
                 Response.Redirect("Login.aspx");
             }
-            userID = DatabankConnector.GetIdMetMail(Session["User"].ToString());
+            userMail = Session["User"].ToString();
             //Debug label TODO verwijderen
             //debugLabel.Text = Session["User"].ToString();
 
@@ -45,7 +45,10 @@ namespace Examenmonitor
             locaties.Add("Vrije plaatsen");
             this.GenerateCheckBoxes(locaties);
             this.origineleLijst = ExamenModel.getExamens();
-            Filteren();
+            if (filterLijst == null)
+            {
+                filterLijst = origineleLijst;
+            }
 
             //Methode om alle data te showen
             this.InitDataView(filterLijst);
@@ -144,10 +147,17 @@ namespace Examenmonitor
                 if (item.VrijeSlots().Equals("Volzet"))
                 {
                     check.Enabled = false;
+                    foreach (Reservatie res in item.Reservaties)
+                    {
+                        if (res.Usermail.Equals(userMail))
+                        {
+                            check.Enabled = true;
+                        }
+                    }
                 }
                 foreach (Reservatie res in item.Reservaties)
                 {
-                    if (res.UserId == userID)
+                    if (res.Usermail.Equals(userMail))
                     {
                         check.Checked = true;
                     }
@@ -289,10 +299,10 @@ namespace Examenmonitor
                 tempCell.ID = "Sort" + i;
                 //Aflopende button per header toevoegen
                 Button btn1 = new Button();
-                btn1.Click += new EventHandler(SortAflopend);
+                btn1.Click += new EventHandler(SorteerButton_Click);
                 //Oplopende button per header toevoegen
                 Button btn2 = new Button();
-                btn2.Click += new EventHandler(SortOplopend);
+                btn2.Click += new EventHandler(SorteerButton_Click);
                 btn1.ID = "Aflopend" + Kolomnamen[i];
                 btn2.ID = "Oplopend" + Kolomnamen[i];
 
@@ -322,7 +332,7 @@ namespace Examenmonitor
 
             if (checkboxLijst[checkboxLijst.Count - 2].Checked) //filteren indien eigen reservatie filter gechecked is
             {
-                filterLijst = FilterModel.filterExamensID(filterLijst, this.userID);
+                filterLijst = FilterModel.filterExamensID(filterLijst, Session["User"].ToString());
             }
 
             int aantalLocaties = checkboxLijst.Count - 2; //aantal locaties die getoond worden
@@ -356,15 +366,7 @@ namespace Examenmonitor
             //TODO code
         }
 
-        protected void SortAflopend(object sender, EventArgs e)
-        {
-            Button b = (Button)sender;
-            filterLijst = SorteerModel.SorterenOplopend(filterLijst, b.ID);
-            filterLijst.Reverse();
-            InitDataView(filterLijst);
-        }
-
-        protected void SortOplopend(object sender, EventArgs e)
+        protected void SorteerButton_Click(object sender, EventArgs e)
         {
             Button b = (Button)sender;
             filterLijst = SorteerModel.SorterenOplopend(filterLijst, b.ID);

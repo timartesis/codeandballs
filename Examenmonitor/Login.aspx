@@ -13,6 +13,9 @@
 <body>
     <div class="PageContent">
         <form id="form1" class="form-horizontal"  runat="server">
+            <div class="Header">
+
+            </div>
             <div>
                 <%-- Begin div --%>
                     <div>

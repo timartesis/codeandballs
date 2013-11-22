@@ -5,8 +5,18 @@ td { text-align: left; }
 
 
 
-/* Buttons*/
-.RegistreerButton
+/*HEADER*/
+div.Header
 {
-    /*TODO DIV POSITIONING*/
+    background-color: yellow;
+    height: 200px;
 }
+
+div#HeaderMain
+{
+    position: relative;
+    margin-left: 10px;
+}
+
+
+
