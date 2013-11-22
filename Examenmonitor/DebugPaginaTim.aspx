@@ -11,34 +11,7 @@
     <form id="form1" runat="server">
     <div>
  <%
-     ExamenModel model = ExamenModel.getInstance();
-     //ExamenModel.ReloadDataAsync();
-     ExamenModel.ReloadData();
-     List<Examen> list = ExamenModel.getExamens();
-     //foreach (Examen item in list )
-     //{
-     //    Response.Write("<p>");
-     //    Response.Write(item.ToString());
-     //    Response.Write("</p>");
-     //}
-
-     //List<Examen> list1 = FilterModel.filterExamensCities(ExamenModel.getExamens(), "Bouwmeesterstraat");
-     //foreach (Examen item in list1)
-     //{
-     //    Response.Write("<p>");
-     //    Response.Write(item.ToString());
-     //    Response.Write("</p>");
-     //}
-
-     List<Examen> list2 = FilterModel.filterExamensID(ExamenModel.getExamens(), 3);
-     foreach (Examen item in list2)
-     {
-         Response.Write("<p>");
-         Response.Write(item.ToString());
-         Response.Write("</p>");
-     }
-     
-      
+     DatabankConnector.removeReservation("test", 5);
 %>
     </div>
     </form>
