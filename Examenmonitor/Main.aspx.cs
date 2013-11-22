@@ -144,6 +144,13 @@ namespace Examenmonitor
                 if (item.VrijeSlots().Equals("Volzet"))
                 {
                     check.Enabled = false;
+                    foreach (Reservatie res in item.Reservaties)
+                    {
+                        if (res.Usermail.Equals(userMail))
+                        {
+                            check.Enabled = true;
+                        }
+                    }
                 }
                 foreach (Reservatie res in item.Reservaties)
                 {
