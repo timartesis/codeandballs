@@ -56,7 +56,7 @@ namespace Examenmonitor
 
         protected void buttonResend_Click(object sender, EventArgs e)
         {
-            //Doorverwijzing naar de login pagina!
+            //Doorverwijzing naar de wachtwoord vergeten pagina!
             Response.Redirect("~/WachtwoordVergeten.aspx");
         }
     }

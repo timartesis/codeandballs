@@ -11,6 +11,7 @@ namespace Examenmonitor
 {
     public static class DatabankConnector
     {
+        //Toevoegen van een reservatie
         public static void addReservation(string email, int slotid)
         {
             string datum = IOConverter.GetHuidigeDatum();
@@ -20,6 +21,7 @@ namespace Examenmonitor
             controller.ExecuteNonQuery();
         }
 
+        //Verwijderen van een reservatie
         public static void removeReservation(string email, int slotid)
         {
             string datum = IOConverter.GetHuidigeDatum();
@@ -135,7 +137,6 @@ namespace Examenmonitor
 
 
         //controleert of de hash overeen komt met nen mail, 2 dagen odu check en stuurt terug op alle wijzingen zijn gelukt
-        //TO DO
         public static bool ControleerActivatieHash(string hash)
         {
             string mail = "";
@@ -172,7 +173,6 @@ namespace Examenmonitor
         }
 
         //controleert of de hash overeenkomt met aanvraag op passreset
-        //TO DO
         public static bool ControleerPassresetHash(string hash)
         {
             string mail = "";
@@ -206,7 +206,7 @@ namespace Examenmonitor
 
 
         //int 0 = succes, int 1= ongeactiveerd account, int 2= verkeerde login gegevens, int 3 = unexpected error
-        //TO DO
+        //Controle methode om te controleren of de login gegevens geldig zijn en overeenkomen met de DB.
         public static int login(string email, string passwoord)
         {
             int actief;
@@ -250,7 +250,6 @@ namespace Examenmonitor
         }
 
         //halen van naam en voornaam uit DB aan de hand van email
-        //todo
         public static string GetVoornaamEnAchternaam(string email)
         {
             string result = "";
@@ -273,6 +272,7 @@ namespace Examenmonitor
             return result;
         }
 
+        //ID van de user ophalen aan de hand van de email.
         public static int GetIdMetMail(string email)
         {
             string result = "";

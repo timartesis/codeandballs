@@ -9,12 +9,15 @@ namespace Examenmonitor
     public class DBController
     {
         public String SQL { get; set; }
-        public DBController(String SQL) //elke controller vereist initiele SQL querries
+
+        //elke controller vereist initiele SQL querries
+        public DBController(String SQL) 
         {
             this.SQL = SQL;
         }
 
-        public void ExecuteNonQuery() //voert de opgegeven query code uit zonder resultaat terug te geven
+        //voert de opgegeven query code uit zonder resultaat terug te geven
+        public void ExecuteNonQuery() 
         {
             using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
             {
@@ -26,7 +29,8 @@ namespace Examenmonitor
             }
         }
 
-        public string ExecuteReaderQueryReturnSingleString(string tabelnaam) //haalt 1 stringresult uit 1 row op basis van een tabelnaam op
+        //haalt 1 stringresult uit 1 row op basis van een tabelnaam op
+        public string ExecuteReaderQueryReturnSingleString(string tabelnaam) 
         {
             string result = "";
             using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
@@ -52,7 +56,8 @@ namespace Examenmonitor
             return result;
         }
 
-        public bool ExecuteReaderQueryReturnSingleResult() //haalt op of er rijen zijn in opgegeven query
+        //haalt op of er rijen zijn in opgegeven query
+        public bool ExecuteReaderQueryReturnSingleResult() 
         {
             bool result;
             using (SQLiteConnection c = new SQLiteConnection(@"data source=" + ConfigDB.getPad() + ""))
@@ -69,7 +74,8 @@ namespace Examenmonitor
             return result;
         }
 
-        public List<KeyValuePair<string, string>> ExecuteReaderQueryReturnMultipleResultsOneRow(params string[] tabelnamen) //deze parameer moet veranderen naar een variabele die oneindig strings accepteert            
+        //deze parameer moet veranderen naar een variabele die oneindig strings accepteert
+        public List<KeyValuePair<string, string>> ExecuteReaderQueryReturnMultipleResultsOneRow(params string[] tabelnamen)             
         {
             List<KeyValuePair<string, string>> lijst = new List<KeyValuePair<string, string>>();
             KeyValuePair<string, string> data;

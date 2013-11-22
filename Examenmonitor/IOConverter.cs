@@ -26,6 +26,7 @@ namespace Examenmonitor
             }
             return "";
         }
+
         //zet een stuk tekst om in onomkeerbare sha256 string
         public static string getHashSha256(string text)
         {

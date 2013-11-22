@@ -7,6 +7,7 @@ namespace Examenmonitor
 {
     public static class FilterModel
     {
+        //Filteren op basis van de capaciteit dat een examen kan hebben.
         public static List<Examen> filterExamensFullCapacity(List<Examen> original) {
             List<Examen> result = new List<Examen>();
 
@@ -20,6 +21,7 @@ namespace Examenmonitor
             return result;
         }
 
+        //Filteren op basis van de locaties waar examens gegeven gaan worden.
         public static List<Examen> filterExamensCities(List<Examen> original, List<string> steden)
         {
             List<Examen> result = new List<Examen>();
@@ -37,6 +39,7 @@ namespace Examenmonitor
             return result;
         }
 
+        //Filteren op basis van examens ID's.
         public static List<Examen> filterExamensID(List<Examen> original, string userMail)
         {
             List<Examen> result = new List<Examen>();
