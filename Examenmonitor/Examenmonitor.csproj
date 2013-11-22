@@ -100,6 +100,7 @@
     <Compile Include="Examen.cs" />
     <Compile Include="ExamenModel.cs" />
     <Compile Include="FilterModel.cs" />
+    <Compile Include="FormsAdapter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -188,6 +189,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\Test.pubxml" />
+    <None Include="Properties\PublishProfiles\Test2.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
