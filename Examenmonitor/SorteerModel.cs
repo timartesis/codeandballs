@@ -13,32 +13,46 @@ namespace Examenmonitor
             switch (id)
             {
                 case "OplopendLocatie":
-                case "AflopendLocatie":
                     resultaat = origineel.OrderBy(e => e.Locatie).ToList();
                     break;
+                case "AflopendLocatie":
+                    resultaat = origineel.OrderByDescending(e => e.Locatie).ToList();
+                    break;
                 case "OplopendDatum":
-                case "AflopendDatum":
                     resultaat = origineel.OrderBy(e => e.HaalDatumOp()).ToList();
                     break;
+                case "AflopendDatum":
+                    resultaat = origineel.OrderByDescending(e => e.HaalDatumOp()).ToList();
+                    break;
                 case "OplopendBeginUur":
-                case "AflopendBeginUur":
                     resultaat = origineel.OrderBy(e => e.HaalBeginUurOp()).ToList();
                     break;
+                case "AflopendBeginUur":
+                    resultaat = origineel.OrderByDescending(e => e.HaalBeginUurOp()).ToList();
+                    break;
                 case "OplopendEindUur":
-                case "AflopendEindUur":
                     resultaat = origineel.OrderBy(e => e.HaalEindUurOp()).ToList();
                     break;
+                case "AflopendEindUur":
+                    resultaat = origineel.OrderByDescending(e => e.HaalEindUurOp()).ToList();
+                    break;
                 case "OplopendDuur":
-                case "AflopendDuur":
                     resultaat = origineel.OrderBy(e => e.Lengte).ToList();
                     break;
+                case "AflopendDuur":
+                    resultaat = origineel.OrderByDescending(e => e.Lengte).ToList();
+                    break;
                 case "OplopendDigitaal":
-                case "AflopendDigitaal":
                     resultaat = origineel.OrderBy(e => e.IsDigitaal()).ToList();
                     break;
+                case "AflopendDigitaal":
+                    resultaat = origineel.OrderByDescending(e => e.IsDigitaal()).ToList();
+                    break;
                 case "OplopendTotaalVrij":
-                case "AflopendTotaalVrij":
                     resultaat = origineel.OrderBy(e => e.VrijeSlots()).ToList();
+                    break;
+                case "AflopendTotaalVrij":
+                    resultaat = origineel.OrderByDescending(e => e.VrijeSlots()).ToList();
                     break;
             }
             return resultaat;

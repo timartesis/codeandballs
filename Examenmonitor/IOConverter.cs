@@ -13,6 +13,19 @@ namespace Examenmonitor
 {
     public static class IOConverter
     {
+        public static string getServerName(HttpRequest request)
+        {
+            int teller = 0;
+            foreach (string key in request.ServerVariables)
+            {
+                if (key.Equals("SERVER_NAME"))
+                {
+                    return request.ServerVariables.GetValues(teller)[0].ToString();
+                }
+                teller++;
+            }
+            return "";
+        }
         //zet een stuk tekst om in onomkeerbare sha256 string
         public static string getHashSha256(string text)
         {
