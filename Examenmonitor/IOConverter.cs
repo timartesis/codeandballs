@@ -15,16 +15,22 @@ namespace Examenmonitor
     {
         public static string getServerName()
         {
+            string url = "";
             int teller = 0;
             foreach (string key in HttpContext.Current.Request.ServerVariables)
             {
                 if (key.Equals("SERVER_NAME"))
                 {
-                    return HttpContext.Current.Request.ServerVariables.GetValues(teller)[0].ToString();
+                    url = HttpContext.Current.Request.ServerVariables.GetValues(teller)[0].ToString() + url;
                 }
+                if (key.Equals("SERVER_PORT"))
+                {
+                    url +=  ":" + HttpContext.Current.Request.ServerVariables.GetValues(teller)[0].ToString();
+                }
+                
                 teller++;
             }
-            return "";
+            return url;
         }
         //zet een stuk tekst om in onomkeerbare sha256 string
         public static string getHashSha256(string text)
