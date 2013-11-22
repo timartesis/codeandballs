@@ -14,8 +14,16 @@ namespace Examenmonitor
         public static void addReservation(string email, int slotid)
         {
             string datum = IOConverter.GetHuidigeDatum();
-            string SQL = "INSERT INTO tblActivatie (email,slotid,creatiedatum) VALUES";            
+            string SQL = "INSERT INTO tblReservations (email,slotid,creatiedatum) VALUES";            
             SQL += "('"+IOConverter.SanitizeHtml(email)+"','"+slotid+"','"+datum+"')";
+            DBController controller = new DBController(SQL);
+            controller.ExecuteNonQuery();
+        }
+
+        public static void removeReservation(string email, int slotid)
+        {
+            string datum = IOConverter.GetHuidigeDatum();
+            string SQL = "DELETE FROM tblReservations where 'email' = '"+ IOConverter.SanitizeHtml(email) + "' AND 'slotid' = '" + slotid + "'";            
             DBController controller = new DBController(SQL);
             controller.ExecuteNonQuery();
         }
