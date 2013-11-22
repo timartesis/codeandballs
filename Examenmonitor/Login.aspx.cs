@@ -30,19 +30,19 @@ namespace Examenmonitor
                 switch (code)
                 {
                     case 0:
-                        Debug.Text = "Ok";
+                       
                         Session["Logged"] = "yes";
                         Session["User"] = Email.Text;
                         Response.Redirect("Main.aspx"); 
                         break;
                     case 1:
-                        Debug.Text = "Ongeactiveerde email";
+                        ;
                         break;
                     case 2:
-                        Debug.Text = "Verkeerde login";
+                        
                         break;
                     default:
-                        Debug.Text = "Unexpected error";
+                        
                         break;
                 }
             }
