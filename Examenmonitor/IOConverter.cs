@@ -13,14 +13,14 @@ namespace Examenmonitor
 {
     public static class IOConverter
     {
-        public static string getServerName(HttpRequest request)
+        public static string getServerName()
         {
             int teller = 0;
-            foreach (string key in request.ServerVariables)
+            foreach (string key in HttpContext.Current.Request.ServerVariables)
             {
                 if (key.Equals("SERVER_NAME"))
                 {
-                    return request.ServerVariables.GetValues(teller)[0].ToString();
+                    return HttpContext.Current.Request.ServerVariables.GetValues(teller)[0].ToString();
                 }
                 teller++;
             }

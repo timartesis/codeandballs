@@ -74,7 +74,7 @@ namespace Examenmonitor
         {
             StringBuilder bericht = new StringBuilder();
 
-            const string beginUrl = "http://localhost:50157/PassresetVoltooid.aspx?hash=";
+            string beginUrl = "http://"+IOConverter.getServerName()+"/PassresetVoltooid.aspx?hash=";
 
             bericht.Append("<h2>Beste " + naam + ", </h2>");
             bericht.Append("<br /><br /><p> U ontvangt deze mail omdat u een paswoord reset heeft aangevraagd.</p>");
