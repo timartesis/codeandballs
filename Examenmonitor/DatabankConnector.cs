@@ -23,7 +23,7 @@ namespace Examenmonitor
         public static void removeReservation(string email, int slotid)
         {
             string datum = IOConverter.GetHuidigeDatum();
-            string SQL = "DELETE FROM tblReservations where 'email' = '"+ IOConverter.SanitizeHtml(email) + "' AND 'slotid' = '" + slotid + "'";            
+            string SQL = "DELETE FROM tblReservations WHERE email = '"+ IOConverter.SanitizeHtml(email) + "' AND slotid = '" + slotid + "'";            
             DBController controller = new DBController(SQL);
             controller.ExecuteNonQuery();
         }
