@@ -17,6 +17,7 @@ namespace Examenmonitor
         {
             string url = "";
             int teller = 0;
+            bool result = true;
             foreach (string key in HttpContext.Current.Request.ServerVariables)
             {
                 if (key.Equals("SERVER_NAME"))
@@ -25,10 +26,15 @@ namespace Examenmonitor
                 }
                 if (key.Equals("SERVER_PORT"))
                 {
-                    url +=  ":" + HttpContext.Current.Request.ServerVariables.GetValues(teller)[0].ToString();
+                    url +=  ":" + HttpContext.Current.Request.ServerVariables.GetValues(teller)[0].ToString() + HttpContext.Current.Request.ApplicationPath;
+                    result = false;
                 }
                 
                 teller++;
+            }
+            if (result)
+            {
+                url += HttpContext.Current.Request.ApplicationPath;
             }
             return url;
         }
