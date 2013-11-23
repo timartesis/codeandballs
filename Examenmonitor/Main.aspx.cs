@@ -372,5 +372,13 @@ namespace Examenmonitor
             filterLijst = SorteerModel.SorterenOplopend(filterLijst, b.ID);
             InitDataView(filterLijst);
         }
+
+        protected void LinkButton_Click(Object sender, EventArgs e) 
+        {
+            Session.Clear();
+            Session.RemoveAll();
+            Session.Abandon();
+            Response.Redirect("Login.aspx"); 
+        }
     }
 }

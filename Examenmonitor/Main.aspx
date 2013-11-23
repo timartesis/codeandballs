@@ -7,21 +7,26 @@
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
     <link href="Resources/test.css" rel="stylesheet" type="text/css" />
     <title></title>
+    <script>
+
+    </script>
 </head>
 <body>
     <div class="PageContent">
+        <form id="form1" runat="server">
         <div class="Header" id="HeaderMain">
+
             <ul id="menu">
 	            <li>
 		            <a href="#">ACCOUNTNAMELALATEST</a>
 		            <ul>
 			            <li><a href="PassWijzigen.aspx">Wachtwoord wijzigen</a></li>
-			            <li><a href="#">Logout</a></li>
+			            <li><asp:LinkButton id="myLink" Text="Logout" OnClick="LinkButton_Click" runat="server"/></li>
 		            </ul>
 	            </li>
             </ul>
         </div>
-        <form id="form1" runat="server">
+        
             <div id="Menu">
                 <div id="MenuFilter">
                     <asp:Label ID="titelLabel" runat="server" Text="Filter"></asp:Label>
