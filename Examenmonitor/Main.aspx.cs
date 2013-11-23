@@ -362,8 +362,6 @@ namespace Examenmonitor
         //Event voor de checkboxes van de Dataview
         protected void CheckedChangeData(object sender, EventArgs e)
         {
-            //TODO: bugfix bij reserveren wanneer er gesorteerd is, bv lijst meegeven met addReservation en deze returnen met de gewijzigde reservatie zodat het 
-            //niet volledig moet herberekend worden.
             CheckBox ch = (CheckBox)sender;
             if (ch.Checked == true)
             {
