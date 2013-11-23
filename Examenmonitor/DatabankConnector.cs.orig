@@ -11,7 +11,12 @@ namespace Examenmonitor
 {
     public static class DatabankConnector
     {
+<<<<<<< HEAD
+        //Toevoegen van een reservatie
+        public static void addReservation(string email, int slotid)
+=======
         public static List<Examen> addReservation(List<Examen> lijst, string email, int slotid)
+>>>>>>> f218cfa242bb9688b431d25ba8fe14d0982e2506
         {
             string SQL = "SELECT * FROM tblReservations WHERE email = '" + IOConverter.SanitizeHtml(email) + "' AND slotid = '"+slotid+"'";
             bool result;
@@ -47,8 +52,12 @@ namespace Examenmonitor
             return lijst;
         }
 
+<<<<<<< HEAD
         //Verwijderen van een reservatie
         public static void removeReservation(string email, int slotid)
+=======
+        public static List<Examen> removeReservation(List<Examen> lijst,string email, int slotid)
+>>>>>>> f218cfa242bb9688b431d25ba8fe14d0982e2506
         {
             string datum = IOConverter.GetHuidigeDatum();
 
