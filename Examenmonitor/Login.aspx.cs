@@ -36,26 +36,16 @@ namespace Examenmonitor
                         Response.Redirect("Main.aspx"); 
                         break;
                     case 1:
-<<<<<<< HEAD
                         //Veranderen naar meer functionele foutmeldingen
-                        Debug.Text = "Ongeactiveerde email";
+                        //Debug.Text = "Ongeactiveerde email";
                         break;
                     case 2:
                         //Veranderen naar meer functionele foutmeldingen
-                        Debug.Text = "Verkeerde login";
+                        //Debug.Text = "Verkeerde login";
                         break;
                     default:
                         //Veranderen naar meer functionele foutmeldingen
-                        Debug.Text = "Unexpected error";
-=======
-                        ;
-                        break;
-                    case 2:
-                        
-                        break;
-                    default:
-                        
->>>>>>> 9657501e6f960b9a0a0301675c9910ab4c82da2e
+                        //Debug.Text = "Unexpected error";
                         break;
                 }
             }
