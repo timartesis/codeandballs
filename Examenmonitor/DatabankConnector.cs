@@ -48,7 +48,7 @@ namespace Examenmonitor
         }
 
         //Verwijderen van een reservatie
-        public static void removeReservation(string email, int slotid)
+        public static List<Examen> removeReservation(List<Examen> lijst, string email, int slotid)
         {
             string datum = IOConverter.GetHuidigeDatum();
 
