@@ -29,13 +29,16 @@
 }
 
 #menu li {
-	float: left;
 	border-right: 1px solid #222;
 	box-shadow: 1px 0 0 #444;
 	position: relative;
+    text-align: center;
+    height: 30px;
 }
 
 #menu a {
+    padding-top: 12px;
+    padding-bottom: 8px;
 	color: #999;
 	text-transform: uppercase;
 	font: bold 12px Arial, Helvetica;

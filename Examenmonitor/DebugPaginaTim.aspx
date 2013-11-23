@@ -11,7 +11,7 @@
     <form id="form1" runat="server">
     <div>
  <%
-     DatabankConnector.removeReservation("test", 5);
+     DatabankConnector.addReservation("test2",15);
 %>
     </div>
     </form>

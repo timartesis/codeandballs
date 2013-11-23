@@ -30,12 +30,13 @@ namespace Examenmonitor
                 switch (code)
                 {
                     case 0:
-                        Debug.Text = "Ok";
+                       
                         Session["Logged"] = "yes";
                         Session["User"] = Email.Text;
                         Response.Redirect("Main.aspx"); 
                         break;
                     case 1:
+<<<<<<< HEAD
                         //Veranderen naar meer functionele foutmeldingen
                         Debug.Text = "Ongeactiveerde email";
                         break;
@@ -46,6 +47,15 @@ namespace Examenmonitor
                     default:
                         //Veranderen naar meer functionele foutmeldingen
                         Debug.Text = "Unexpected error";
+=======
+                        ;
+                        break;
+                    case 2:
+                        
+                        break;
+                    default:
+                        
+>>>>>>> 9657501e6f960b9a0a0301675c9910ab4c82da2e
                         break;
                 }
             }

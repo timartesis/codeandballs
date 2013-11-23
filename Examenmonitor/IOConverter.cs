@@ -13,18 +13,30 @@ namespace Examenmonitor
 {
     public static class IOConverter
     {
-        public static string getServerName(HttpRequest request)
+        public static string getServerName()
         {
+            string url = "";
             int teller = 0;
-            foreach (string key in request.ServerVariables)
+            bool result = true;
+            foreach (string key in HttpContext.Current.Request.ServerVariables)
             {
                 if (key.Equals("SERVER_NAME"))
                 {
-                    return request.ServerVariables.GetValues(teller)[0].ToString();
+                    url = HttpContext.Current.Request.ServerVariables.GetValues(teller)[0].ToString() + url;
                 }
+                if (key.Equals("SERVER_PORT"))
+                {
+                    url +=  ":" + HttpContext.Current.Request.ServerVariables.GetValues(teller)[0].ToString() + HttpContext.Current.Request.ApplicationPath;
+                    result = false;
+                }
+                
                 teller++;
             }
-            return "";
+            if (result)
+            {
+                url += HttpContext.Current.Request.ApplicationPath;
+            }
+            return url;
         }
 
         //zet een stuk tekst om in onomkeerbare sha256 string
