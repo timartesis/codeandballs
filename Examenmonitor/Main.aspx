@@ -15,7 +15,7 @@
 	            <li>
 		            <a href="#">ACCOUNTNAMELALATEST</a>
 		            <ul>
-			            <li><a href="#">Wachtwoord wijzigen</a></li>
+			            <li><a href="PassWijzigen.aspx">Wachtwoord wijzigen</a></li>
 			            <li><a href="#">Logout</a></li>
 		            </ul>
 	            </li>

@@ -13,18 +13,26 @@ namespace Examenmonitor
     {
         public static List<Examen> addReservation(List<Examen> lijst, string email, int slotid)
         {
-            string datum = IOConverter.GetHuidigeDatum();
+            string SQL = "SELECT * FROM tblReservations WHERE email = '" + IOConverter.SanitizeHtml(email) + "' AND slotid = '"+slotid+"'";
+            bool result;
+            DBController controller = new DBController(SQL);
+            result = controller.ExecuteReaderQueryReturnSingleResult();
+
+
+            if (!result)
+            {
+                string datum = IOConverter.GetHuidigeDatum();
 
             //toevoegen van de data
-            string SQL = "INSERT INTO tblReservations (email,slotid,creatiedatum) VALUES";            
+            SQL = "INSERT INTO tblReservations (email,slotid,creatiedatum) VALUES";            
             SQL += "('"+IOConverter.SanitizeHtml(email)+"','"+slotid+"','"+datum+"')";
-            DBController controller = new DBController(SQL);
-            controller.ExecuteNonQuery();
+            DBController controller2 = new DBController(SQL);
+            controller2.ExecuteNonQuery();
 
             //verkrijgen van de id van de gezochte reservatie
             SQL = "SELECT id FROM tblReservations WHERE email = '"+IOConverter.SanitizeHtml(email)+"' AND slotid = '"+slotid+"'";
-            DBController controller2 = new DBController(SQL);
-            int resID = int.Parse(controller2.ExecuteReaderQueryReturnSingleString("id"));
+            DBController controller3 = new DBController(SQL);
+            int resID = int.Parse(controller3.ExecuteReaderQueryReturnSingleString("id"));
 
             //updaten van de lijst
             foreach (Examen ex in lijst)
@@ -33,6 +41,7 @@ namespace Examenmonitor
                 {
                     ex.Reservaties.Add(new Reservatie(resID, slotid, email, IOConverter.StringDatumNaarDateTime(datum)));
                 }
+            }
             }
 
             return lijst;

@@ -68,6 +68,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DebugPaginaTim.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Main.aspx" />
     <Content Include="PassresetVoltooid.aspx" />
@@ -75,8 +76,14 @@
     <Content Include="PassWijzigenVoltooid.aspx" />
     <Content Include="RegistratieVoltooid.aspx" />
     <Content Include="ResendMail.aspx" />
+    <Content Include="Resources\bootstrap-responsive.css" />
+    <Content Include="Resources\bootstrap-responsive.min.css" />
+    <Content Include="Resources\bootstrap.css" />
+    <Content Include="Resources\bootstrap.min.css" />
+    <Content Include="Resources\Scripts\bootstrap.js" />
+    <Content Include="Resources\Scripts\bootstrap.min.js" />
+    <Content Include="Resources\Scripts\jquery-2.0.3.min.js" />
     <Content Include="Resources\Site.css" />
-    <Content Include="DebugPaginaTim.aspx" />
     <Content Include="MailTestYentl.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="RegistratieForm.aspx" />
