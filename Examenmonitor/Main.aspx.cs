@@ -140,7 +140,7 @@ namespace Examenmonitor
                 TableCell ReserverenCell = new TableCell();
                 ReserverenCell.ID = "Reserveren" + item.Id;
                 CheckBox check = new CheckBox();
-                check.ID = "Reservatie" + item.Id;
+                check.ID = item.Id.ToString();
                 check.AutoPostBack = true;
                 check.CheckedChanged += new EventHandler(this.CheckedChangeData);
                 ReserverenCell.Controls.Add(check);
@@ -362,14 +362,29 @@ namespace Examenmonitor
         //Event voor de checkboxes van de Dataview
         protected void CheckedChangeData(object sender, EventArgs e)
         {
-            CheckBox x = (CheckBox)sender;
-            //TODO code
+            //TODO: bugfix bij reserveren wanneer er gesorteerd is, bv lijst meegeven met addReservation en deze returnen met de gewijzigde reservatie zodat het 
+            //niet volledig moet herberekend worden.
+            CheckBox ch = (CheckBox)sender;
+            if (ch.Checked == true)
+            {
+                DatabankConnector.addReservation(filterLijst, userMail, int.Parse(ch.ID));
+            }
+            else
+            {
+                DatabankConnector.removeReservation(filterLijst, userMail, int.Parse(ch.ID));
+            }
+            InitDataView(filterLijst);
         }
 
         protected void SorteerButton_Click(object sender, EventArgs e)
         {
             Button b = (Button)sender;
-            filterLijst = SorteerModel.SorterenOplopend(filterLijst, b.ID);
+            Sorteren(b.ID);
+        }
+
+        protected void Sorteren(string id)
+        {
+            filterLijst = SorteerModel.SorterenOplopend(filterLijst, id);
             InitDataView(filterLijst);
         }
     }

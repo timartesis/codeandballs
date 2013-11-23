@@ -11,21 +11,65 @@ namespace Examenmonitor
 {
     public static class DatabankConnector
     {
-        public static void addReservation(string email, int slotid)
+        public static List<Examen> addReservation(List<Examen> lijst, string email, int slotid)
         {
             string datum = IOConverter.GetHuidigeDatum();
+
+            //toevoegen van de data
             string SQL = "INSERT INTO tblReservations (email,slotid,creatiedatum) VALUES";            
             SQL += "('"+IOConverter.SanitizeHtml(email)+"','"+slotid+"','"+datum+"')";
             DBController controller = new DBController(SQL);
             controller.ExecuteNonQuery();
+
+            //verkrijgen van de id van de gezochte reservatie
+            SQL = "SELECT id FROM tblReservations WHERE email = '"+IOConverter.SanitizeHtml(email)+"' AND slotid = '"+slotid+"'";
+            DBController controller2 = new DBController(SQL);
+            int resID = int.Parse(controller2.ExecuteReaderQueryReturnSingleString("id"));
+
+            //updaten van de lijst
+            foreach (Examen ex in lijst)
+            {
+                if (ex.Id == slotid)
+                {
+                    ex.Reservaties.Add(new Reservatie(resID, slotid, email, IOConverter.StringDatumNaarDateTime(datum)));
+                }
+            }
+
+            return lijst;
         }
 
-        public static void removeReservation(string email, int slotid)
+        public static List<Examen> removeReservation(List<Examen> lijst,string email, int slotid)
         {
             string datum = IOConverter.GetHuidigeDatum();
-            string SQL = "DELETE FROM tblReservations WHERE email = '"+ IOConverter.SanitizeHtml(email) + "' AND slotid = '" + slotid + "'";            
+
+            //verkrijgen van de id van de gezochte reservatie
+            string SQL = "SELECT id FROM tblReservations WHERE email = '" + IOConverter.SanitizeHtml(email) + "' AND slotid = '" + slotid + "'";
             DBController controller = new DBController(SQL);
-            controller.ExecuteNonQuery();
+            int resID = int.Parse(controller.ExecuteReaderQueryReturnSingleString("id"));
+            
+            //verwijderen van reservatie uit de tabel
+            SQL = "DELETE FROM tblReservations WHERE id = '" + resID + "'";            
+            DBController controller2 = new DBController(SQL);
+            controller2.ExecuteNonQuery();
+
+            //updaten van de lijst
+            Reservatie res = new Reservatie();
+            foreach (Examen ex in lijst)
+            {
+                if (ex.Id == slotid)
+                {
+                    foreach (Reservatie r in ex.Reservaties)
+                    {
+                        if (r.Id == resID)
+                        {
+                            res = r;
+                        }
+                    }
+                    ex.Reservaties.Remove(res);
+                }
+            }
+
+            return lijst;
         }
 
         //Haalt het email adress van iemand die pass reset heeft aangevraagd uit de Passreset tabel
