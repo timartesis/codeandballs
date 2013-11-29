@@ -10,6 +10,7 @@ namespace Examenmonitor
 {
     public class MailVersturingen
     {
+        //constante velden voor het opstellen van de mail
         private const string ZENDER = "noreply@codeandballs.be";
         private const string LOGIN = "codeandballs@gmail.com";
         private const string PASSWOORD = "plantesis";
@@ -51,26 +52,24 @@ namespace Examenmonitor
         }
 
         //Onderstaande methode gebruiken voor het zenden van de registratie mail
-
         public bool ZendRegistratieMail(string naam, string ontvangerMail, string randomLink)
         {
             return ZendMail(naam, ontvangerMail, randomLink, ONDERWERPREGISTRATIE, OpstellenBerichtRegistratie(naam, randomLink));
         }
 
         //Onderstaande methode gebruiken voor het zenden van de paswoord recovery mail
-
         public bool ZendPaswoordResetMail(string naam, string ontvangerMail, string randomLink)
         {
             return ZendMail(naam, ontvangerMail, randomLink, ONDERWERPASWOORDRECOVERY, OpstellenBerichtResetten(naam, randomLink));
         }
 
+        //Onderstaande methode gebruiken voor het zenden van de paswoord aanvraag mail
         public bool ZendPaswoordAanvraagMail(string naam, string ontvangerMail, string paswoord)
         {
             return ZendMail(naam, ontvangerMail, paswoord, ONDERWERPASWOORDRECOVERY, OpstellenBerichtRandomPaswoord(naam, paswoord));
         }
 
-        //Onderstaande methode zal het bericht gaan opstellen met de randomlink
-
+        //Onderstaande methode zal het paswoord reset bericht gaan opstellen met de randomlink
         private StringBuilder OpstellenBerichtResetten(string naam, string randomLink)
         {
             StringBuilder bericht = new StringBuilder();

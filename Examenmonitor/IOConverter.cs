@@ -13,6 +13,7 @@ namespace Examenmonitor
 {
     public static class IOConverter
     {
+        //returnd de naam van de server, zodat mails automatisch gestuurd worden met de juiste link
         public static string getServerName()
         {
             string url = "";

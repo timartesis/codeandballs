@@ -12,13 +12,16 @@
     </script>
     <%-- CSS sheet link--%>
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Resources/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="Resources/bootstrap.css" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
     <div class="PageContent">
         <div class="Header">
 
             </div>
-        <form id="formRegistratie" runat="server">
+        <form id="formRegistratie" class="form-horizontal" runat="server">
         
             <div style="height: 94px; width: 920px">
     
@@ -71,7 +74,7 @@
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" 
                                     ControlToValidate="Email" CssClass="field-validation-error" Display="Dynamic" 
                                     ValidationExpression="^((?>[a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]+\x20*|((?=[\x01-\x7f])[^\\]|\\[\x01-\x7f])*\x20*)*(?<angle><))?((?!\.)(?>\.?[a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]+)+|((?=[\x01-\x7f])[^\\]|\\[\x01-\x7f])*)@+ap\.be$" 
-                                    ErrorMessage="U kan enkel registreren met een emailadres van de AP hoge school"></asp:RegularExpressionValidator>
+                                    ErrorMessage="U kan enkel registreren met een emailadres van de AP hoge school inloggen als lector"></asp:RegularExpressionValidator>
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow BorderColor="Transparent">
@@ -115,6 +118,10 @@
                     </asp:TableRow>
                 </asp:Table>
     </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
     </form>
     </div>
 </body>

@@ -13,14 +13,16 @@ namespace Examenmonitor
         protected void Page_Load(object sender, EventArgs e)
         {
             registratieMail = MailVersturingen.getInstance();
+            activatieLabel.Visible = false;
+            mailBestaatLabel.Visible = false;
         }
 
+        //Event om de mail opnieuw te versturen wanneer de gebruiker op de resendbutton geklikt heeft.
         protected void buttonResendMail_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
-                activatieLabel.Visible = false;
-                mailBestaatLabel.Visible = false;
+                
                 //Controle op mail aanwezigheid + geen activatie in databank
                 string email = Email.Text;
 
@@ -30,9 +32,10 @@ namespace Examenmonitor
                     //controleert of het gegeven email nog niet geactiveerd is
                     if (!DatabankConnector.ControleerActivatieEmail(email))
                     {
-                        //Code om values uit de form te halen
+                        //Haalt de volledige naam van de gebruiker uit de database, op basis van de email.
                         string volledigeNaam = DatabankConnector.GetVoornaamEnAchternaam(email);
 
+                        //Verstuurt de registratiemail opnieuw.
                         registratieMail.ZendRegistratieMail(volledigeNaam, email, DatabankConnector.RegistratieMail(email));
                         Response.Redirect("~/MailCheck.aspx");
                     }

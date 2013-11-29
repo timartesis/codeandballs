@@ -12,6 +12,7 @@
         </script>
     <%-- CSS sheet link--%>
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Resources/bootstrap.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
@@ -19,7 +20,7 @@
         <div class="Header">
 
         </div>
-        <form id="formWijzigenPasswoord" runat="server">
+        <form id="formWijzigenPasswoord" class="form-horizontal" runat="server">
         <div style="height: 94px; width: 920px">
             <%-- Begin fieldset --%>
                 <fieldset>
@@ -64,7 +65,7 @@
                             </li>
                     </ol>
                         <%-- Confirm button --%>
-                        <asp:Button ID="buttonWijzig" runat="server" CommandName="MoveNext" Text="Wijzigen" OnClick="buttonWijzig_Click" />
+                        <asp:Button ID="buttonWijzig" class="btn" runat="server" CommandName="MoveNext" Text="Wijzigen" OnClick="buttonWijzig_Click" />
                         <asp:Label ID="incorrectLabel" runat="server" ForeColor="Red" Visible="False"></asp:Label>
                         <asp:Button ID="TerugButton" class="btn" runat="server" CommandName="MoveNext" Text="Terug" 
                                         OnClientClick="window.location.href='Main.aspx'" 
@@ -73,6 +74,10 @@
             <%-- Einde fieldset --%>
     
         </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
         </form>
     </div>
     <p>

@@ -18,7 +18,7 @@
 
             <ul id="menu">
 	            <li>
-		            <a href="#">ACCOUNTNAMELALATEST</a>
+		            <a href="#"><%= Session["User"].ToString() %></a>
 		            <ul>
 			            <li><a href="PassWijzigen.aspx">Wachtwoord wijzigen</a></li>
 			            <li><asp:LinkButton id="myLink" Text="Logout" OnClick="LinkButton_Click" runat="server"/></li>
@@ -40,6 +40,10 @@
                 <asp:Panel ID="PanelData" runat="server" Height="50px" >
                 </asp:Panel>
             </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
         </form>
     </div>
 </body>
