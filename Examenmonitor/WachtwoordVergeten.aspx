@@ -8,6 +8,7 @@
 
     <%-- CSS sheet link--%>
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Resources/bootstrap.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div class="PageContent">
@@ -16,26 +17,39 @@
     </div>
     <form id="formWachtwoordVergeten" runat="server">
     <div style="height: 94px; width: 920px">
-        <fieldset>
-                        <legend>Wachtwoord resetten</legend>
-                        <ol>
-                            <li>
-                                <%-- Email label, textbox en validator --%>
-                                <asp:Label ID="Label2" runat="server" AssociatedControlID="Email">Email: </asp:Label>
-                                <asp:TextBox runat="server" ID="Email" TextMode="Email" />
-                                <%-- Validator om te zien of het veld is ingevuld --%>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Email"
-                                    CssClass="field-validation-error" ErrorMessage="Email is een verplicht veld!" />
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" 
-                                    ControlToValidate="Email" CssClass="field-validation-error" Display="Dynamic" 
-                                    ValidationExpression="^((?>[a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]+\x20*|((?=[\x01-\x7f])[^\\]|\\[\x01-\x7f])*\x20*)*(?<angle><))?((?!\.)(?>\.?[a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]+)+|((?=[\x01-\x7f])[^\\]|\\[\x01-\x7f])*)@(((?!-)[a-zA-Z\d\-]+(?<!-)\.)+[a-zA-Z]{2,}|\[(((?(?<!\[)\.)(25[0-5]|2[0-4]\d|[01]?\d?\d)){4}|[a-zA-Z\d\-]*[a-zA-Z\d]:((?=[\x01-\x7f])[^\\\[\]]|\\[\x01-\x7f])+)\])(?(angle)>)$"
-                                    ErrorMessage="Gebruik geen illegale tekens in uw email aub!"></asp:RegularExpressionValidator>
-                                <asp:Label ID="mailBestaatLabel" runat="server" Text="Deze email is nog niet geregistreerd!" Visible="False"></asp:Label>
-                                <asp:Label ID="activatieLabel" runat="server" Text="Deze email is nog niet geactiveerd!" Visible="False"></asp:Label>
-                            </li>
-                        </ol>
-            <asp:Button ID="buttonWachtwoordResetten" runat="server" CommandName="MoveNext" Text="Wachtwoord resetten" OnClick="buttonWachtwoordResetten_Click" />
-    </fieldset>
+        <asp:Table ID="Table1" runat="server" CellPadding="5"
+                            GridLines="horizontal" BorderColor="Transparent" >
+            <asp:TableRow>
+                <asp:TableCell>                
+                    <%-- Email label, textbox en validator --%>
+                    <asp:Label ID="Label2" runat="server" AssociatedControlID="Email">Email: </asp:Label>
+                    </asp:TableCell>
+                    <asp:TableCell> 
+                    <asp:TextBox runat="server" ID="Email" TextMode="Email" />
+                    <%-- Validator om te zien of het veld is ingevuld --%>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Email"
+                         CssClass="field-validation-error" ErrorMessage="Email is een verplicht veld!" />
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" 
+                         ControlToValidate="Email" CssClass="field-validation-error" Display="Dynamic" 
+                         ValidationExpression="^((?>[a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]+\x20*|((?=[\x01-\x7f])[^\\]|\\[\x01-\x7f])*\x20*)*(?<angle><))?((?!\.)(?>\.?[a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]+)+|((?=[\x01-\x7f])[^\\]|\\[\x01-\x7f])*)@(((?!-)[a-zA-Z\d\-]+(?<!-)\.)+[a-zA-Z]{2,}|\[(((?(?<!\[)\.)(25[0-5]|2[0-4]\d|[01]?\d?\d)){4}|[a-zA-Z\d\-]*[a-zA-Z\d]:((?=[\x01-\x7f])[^\\\[\]]|\\[\x01-\x7f])+)\])(?(angle)>)$"
+                         ErrorMessage="Gebruik geen illegale tekens in uw email aub!"></asp:RegularExpressionValidator>
+                    <asp:Label ID="mailBestaatLabel" runat="server" Text="Deze email is nog niet geregistreerd!" Visible="False"></asp:Label>
+                    <asp:Label ID="activatieLabel" runat="server" Text="Deze email is nog niet geactiveerd!" Visible="False"></asp:Label>
+                                
+                    </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow>
+                    <asp:TableCell>       
+                    <asp:Button ID="buttonWachtwoordResetten" class="btn" runat="server" CommandName="MoveNext" Text="Wachtwoord resetten" 
+                                        OnClick="buttonWachtwoordResetten_Click" />
+                    </asp:TableCell>
+                    <asp:TableCell>  
+                    <asp:Button ID="Terug" class="btn" runat="server" Text="Terug naar login" 
+                                        OnClientClick="window.location.href='Login.aspx'" 
+                                        PostBackUrl="~/Login.aspx" CausesValidation="false"/>
+                    </asp:TableCell>
+        </asp:TableRow>
+    </asp:Table>
     </div>
     </form>
         </div>

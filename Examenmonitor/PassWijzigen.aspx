@@ -66,6 +66,9 @@
                         <%-- Confirm button --%>
                         <asp:Button ID="buttonWijzig" runat="server" CommandName="MoveNext" Text="Wijzigen" OnClick="buttonWijzig_Click" />
                         <asp:Label ID="incorrectLabel" runat="server" ForeColor="Red" Visible="False"></asp:Label>
+                        <asp:Button ID="TerugButton" class="btn" runat="server" CommandName="MoveNext" Text="Terug" 
+                                        OnClientClick="window.location.href='Main.aspx'" 
+                                        PostBackUrl="~/Main.aspx" CausesValidation="false"/>
         </fieldset>
             <%-- Einde fieldset --%>
     
