@@ -45,20 +45,23 @@
                                     <%-- Validator om te zien of het veld is ingevuld--%>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="Password"
                                     CssClass="field-validation-error" ErrorMessage="Wachtwoord is een verplicht veld!" />
-                                    <asp:Label ID="CredentialsLabel" runat="server" Text="label"></asp:Label>
+                                    <asp:Label ID="CredentialsLabel" runat="server" Text=""></asp:Label>
                                 </asp:TableCell></asp:TableRow><asp:TableRow>
                                 <asp:TableCell>
                                     <%-- Inlogbutton --%>
                                     <asp:Button ID="buttonLogIn" class="btn" runat="server" CommandName="MoveNext" Text="Log in" OnClick="buttonLogin_Click" />
                                 </asp:TableCell></asp:TableRow></asp:Table></div><br />
                                 <%-- Email label en textbox --%><div id="RegisterRecovery" >
-            <asp:Button ID="buttonRegistreerHier" class="btn" runat="server" CommandName="MoveNext" Text="Registreer hier" 
-                    OnClick="buttonRegistreerHier_Click" OnClientClick="window.location.href='RegistratieForm.aspx'" 
-                    PostBackUrl="~/RegistratieForm.aspx" CausesValidation="false"/>
-            <%-- REGEX Validator --%><asp:Button ID="wachtwoordVergetenButton" class="btn" runat="server" CommandName="MoveNext" Text="Wachtwoord vergeten"
-            OnClientClick="window.location.href='WachtwoordVergeten.aspx'" PostBackUrl="~/WachtwoordVergeten.aspx" CausesValidation="false"/><asp:Button ID="resendMailButton" class="btn" runat="server" CommandName="MoveNext" Text="Activatiemail opnieuw verzenden" 
-                     OnClientClick="window.location.href='ResendMail.aspx'" 
-                    PostBackUrl="~/ResendMail.aspx" CausesValidation="false"/>
+                                    <asp:Button ID="buttonRegistreerHier" class="btn" runat="server" CommandName="MoveNext" Text="Registreer hier" 
+                                        OnClick="buttonRegistreerHier_Click" OnClientClick="window.location.href='RegistratieForm.aspx'" 
+                                        PostBackUrl="~/RegistratieForm.aspx" CausesValidation="false"/>
+                                    <%-- Wachtwoord vergeten Button --%>
+                                    <asp:Button ID="wachtwoordVergetenButton" class="btn" runat="server" CommandName="MoveNext" Text="Wachtwoord vergeten"
+                                        OnClientClick="window.location.href='WachtwoordVergeten.aspx'" PostBackUrl="~/WachtwoordVergeten.aspx" CausesValidation="false"/>
+                                    <%-- Wachtwoord vergeten Button --%>
+                                    <asp:Button ID="resendMailButton" class="btn" runat="server" Visible="false" CommandName="MoveNext" Text="Activatiemail opnieuw verzenden" 
+                                        OnClientClick="window.location.href='ResendMail.aspx'" 
+                                        PostBackUrl="~/ResendMail.aspx" CausesValidation="false"/>
 
                                         </div></div> 
      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -38,6 +38,7 @@ namespace Examenmonitor
                     case 1:
                         //Veranderen naar meer functionele foutmeldingen
                         CredentialsLabel.Text = "Uw mail adress is nog niet geactiveerd, Geen mail gehad? Klik dan nu op 'Activatie mail verzenden'";
+                        resendMailButton.Visible = true;
                         break;
                     case 2:
                         //Veranderen naar meer functionele foutmeldingen
@@ -45,7 +46,7 @@ namespace Examenmonitor
                         break;
                     default:
                         //Veranderen naar meer functionele foutmeldingen
-                        CredentialsLabel.Text = "Fuck you, je hebt het internet kapot gemaakt. Er is een Federaal team onderweg naar uw locatie. Gelieve te wachten en vreedzaam mee te werken met het team tijdens de arrestatie.";
+                        CredentialsLabel.Text = "Je hebt het internet kapot gemaakt. Er is een Federaal team onderweg naar uw locatie. Gelieve te wachten en vreedzaam mee te werken met het team tijdens de arrestatie.";
                         break;
                 }
             }
