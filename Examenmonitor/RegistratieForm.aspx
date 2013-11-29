@@ -12,13 +12,15 @@
     </script>
     <%-- CSS sheet link--%>
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Resources/bootstrap.css" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
     <div class="PageContent">
         <div class="Header">
 
             </div>
-        <form id="formRegistratie" runat="server">
+        <form id="formRegistratie" class="form-horizontal" runat="server">
         
             <div style="height: 94px; width: 920px">
     
@@ -89,11 +91,15 @@
                             </li>
                         </ol>
                         <%-- Registreer button --%>
-                        <asp:Button ID="buttonRegistreer" runat="server" CommandName="MoveNext" Text="Registreer" OnClick="buttonRegistreer_Click" />
+                        <asp:Button ID="buttonRegistreer" class="btn" runat="server" CommandName="MoveNext" Text="Registreer" OnClick="buttonRegistreer_Click" />
         </fieldset>
         <%-- Einde fieldset --%>
     
     </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
     </form>
     </div>
 </body>

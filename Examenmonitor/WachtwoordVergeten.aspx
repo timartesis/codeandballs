@@ -8,13 +8,15 @@
 
     <%-- CSS sheet link--%>
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Resources/bootstrap.css" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
     <div class="PageContent">
     <div class="Header">
 
     </div>
-    <form id="formWachtwoordVergeten" runat="server">
+    <form id="formWachtwoordVergeten" class="form-horizontal" runat="server">
     <div style="height: 94px; width: 920px">
         <fieldset>
                         <legend>Wachtwoord resetten</legend>
@@ -34,10 +36,14 @@
                                 <asp:Label ID="activatieLabel" runat="server" Text="Deze email is nog niet geactiveerd!" Visible="False"></asp:Label>
                             </li>
                         </ol>
-            <asp:Button ID="buttonWachtwoordResetten" runat="server" CommandName="MoveNext" Text="Wachtwoord resetten" OnClick="buttonWachtwoordResetten_Click" />
+            <asp:Button ID="buttonWachtwoordResetten" CssClass="btn" runat="server" CommandName="MoveNext" Text="Wachtwoord resetten" OnClick="buttonWachtwoordResetten_Click" />
     </fieldset>
     </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
     </form>
-        </div>
+   </div>
 </body>
 </html>
