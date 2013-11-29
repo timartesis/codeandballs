@@ -18,10 +18,10 @@ namespace Examenmonitor
             string SQL = "SELECT * FROM tblReservations WHERE email = '" + IOConverter.SanitizeHtml(email) + "' AND slotid = '"+slotid+"'";
             bool result;
             DBController controller = new DBController(SQL);
-            result = controller.ExecuteReaderQueryReturnSingleResult();
+            result = !controller.ExecuteReaderQueryReturnSingleResult();
 
 
-            if (!result)
+            if (result)
             {
                 string datum = IOConverter.GetHuidigeDatum();
 
@@ -46,7 +46,7 @@ namespace Examenmonitor
                 }
             }
 
-            return (!result);
+            return result;
         }
 
         //Verwijderen van een reservatie, returned true indien geslaagd
@@ -118,7 +118,7 @@ namespace Examenmonitor
         }
 
         //genereert een activatiehash op basis van email en random getal tussen 0.0 en 1.0
-        private static string genereerActivatieHash(string email)
+        private static string genereerHash(string email)
         {
             Random generator = new Random();            
             string randomString = generator.NextDouble().ToString();
@@ -129,7 +129,7 @@ namespace Examenmonitor
         public static string RegistratieMail(string email)
         {        
             string datum = IOConverter.GetHuidigeDatum();
-            string activatieHash = genereerActivatieHash(email);
+            string activatieHash = genereerHash(email);
             
             String SQL = "UPDATE tblActivatie SET actief = '0' WHERE email = '" + IOConverter.SanitizeHtml(email) + "'"; //alle andere mails deactiveren
             DBController controller = new DBController(SQL);
@@ -147,18 +147,18 @@ namespace Examenmonitor
         public static string PassResetMail(string email)
         {
             string datum = IOConverter.GetHuidigeDatum();
-            string activatieHash = genereerActivatieHash(email);
+            string passResetHash = genereerHash(email);
 
             string SQL = "UPDATE tblPassreset SET actief = '0' WHERE email = '" + IOConverter.SanitizeHtml(email) + "'"; //alle andere mails deactiveren
             DBController controller = new DBController(SQL);
             controller.ExecuteNonQuery();
 
             SQL = "INSERT INTO tblPassreset (actief,datum,email,activatieHash) VALUES";
-            SQL += "(1, '" + datum + "','" + IOConverter.SanitizeHtml(email) + "','" + activatieHash + "')";
+            SQL += "(1, '" + datum + "','" + IOConverter.SanitizeHtml(email) + "','" + passResetHash + "')";
             controller.SQL = SQL;
             controller.ExecuteNonQuery();
 
-            return activatieHash;
+            return passResetHash;
         }      
 
         //voegt een gebruiker toe aan de db
@@ -197,15 +197,17 @@ namespace Examenmonitor
         }
 
 
-        //controleert of de hash overeen komt met nen mail, 2 dagen odu check en stuurt terug op alle wijzingen zijn gelukt
+        //controleert of de hash overeen komt met een mail, binnen 2 dagen check en stuurt terug op alle wijzingen zijn gelukt
         public static bool ControleerActivatieHash(string hash)
         {
+            //ophalen van de datum en het email van de gegeven hash
             string mail = "";
             bool result = false;
             string SQL = "SELECT * FROM tblActivatie WHERE activatiehash = '" + hash + "' AND actief = '1'";
             DBController controller = new DBController(SQL);
             var resultList = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("datum", "email");
 
+            //kijken naar de datum van de hash, of deze binnen de 2 dagen geactiveerd wordt
             foreach (var lijst in resultList)
             {
                 string datum = lijst[0].Value;
@@ -219,6 +221,7 @@ namespace Examenmonitor
                 }
             }
             
+            //actief maken van de user
             if (result)
             {
                 SQL = "UPDATE tblUsers SET actief='1' WHERE email = '" + mail + "'";
@@ -236,12 +239,14 @@ namespace Examenmonitor
         //controleert of de hash overeenkomt met aanvraag op passreset
         public static bool ControleerPassresetHash(string hash)
         {
+            //ophalen van de datum en email van de gegeven hash
             string mail = "";
             bool result = false;
             string SQL = "SELECT * FROM tblPassreset WHERE activatiehash = '" + hash + "' AND actief = '1'";
             DBController controller = new DBController(SQL);
             var resultList = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("datum", "email");
 
+            //kijken naar de datum van de hash, of deze binnen de 2 dagen geactiveerd wordt
             foreach (var lijst in resultList)
             {
                 string datum = lijst[0].Value;
@@ -255,6 +260,7 @@ namespace Examenmonitor
                 }
             }
 
+            //actief maken van de user
             if (result)
             {
                 SQL = "UPDATE tblPassreset SET actief='0' WHERE email = '" + mail + "'";
