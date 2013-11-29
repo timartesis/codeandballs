@@ -14,15 +14,9 @@ namespace Examenmonitor
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Haalt de hash terug uit de url, om nadien te controleren of deze overeenkomt met de DB-waarde om deze nadien op actief te zetten!
+            //Haalt de hash terug uit de url, om nadien te controleren of deze overeenkomt met de DB-waarde om deze vervolgens op actief te zetten!
             activatieHash = Request.QueryString["hash"];
-            hash.Text = activatieHash;
-            
-            
             bool controleActivatieHash = DatabankConnector.ControleerActivatieHash(activatieHash);
-            
-            //Gewoon om te checken, mag later weg!
-            hash.Text += " : " + controleActivatieHash.ToString();
 
             //Zet de knoppen op onzichtbaar
             buttonLogin.Visible = false;

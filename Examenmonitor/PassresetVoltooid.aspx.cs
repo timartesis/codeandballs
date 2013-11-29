@@ -15,6 +15,7 @@ namespace Examenmonitor
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             MailVersturingen pasresetmail = MailVersturingen.getInstance();
             //Haalt de hash terug uit de url, om nadien te controleren of deze overeenkomt met de DB-waarde om deze nadien op actief te zetten!
             passresetHash = Request.QueryString["hash"];
