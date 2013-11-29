@@ -104,7 +104,6 @@
     <Content Include="Resources\Scripts\bootstrap.min.js" />
     <Content Include="Resources\Scripts\jquery-2.0.3.min.js" />
     <Content Include="Resources\Site.css" />
-    <Content Include="MailTestYentl.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="RegistratieForm.aspx" />
     <Content Include="Resources\AccountManager.css" />
@@ -133,13 +132,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IOConverter.cs" />
-    <Compile Include="MailTestYentl.aspx.cs">
-      <DependentUpon>MailTestYentl.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MailTestYentl.aspx.designer.cs">
-      <DependentUpon>MailTestYentl.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
