@@ -14,7 +14,7 @@ namespace Examenmonitor
         private Table table = new Table();
         private Table tableData = new Table();
         private List<Examen> origineleLijst = new List<Examen>();
-        private static List<Examen> filterLijst;
+        private List<Examen> filterLijst;
         private List<CheckBox> checkboxLijst = new List<CheckBox>();
         private string userMail;
         private List<string> Kolomnamen = new List<string>();
@@ -47,9 +47,12 @@ namespace Examenmonitor
             this.GenerateCheckBoxes(locaties);
             //Steekt alle examens in een lijst.
             this.origineleLijst = ExamenModel.getExamens();
-            
-            //Als de filterlijst geen initialisatie heeft, wordt deze gelinked aan de originele lijst.
-            if (filterLijst == null)
+
+            if (Session["Lijst"] != null)
+            {
+                filterLijst = (List<Examen>)Session["Lijst"];
+            }
+            else
             {
                 filterLijst = origineleLijst;
             }
@@ -374,6 +377,7 @@ namespace Examenmonitor
         protected void CheckedChangeFilter(object sender, EventArgs e)
         {
             Filteren();
+            Session["Lijst"] = filterLijst;
         }
 
         //Event voor de checkboxes van de Dataview
@@ -392,6 +396,7 @@ namespace Examenmonitor
             }
             //Updaten van de data voor de gebruiker.
             InitDataView(filterLijst);
+            Session["Lijst"] = filterLijst;
         }
 
         //Event voor het klikken van een sorteerbutton.
@@ -406,6 +411,7 @@ namespace Examenmonitor
         {
             filterLijst = SorteerModel.Sorteer(filterLijst, id);
             InitDataView(filterLijst);
+            Session["Lijst"] = filterLijst;
         }
 
         //Event voor uit te loggen.
