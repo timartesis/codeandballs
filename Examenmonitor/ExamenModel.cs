@@ -12,6 +12,7 @@ namespace Examenmonitor
     /* singleton opgebouwd om lock fouten te voorkomen */
     public class ExamenModel
     {
+        //velden van de klasse
         private static ExamenModel model = new ExamenModel(); 
         private List<Examen> examens;
 
@@ -48,12 +49,14 @@ namespace Examenmonitor
         //Databank connectie en conversie van de key value pairs in een lijst.
         private List<Examen> DatabankExamensToList() 
         {
+            //alle examens halen uit de slots tabel
             List<Examen> lijst = new List<Examen>();
             Examen examen;
             string SQL = "SELECT * FROM tblSlots";
             DBController controller = new DBController(SQL);            
             List<List<KeyValuePair<string, string>> > resultset = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "datum", "lengte", "capaciteit", "digitaal", "locatie");
 
+            //deze gegevens uit de lijst halen en in de lijst met examens steken
             foreach (List<KeyValuePair<string,string>> row in resultset)
             {
                 examen = new Examen();
@@ -135,12 +138,14 @@ namespace Examenmonitor
         //Haalt alle reservaties voor een bepaald examen.
         private List<Reservatie> GetReservatiesInExamen(int examenid)
         {
+            //ophalen van alle reservaties uit de tabel
             List<Reservatie> lijst = new List<Reservatie>();
             Reservatie reservatie;
             string SQL = "SELECT * FROM tblReservations WHERE slotid = '" + examenid + "'";
             DBController controller = new DBController(SQL);
             List<List<KeyValuePair<string, string>>> resultset = controller.ExecuteReaderQueryReturnMultipleResultsMultipleRow("id", "slotid", "email", "creatiedatum");
 
+            //de opgehaalde gegevens in een lijst steken
             foreach (List<KeyValuePair<string, string>> row in resultset)
             {
                 reservatie = new Reservatie();
