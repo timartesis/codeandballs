@@ -7,6 +7,13 @@ div.PageContent
 {
 }
 
+.ButtonClass
+{
+  border: thin groove #000000;
+  vertical-align: bottom;
+  color: #000000;
+  background-color: #99FFCC;
+}
 
 
 
@@ -14,8 +21,9 @@ div.PageContent
 /*HEADER*/
 div.Header
 {
-    background-color: yellow;
-    height: 200px;
+    background-image:url("Images/8==D.jpg");
+    background-repeat:no-repeat;
+    height: 70px;
 }
 
 div#HeaderMain

@@ -99,6 +99,7 @@
     <Content Include="Resources\bootstrap-responsive.min.css" />
     <Content Include="Resources\bootstrap.css" />
     <Content Include="Resources\bootstrap.min.css" />
+    <Content Include="Resources\Images\8==D.jpg" />
     <Content Include="Resources\Scripts\bootstrap.js" />
     <Content Include="Resources\Scripts\bootstrap.min.js" />
     <Content Include="Resources\Scripts\jquery-2.0.3.min.js" />
@@ -217,9 +218,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
