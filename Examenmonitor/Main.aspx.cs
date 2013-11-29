@@ -366,6 +366,7 @@ namespace Examenmonitor
             if (ch.Checked == true)
             {
                 DatabankConnector.addReservation(filterLijst, userMail, int.Parse(ch.ID));
+                //LABEL VOOR ERROR HANDLING
             }
             else
             {

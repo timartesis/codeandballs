@@ -37,15 +37,15 @@ namespace Examenmonitor
                         break;
                     case 1:
                         //Veranderen naar meer functionele foutmeldingen
-                        //Debug.Text = "Ongeactiveerde email";
+                        CredentialsLabel.Text = "Uw mail adress is nog niet geactiveerd, Geen mail gehad? Klik dan nu op 'Activatie mail verzenden'";
                         break;
                     case 2:
                         //Veranderen naar meer functionele foutmeldingen
-                        //Debug.Text = "Verkeerde login";
+                        CredentialsLabel.Text = "De login gegevens zijn foutief!";
                         break;
                     default:
                         //Veranderen naar meer functionele foutmeldingen
-                        //Debug.Text = "Unexpected error";
+                        CredentialsLabel.Text = "Fuck you, je hebt het internet kapot gemaakt. Er is een Federaal team onderweg naar uw locatie. Gelieve te wachten en vreedzaam mee te werken met het team tijdens de arrestatie.";
                         break;
                 }
             }
