@@ -32,9 +32,10 @@ namespace Examenmonitor
                 //Controleert of de email al bestaat in ons systeem.
                 if (DatabankConnector.ControleerBestaandeEmail(email))
                 {
+                    //Zenden van de registratiemail.
                     registratieMail.ZendRegistratieMail(volledigeNaam, email, DatabankConnector.RegistratieMail(email));
+                    //Invoeren van de gebruikersgegevens in de database.
                     DatabankConnector.InsertGebruiker(email, wachtwoord, voorNaam, achterNaam);
-                    //in commentaar zodat de databank niet constant geupdate wordt
                     Response.Redirect("~/MailCheck.aspx");
                 }
                 else
