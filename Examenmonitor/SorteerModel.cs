@@ -7,7 +7,7 @@ namespace Examenmonitor
 {
     public class SorteerModel
     {
-        public static List<Examen> SorterenOplopend(List<Examen> origineel, string id)
+        public static List<Examen> Sorteer(List<Examen> origineel, string id)
         {
             List<Examen> resultaat = origineel;
             switch (id)

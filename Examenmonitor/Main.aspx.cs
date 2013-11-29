@@ -48,7 +48,6 @@ namespace Examenmonitor
             //Steekt alle examens in een lijst.
             this.origineleLijst = ExamenModel.getExamens();
             
-            //
             if (filterLijst == null)
             {
                 filterLijst = origineleLijst;
@@ -387,7 +386,7 @@ namespace Examenmonitor
 
         protected void Sorteren(string id)
         {
-            filterLijst = SorteerModel.SorterenOplopend(filterLijst, id);
+            filterLijst = SorteerModel.Sorteer(filterLijst, id);
             InitDataView(filterLijst);
         }
 
