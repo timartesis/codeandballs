@@ -79,9 +79,11 @@
                         <%-- Confirm button --%>
                         <asp:Button ID="buttonWijzig" class="btn" runat="server" CommandName="MoveNext" Text="Wijzigen" OnClick="buttonWijzig_Click" />
                         <asp:Label ID="incorrectLabel" runat="server" ForeColor="Red" Visible="False"></asp:Label>
+                    </asp:TableCell>
+                    <asp:TableCell BorderColor="Transparent" >
                         <asp:Button ID="TerugButton" class="btn" runat="server" CommandName="MoveNext" Text="Terug" 
                                         OnClientClick="window.location.href='Main.aspx'" 
-                                        PostBackUrl="~/Main.aspx" CausesValidation="false"/>
+                                        PostBackUrl="~/Main.aspx" CausesValidation="false" />
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>
