@@ -18,7 +18,7 @@
 
             <ul id="menu">
 	            <li>
-		            <a href="#">ACCOUNTNAMELALATEST</a>
+		            <a href="#"><%= Session["User"].ToString() %></a>
 		            <ul>
 			            <li><a href="PassWijzigen.aspx">Wachtwoord wijzigen</a></li>
 			            <li><asp:LinkButton id="myLink" Text="Logout" OnClick="LinkButton_Click" runat="server"/></li>

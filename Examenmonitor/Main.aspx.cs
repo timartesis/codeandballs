@@ -27,34 +27,38 @@ namespace Examenmonitor
                 Response.Redirect("Login.aspx");
             }
             userMail = Session["User"].ToString();
-            //Debug label TODO verwijderen
-            //debugLabel.Text = Session["User"].ToString();
 
             //Code voor generatie check boxes
             table.ID = "Filter";
             tableData.ID = "Data view";
             PanelFilter.Controls.Add(table);
             PanelData.Controls.Add(tableData);
+
             //Locaties ophalen uit de DataBase via ExamenModel
             ExamenModel.ReloadData();
             ExamenModel ex = ExamenModel.getInstance();
 
-            //Methode oproepen om checkboxes te genereren
+            //Methode oproepen om checkboxes te genereren voor de locaties van mogelijke examens.
             List<string> locaties = ex.GetAllLocaties();
+            //Manueel toevoegen van extra checkboxen.
             locaties.Add("Mijn reservaties");
             locaties.Add("Vrije plaatsen");
+            //Genereert checkboxen op basis van een lijst met locaties.
             this.GenerateCheckBoxes(locaties);
+            //Steekt alle examens in een lijst.
             this.origineleLijst = ExamenModel.getExamens();
+            
+            //Als de filterlijst geen initialisatie heeft, wordt deze gelinked aan de originele lijst.
             if (filterLijst == null)
             {
                 filterLijst = origineleLijst;
             }
 
-            //Methode om alle data te showen
+            //Methode om alle data weer te geven.
             this.InitDataView(filterLijst);
         }
 
-        
+        //Methode om locatie checkboxen te genereren.
         private void GenerateCheckBoxes(List<string> lijst)
         {
             //Teller om te zien wanneer we bij de 3 zijn
@@ -87,12 +91,13 @@ namespace Examenmonitor
             table.Rows.Add(row);
         }
 
+        //Methode om de tabel te maken en opvullen met gegevens.
         private void InitDataView(List<Examen> lijst)
         {
-            //Clearen van de tabel voor hem opnieuw te renderen
+            //Leegmaken van de tabel voor hem opnieuw te renderen
             tableData.Rows.Clear();
 
-            //Header renderen + sorteerbuttons
+            //Sorteerbuttons toevoegen en een header toevoegen.
             tableData.Rows.Add(this.GenerateSortButtons());
             tableData.Rows.Add(this.GenerateHeaderRow());
 
@@ -144,6 +149,8 @@ namespace Examenmonitor
                 check.AutoPostBack = true;
                 check.CheckedChanged += new EventHandler(this.CheckedChangeData);
                 ReserverenCell.Controls.Add(check);
+                
+                //Als de kolom met het aantal vrije plaatsen "volzet" is, wordt de checkbox niet meer klikbaar.
                 if (item.VrijeSlots().Equals("Volzet"))
                 {
                     check.Enabled = false;
@@ -155,6 +162,8 @@ namespace Examenmonitor
                         }
                     }
                 }
+
+                //Checken of de reservaties overeenkomen met de ingelogde user, indien dit het geval is, zal elke reservatie gechecked worden.
                 foreach (Reservatie res in item.Reservaties)
                 {
                     if (res.Usermail.Equals(userMail))
@@ -163,7 +172,7 @@ namespace Examenmonitor
                     }
                 }
 
-                //Cellen toevoegen aan row
+                //Cellen toevoegen aan een rij = 1 examen
                 tempRow.Cells.Add(locatieCell);
                 tempRow.Cells.Add(datumCell);
                 tempRow.Cells.Add(beginUurCell);
@@ -173,17 +182,19 @@ namespace Examenmonitor
                 tempRow.Cells.Add(TotaalVrijCell);
                 tempRow.Cells.Add(ReserverenCell);
 
-                //Rij aan tabel toevoegen
+                //Rij toevoegen aan de tabel
                 tableData.Rows.Add(tempRow);
             }
         }
 
+        //Genereren van de rij, met daarin de header elementen.
         private TableRow GenerateHeaderRow()
         {
             //Heading row maken
             TableRow row = new TableRow();
             row.ID = "Heading";
-            //maken van de nodige cellen
+
+            //Maken van de nodige cellen
             TableCell locatieCell = new TableCell();
             TableCell datumCell = new TableCell();
             TableCell beginUurCell = new TableCell();
@@ -192,8 +203,6 @@ namespace Examenmonitor
             TableCell DigitaalCell = new TableCell();
             TableCell TotaalVrijCell = new TableCell();
             TableCell ReserverenCell = new TableCell();
-
-            //Opmaken van de cellen
 
             //Locatie cell
             locatieCell.ID = "Locatie";
@@ -294,7 +303,7 @@ namespace Examenmonitor
 
             for (int i = 0; i <= 6; i++)
             {
-
+                //Genereert een cell voor elke kolom, waarin 2 buttons komen.
                 TableCell tempCell = new TableCell();
                 tempCell.ID = "Sort" + i;
                 //Aflopende button per header toevoegen
@@ -321,23 +330,29 @@ namespace Examenmonitor
             return row;
         }
 
+        //Filteren op basis van de geselecteerde checkboxen.
         protected void Filteren()
         {
             filterLijst = origineleLijst;
 
-            if (checkboxLijst[checkboxLijst.Count - 1].Checked) //filteren indien volzet filter gechecked is
+            //Filteren indien volzet filter gechecked is
+            if (checkboxLijst[checkboxLijst.Count - 1].Checked) 
             {
                 filterLijst = FilterModel.filterExamensFullCapacity(filterLijst);
             }
 
-            if (checkboxLijst[checkboxLijst.Count - 2].Checked) //filteren indien eigen reservatie filter gechecked is
+            //Filteren indien eigen reservatie filter gechecked is
+            if (checkboxLijst[checkboxLijst.Count - 2].Checked) 
             {
                 filterLijst = FilterModel.filterExamensID(filterLijst, Session["User"].ToString());
             }
 
-            int aantalLocaties = checkboxLijst.Count - 2; //aantal locaties die getoond worden
+            //Aantal locaties die getoond worden
+            int aantalLocaties = checkboxLijst.Count - 2; 
             List<string> locaties = new List<string>();
-            for (int i = 0; i < aantalLocaties; i++) //zetten van locaties die gechecked zijn in een lijst
+
+            //Zetten van locaties die gechecked zijn in een lijst
+            for (int i = 0; i < aantalLocaties; i++) 
             {
                 if (checkboxLijst[i].Checked)
                 {
@@ -345,11 +360,13 @@ namespace Examenmonitor
                 }
             }
 
-            if (locaties.Count > 0) //als er locaties gechecked zijn, zal het filteren ervan hier plaatsnemen
+            //Als er locaties gechecked zijn, zal het filteren ervan hier plaatsnemen
+            if (locaties.Count > 0) 
             {
                 filterLijst = FilterModel.filterExamensCities(filterLijst, locaties);
             }
 
+            //Updaten van de data voor de gebruiker.
             InitDataView(filterLijst);
         }
 
@@ -365,28 +382,34 @@ namespace Examenmonitor
             CheckBox ch = (CheckBox)sender;
             if (ch.Checked == true)
             {
+                //Reservatie toevoegen aan de database.
                 DatabankConnector.addReservation(filterLijst, userMail, int.Parse(ch.ID));
-                //LABEL VOOR ERROR HANDLING
             }
             else
             {
+                //Reservatie verwijderen uit de database.
                 DatabankConnector.removeReservation(filterLijst, userMail, int.Parse(ch.ID));
             }
+            //Updaten van de data voor de gebruiker.
             InitDataView(filterLijst);
         }
 
+        //Event voor het klikken van een sorteerbutton.
         protected void SorteerButton_Click(object sender, EventArgs e)
         {
             Button b = (Button)sender;
             Sorteren(b.ID);
         }
 
+        //Sorteer methode die de sorteermethode aanspreekt van ons sorteermodel.
         protected void Sorteren(string id)
         {
-            filterLijst = SorteerModel.SorterenOplopend(filterLijst, id);
+            filterLijst = SorteerModel.Sorteer(filterLijst, id);
             InitDataView(filterLijst);
         }
 
+        //Event voor uit te loggen.
+        //Indien erop geklikt wordt, zal de session leeggemaakt worden en zal de gebruiker doorverwezen worden naar de login pagina.
         protected void LinkButton_Click(Object sender, EventArgs e) 
         {
             Session.Clear();

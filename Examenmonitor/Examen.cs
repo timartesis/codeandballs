@@ -42,7 +42,7 @@ namespace Examenmonitor
             return obj.Id == this.Id;            
         }
 
-        //Berekent het aantal vrije slots ten opzichte van het totaal.
+        //Berekent het aantal vrije slots ten opzichte van het totaal. Wanneer het volzet is, returnt het Volzet, anders returned het iets in de vorm van 1/3
         public string VrijeSlots()
         {
             string vrijeSlots = this.Reservaties.Count + "/" + this.Capaciteit;
