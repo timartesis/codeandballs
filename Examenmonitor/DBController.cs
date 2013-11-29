@@ -29,7 +29,7 @@ namespace Examenmonitor
             }
         }
 
-        //haalt 1 stringresult uit 1 row op basis van een tabelnaam op
+        //haalt 1 stringresult uit 1 row op basis van een tabelnaam op, ints worden gevoncerteerd naar strings
         public string ExecuteReaderQueryReturnSingleString(string tabelnaam) 
         {
             string result = "";
@@ -56,7 +56,7 @@ namespace Examenmonitor
             return result;
         }
 
-        //haalt op of er rijen zijn in opgegeven query
+        //returned true als er een rij gevonden is in de opgegeven query
         public bool ExecuteReaderQueryReturnSingleResult() 
         {
             bool result;
@@ -74,7 +74,7 @@ namespace Examenmonitor
             return result;
         }
 
-        //deze parameer moet veranderen naar een variabele die oneindig strings accepteert
+        //returned een lijst waar de resultaten van de opgegeven tabelnamen inzitten in de vorm van (tabelnaam, waarde)
         public List<KeyValuePair<string, string>> ExecuteReaderQueryReturnMultipleResultsOneRow(params string[] tabelnamen)             
         {
             List<KeyValuePair<string, string>> lijst = new List<KeyValuePair<string, string>>();
@@ -110,6 +110,7 @@ namespace Examenmonitor
             return lijst;
         }
 
+        //returned een lijst waar de resultaten van de opgegeven tabelnamen inzitten in de vorm van lijsten met daarin de (tabelnaam, waarde)
         public List<List<KeyValuePair<string, string>>> ExecuteReaderQueryReturnMultipleResultsMultipleRow(params string[] tabelnamen) //deze parameer moet veranderen naar een variabele die oneindig strings accepteert            
         {
             /*
