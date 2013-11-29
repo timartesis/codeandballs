@@ -113,7 +113,7 @@
                     <asp:TableRow BorderColor="Transparent">
                         <asp:TableCell BorderColor="Transparent">
                             <%-- Registreer button --%>
-                            <asp:Button ID="buttonRegistreer" runat="server" CommandName="MoveNext" Text="Registreer" OnClick="buttonRegistreer_Click" />
+                            <asp:Button ID="buttonRegistreer" class="btn" runat="server" CommandName="MoveNext" Text="Registreer" OnClick="buttonRegistreer_Click" />
                         </asp:TableCell>
                         <asp:TableCell BorderColor="Transparent">  
                             <asp:Button ID="Terug" class="btn" runat="server" Text="Terug naar login" 
