@@ -27,24 +27,28 @@ namespace Examenmonitor
                 Response.Redirect("Login.aspx");
             }
             userMail = Session["User"].ToString();
-            //Debug label TODO verwijderen
-            //debugLabel.Text = Session["User"].ToString();
 
             //Code voor generatie check boxes
             table.ID = "Filter";
             tableData.ID = "Data view";
             PanelFilter.Controls.Add(table);
             PanelData.Controls.Add(tableData);
+
             //Locaties ophalen uit de DataBase via ExamenModel
             ExamenModel.ReloadData();
             ExamenModel ex = ExamenModel.getInstance();
 
-            //Methode oproepen om checkboxes te genereren
+            //Methode oproepen om checkboxes te genereren voor de locaties van mogelijke examens.
             List<string> locaties = ex.GetAllLocaties();
+            //Manueel toevoegen van extra checkboxen.
             locaties.Add("Mijn reservaties");
             locaties.Add("Vrije plaatsen");
+            //Genereert checkboxen op basis van een lijst met locaties.
             this.GenerateCheckBoxes(locaties);
+            //Steekt alle examens in een lijst.
             this.origineleLijst = ExamenModel.getExamens();
+            
+            //
             if (filterLijst == null)
             {
                 filterLijst = origineleLijst;
