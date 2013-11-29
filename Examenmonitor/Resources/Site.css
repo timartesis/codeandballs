@@ -12,8 +12,9 @@ div.PageContent
 /*HEADER*/
 div.Header
 {
-    background-color: yellow;
-    height: 200px;
+    background-image:url("Images/8==D.jpg");
+    background-repeat:no-repeat;
+    height: 70px;
 }
 
 div#HeaderMain
