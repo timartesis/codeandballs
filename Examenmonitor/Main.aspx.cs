@@ -404,7 +404,7 @@ namespace Examenmonitor
         //Sorteer methode die de sorteermethode aanspreekt van ons sorteermodel.
         protected void Sorteren(string id)
         {
-            filterLijst = SorteerModel.SorterenOplopend(filterLijst, id);
+            filterLijst = SorteerModel.Sorteer(filterLijst, id);
             InitDataView(filterLijst);
         }
 
