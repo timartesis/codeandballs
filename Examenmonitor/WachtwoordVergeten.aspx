@@ -20,12 +20,12 @@
     <div style="height: 94px; width: 920px">
         <asp:Table ID="Table1" runat="server" CellPadding="5"
                             GridLines="horizontal" BorderColor="Transparent" >
-            <asp:TableRow>
-                <asp:TableCell>                
+            <asp:TableRow BorderColor="Transparent"> 
+                <asp:TableCell BorderColor="Transparent">                
                     <%-- Email label, textbox en validator --%>
                     <asp:Label ID="Label2" runat="server" AssociatedControlID="Email">Email: </asp:Label>
                     </asp:TableCell>
-                    <asp:TableCell> 
+                    <asp:TableCell BorderColor="Transparent"> 
                     <asp:TextBox runat="server" ID="Email" TextMode="Email" />
                     <%-- Validator om te zien of het veld is ingevuld --%>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Email"
@@ -39,12 +39,12 @@
                                 
                     </asp:TableCell>
         </asp:TableRow>
-        <asp:TableRow>
-                    <asp:TableCell>       
+        <asp:TableRow BorderColor="Transparent">
+                    <asp:TableCell BorderColor="Transparent">       
                     <asp:Button ID="buttonWachtwoordResetten" class="btn" runat="server" CommandName="MoveNext" Text="Wachtwoord resetten" 
                                         OnClick="buttonWachtwoordResetten_Click" />
                     </asp:TableCell>
-                    <asp:TableCell>  
+                    <asp:TableCell BorderColor="Transparent">  
                     <asp:Button ID="Terug" class="btn" runat="server" Text="Terug naar login" 
                                         OnClientClick="window.location.href='Login.aspx'" 
                                         PostBackUrl="~/Login.aspx" CausesValidation="false"/>
