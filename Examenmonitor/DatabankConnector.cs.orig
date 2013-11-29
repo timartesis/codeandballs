@@ -11,7 +11,12 @@ namespace Examenmonitor
 {
     public static class DatabankConnector
     {
+<<<<<<< HEAD
+        //Toevoegen van een reservatie
+        public static void addReservation(string email, int slotid)
+=======
         public static List<Examen> addReservation(List<Examen> lijst, string email, int slotid)
+>>>>>>> f218cfa242bb9688b431d25ba8fe14d0982e2506
         {
             string SQL = "SELECT * FROM tblReservations WHERE email = '" + IOConverter.SanitizeHtml(email) + "' AND slotid = '"+slotid+"'";
             bool result;
@@ -23,32 +28,36 @@ namespace Examenmonitor
             {
                 string datum = IOConverter.GetHuidigeDatum();
 
-                //toevoegen van de data
-                SQL = "INSERT INTO tblReservations (email,slotid,creatiedatum) VALUES";            
-                SQL += "('"+IOConverter.SanitizeHtml(email)+"','"+slotid+"','"+datum+"')";
-                DBController controller2 = new DBController(SQL);
-                controller2.ExecuteNonQuery();
+            //toevoegen van de data
+            SQL = "INSERT INTO tblReservations (email,slotid,creatiedatum) VALUES";            
+            SQL += "('"+IOConverter.SanitizeHtml(email)+"','"+slotid+"','"+datum+"')";
+            DBController controller2 = new DBController(SQL);
+            controller2.ExecuteNonQuery();
 
-                //verkrijgen van de id van de gezochte reservatie
-                SQL = "SELECT id FROM tblReservations WHERE email = '"+IOConverter.SanitizeHtml(email)+"' AND slotid = '"+slotid+"'";
-                DBController controller3 = new DBController(SQL);
-                int resID = int.Parse(controller3.ExecuteReaderQueryReturnSingleString("id"));
+            //verkrijgen van de id van de gezochte reservatie
+            SQL = "SELECT id FROM tblReservations WHERE email = '"+IOConverter.SanitizeHtml(email)+"' AND slotid = '"+slotid+"'";
+            DBController controller3 = new DBController(SQL);
+            int resID = int.Parse(controller3.ExecuteReaderQueryReturnSingleString("id"));
 
-                //updaten van de lijst
-                foreach (Examen ex in lijst)
+            //updaten van de lijst
+            foreach (Examen ex in lijst)
+            {
+                if (ex.Id == slotid)
                 {
-                    if (ex.Id == slotid)
-                    {
-                        ex.Reservaties.Add(new Reservatie(resID, slotid, email, IOConverter.StringDatumNaarDateTime(datum)));
-                    }
+                    ex.Reservaties.Add(new Reservatie(resID, slotid, email, IOConverter.StringDatumNaarDateTime(datum)));
                 }
+            }
             }
 
             return lijst;
         }
 
+<<<<<<< HEAD
         //Verwijderen van een reservatie
-        public static List<Examen> removeReservation(List<Examen> lijst, string email, int slotid)
+        public static void removeReservation(string email, int slotid)
+=======
+        public static List<Examen> removeReservation(List<Examen> lijst,string email, int slotid)
+>>>>>>> f218cfa242bb9688b431d25ba8fe14d0982e2506
         {
             string datum = IOConverter.GetHuidigeDatum();
 

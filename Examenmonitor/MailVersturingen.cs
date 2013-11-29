@@ -31,6 +31,7 @@ namespace Examenmonitor
             client.Credentials = loginInfo;
         }
 
+        //Algemene methode die gebruikt wordt in alle vormen voor het zenden van een mail (Registratie mail, reset mail, wachtwoord wijzigen mail).
         private bool ZendMail(string naam, string ontvangerMail, string randomLink, string onderwerp, StringBuilder body)
         {
             MailMessage mailBericht = new MailMessage(new MailAddress(LOGIN, ZENDER), new MailAddress(ontvangerMail, naam));
@@ -104,6 +105,8 @@ namespace Examenmonitor
 
             return bericht;
         }
+
+        //Onderstaande methode zal het bericht gaan opstellen voor de registratie met de unieke hash.
         private StringBuilder OpstellenBerichtRegistratie(string naam, string randomLink)
         {
             StringBuilder bericht = new StringBuilder();

@@ -9,37 +9,44 @@ using System.Threading;
 namespace Examenmonitor
 {
     /* het examen model is een singleton die instaat voor het opvragen van alle examen gerelateerde data */
-    /* singleton opgebouwd om lock fouten te voorkomen (possie stijl) */
+    /* singleton opgebouwd om lock fouten te voorkomen */
     public class ExamenModel
     {
         private static ExamenModel model = new ExamenModel(); 
         private List<Examen> examens;
 
+        //Singleton constructor
         private ExamenModel()
         {
             this.examens = new List<Examen>();
         }
 
-        public static ExamenModel getInstance() { //hiermee verkrijg je de instantie van het model
+        //Instantie van het model verkrijgen
+        public static ExamenModel getInstance() 
+        {
             return model;
         }
 
+        //Asynchroon de data reloaden
         public static void ReloadDataAsync()
         {
             ExamenModel.Init(ExamenModel.Work);  
         }
 
+        //Reloaden van de data.
         public static void ReloadData()
         {
             ExamenModel.Work();
         }
 
+        //Geeft een lijst weer van examens.
         public static List<Examen> getExamens()
         {
             return ExamenModel.getInstance().examens;
         }
 
-        private List<Examen> DatabankExamensToList() //databank connectie en conversie van de key value pairs in een lijst
+        //Databank connectie en conversie van de key value pairs in een lijst.
+        private List<Examen> DatabankExamensToList() 
         {
             List<Examen> lijst = new List<Examen>();
             Examen examen;
@@ -80,7 +87,8 @@ namespace Examenmonitor
             return lijst;
         }
 
-        public List<string> GetAllLocaties() //haal uit de lijst alle locaties op en geef deze terug in een string lijst, dubbele locaties worden gefilterd
+        //Haalt de locaties op, steekt ze in een lijst en filtert alle dubbele locaties eruit.
+        public List<string> GetAllLocaties()
         {
             List<string> lijst = new List<string>();
             bool compare = false;
@@ -124,6 +132,7 @@ namespace Examenmonitor
             }
         }
 
+        //Haalt alle reservaties voor een bepaald examen.
         private List<Reservatie> GetReservatiesInExamen(int examenid)
         {
             List<Reservatie> lijst = new List<Reservatie>();
