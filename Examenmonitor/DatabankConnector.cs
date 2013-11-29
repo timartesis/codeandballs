@@ -11,8 +11,10 @@ namespace Examenmonitor
 {
     public static class DatabankConnector
     {
-        public static List<Examen> addReservation(List<Examen> lijst, string email, int slotid)
+        //toevoegen van een reservatie, returned true als het gelukt is
+        public static bool addReservation(List<Examen> lijst, string email, int slotid) //is dit async?
         {
+            //kijken of er al een reservatie in de tabel zit van het email-adres met het opgegeven slot
             string SQL = "SELECT * FROM tblReservations WHERE email = '" + IOConverter.SanitizeHtml(email) + "' AND slotid = '"+slotid+"'";
             bool result;
             DBController controller = new DBController(SQL);
@@ -23,7 +25,7 @@ namespace Examenmonitor
             {
                 string datum = IOConverter.GetHuidigeDatum();
 
-                //toevoegen van de data
+                //toevoegen van de data in de tabel
                 SQL = "INSERT INTO tblReservations (email,slotid,creatiedatum) VALUES";            
                 SQL += "('"+IOConverter.SanitizeHtml(email)+"','"+slotid+"','"+datum+"')";
                 DBController controller2 = new DBController(SQL);
@@ -44,42 +46,49 @@ namespace Examenmonitor
                 }
             }
 
-            return lijst;
+            return (!result);
         }
 
-        //Verwijderen van een reservatie
-        public static List<Examen> removeReservation(List<Examen> lijst, string email, int slotid)
+        //Verwijderen van een reservatie, returned true indien geslaagd
+        public static bool removeReservation(List<Examen> lijst, string email, int slotid)
         {
             string datum = IOConverter.GetHuidigeDatum();
 
             //verkrijgen van de id van de gezochte reservatie
-            string SQL = "SELECT id FROM tblReservations WHERE email = '" + IOConverter.SanitizeHtml(email) + "' AND slotid = '" + slotid + "'";
-            DBController controller = new DBController(SQL);
-            int resID = int.Parse(controller.ExecuteReaderQueryReturnSingleString("id"));
-            
-            //verwijderen van reservatie uit de tabel
-            SQL = "DELETE FROM tblReservations WHERE id = '" + resID + "'";            
-            DBController controller2 = new DBController(SQL);
-            controller2.ExecuteNonQuery();
-
-            //updaten van de lijst
-            Reservatie res = new Reservatie();
-            foreach (Examen ex in lijst)
+            try
             {
-                if (ex.Id == slotid)
-                {
-                    foreach (Reservatie r in ex.Reservaties)
-                    {
-                        if (r.Id == resID)
-                        {
-                            res = r;
-                        }
-                    }
-                    ex.Reservaties.Remove(res);
-                }
-            }
+                string SQL = "SELECT id FROM tblReservations WHERE email = '" + IOConverter.SanitizeHtml(email) + "' AND slotid = '" + slotid + "'";
+                DBController controller = new DBController(SQL);
+                int resID = int.Parse(controller.ExecuteReaderQueryReturnSingleString("id"));
 
-            return lijst;
+                //verwijderen van reservatie uit de tabel
+                SQL = "DELETE FROM tblReservations WHERE id = '" + resID + "'";
+                DBController controller2 = new DBController(SQL);
+                controller2.ExecuteNonQuery();
+
+                //updaten van de lijst
+                Reservatie res = new Reservatie();
+                foreach (Examen ex in lijst)
+                {
+                    if (ex.Id == slotid)
+                    {
+                        foreach (Reservatie r in ex.Reservaties)
+                        {
+                            if (r.Id == resID)
+                            {
+                                res = r;
+                            }
+                        }
+                        ex.Reservaties.Remove(res);
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         //Haalt het email adress van iemand die pass reset heeft aangevraagd uit de Passreset tabel
