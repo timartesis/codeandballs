@@ -16,6 +16,7 @@ namespace Examenmonitor
         private List<Examen> origineleLijst = new List<Examen>();
         private List<Examen> filterLijst;
         private List<CheckBox> checkboxLijst = new List<CheckBox>();
+        private List<bool> sorteerCheck = new List<bool>();
         private string userMail;
         private List<string> Kolomnamen = new List<string>();
 
@@ -27,6 +28,14 @@ namespace Examenmonitor
                 Response.Redirect("Login.aspx");
             }
             userMail = Session["User"].ToString();
+
+            Kolomnamen.Add("Locatie");
+            Kolomnamen.Add("Datum");
+            Kolomnamen.Add("BeginUur");
+            Kolomnamen.Add("EindUur");
+            Kolomnamen.Add("Duur");
+            Kolomnamen.Add("Digitaal");
+            Kolomnamen.Add("TotaalVrij");
 
             //Code voor generatie check boxes
             table.ID = "Filter";
@@ -55,6 +64,22 @@ namespace Examenmonitor
             else
             {
                 filterLijst = origineleLijst;
+            }
+
+            if (Session["Sorteer"] != null)
+            {
+                sorteerCheck = (List<bool>)Session["Sorteer"];
+            }
+            else
+            {
+                sorteerCheck.Add(false);
+                sorteerCheck.Add(false);
+                sorteerCheck.Add(false);
+                sorteerCheck.Add(false);
+                sorteerCheck.Add(false);
+                sorteerCheck.Add(false);
+                sorteerCheck.Add(false);
+                Session["Sorteer"] = sorteerCheck;
             }
 
             //Methode om alle data weer te geven.
@@ -101,14 +126,13 @@ namespace Examenmonitor
             tableData.Rows.Clear();
 
             //Sorteerbuttons toevoegen en een header toevoegen.
-            tableData.Rows.Add(this.GenerateSortButtons());
             tableData.Rows.Add(this.GenerateHeaderRow());
 
             foreach (var item in lijst)
             {
                 //Rij aanmaken per row uit de databank.
                 TableRow tempRow = new TableRow();
-
+                
                 //Toont de locaties
                 TableCell locatieCell = new TableCell();
                 locatieCell.ID = "Locatie" + item.Id;
@@ -208,72 +232,79 @@ namespace Examenmonitor
             TableCell ReserverenCell = new TableCell();
 
             //Locatie cell
-            locatieCell.ID = "Locatie";
-            Label locatieLabel = new Label();
-            locatieLabel.ID = "locatielabel";
+            locatieCell.ID = "cellLocatie";
+            Button locatieLabel = new Button();
+            locatieLabel.Click += new EventHandler(SorteerButton_Click);
+            locatieLabel.ID = "Locatie";
             locatieLabel.Width = 200;
             locatieLabel.Text = "Locatie";
             locatieLabel.Font.Bold = true;
             locatieCell.Controls.Add(locatieLabel);
 
             //Datum cell
-            datumCell.ID = "Datum";
-            Label datumLabel = new Label();
-            datumLabel.ID = "datumlabel";
+            datumCell.ID = "cellDatum";
+            Button datumLabel = new Button();
+            datumLabel.Click += new EventHandler(SorteerButton_Click);
+            datumLabel.ID = "Datum";
             datumLabel.Width = 200;
             datumLabel.Text = "Datum";
             datumLabel.Font.Bold = true;
             datumCell.Controls.Add(datumLabel);
 
             //Begin uur cell
-            beginUurCell.ID = "Begin uur";
-            Label beginUurLabel = new Label();
-            beginUurLabel.ID = "beginUurlabel";
+            beginUurCell.ID = "cellBegin uur";
+            Button beginUurLabel = new Button();
+            beginUurLabel.Click += new EventHandler(SorteerButton_Click);
+            beginUurLabel.ID = "BeginUur";
             beginUurLabel.Width = 200;
             beginUurLabel.Text = "Begin uur";
             beginUurLabel.Font.Bold = true;
             beginUurCell.Controls.Add(beginUurLabel);
 
             //Eind uur cell
-            EindUurCell.ID = "Eind uur";
-            Label EindUurLabel = new Label();
-            EindUurLabel.ID = "EindUurlabel";
+            EindUurCell.ID = "cellEind uur";
+            Button EindUurLabel = new Button();
+            EindUurLabel.Click += new EventHandler(SorteerButton_Click);
+            EindUurLabel.ID = "EindUur";
             EindUurLabel.Width = 200;
             EindUurLabel.Text = "Eind uur";
             EindUurLabel.Font.Bold = true;
             EindUurCell.Controls.Add(EindUurLabel);
 
             //Duur cell
-            DuurCell.ID = "Duur";
-            Label duurLabel = new Label();
-            duurLabel.ID = "duurlabel";
+            DuurCell.ID = "cellDuur";
+            Button duurLabel = new Button();
+            duurLabel.Click += new EventHandler(SorteerButton_Click);
+            duurLabel.ID = "Duur";
             duurLabel.Width = 200;
             duurLabel.Text = "Duur";
             duurLabel.Font.Bold = true;
             DuurCell.Controls.Add(duurLabel);
 
             //Digitaal cell
-            DigitaalCell.ID = "Digitaal";
-            Label digitaalLabel = new Label();
-            digitaalLabel.ID = "digitaallabel";
+            DigitaalCell.ID = "cellDigitaal";
+            Button digitaalLabel = new Button();
+            digitaalLabel.Click += new EventHandler(SorteerButton_Click);
+            digitaalLabel.ID = "Digitaal";
             digitaalLabel.Width = 200;
             digitaalLabel.Text = "Digitaal";
             digitaalLabel.Font.Bold = true;
             DigitaalCell.Controls.Add(digitaalLabel);
 
             //TotaalVrije cell
-            TotaalVrijCell.ID = "TotaalVrij";
-            Label totaalVrijLabel = new Label();
-            totaalVrijLabel.ID = "totaalVrijlabel";
+            TotaalVrijCell.ID = "cellTotaalVrij";
+            Button totaalVrijLabel = new Button();
+            totaalVrijLabel.Click += new EventHandler(SorteerButton_Click);
+            totaalVrijLabel.ID = "TotaalVrij";
             totaalVrijLabel.Width = 200;
             totaalVrijLabel.Text = "Bezet/Totaal";
             totaalVrijLabel.Font.Bold = true;
             TotaalVrijCell.Controls.Add(totaalVrijLabel);
 
             //Reserveren cell
-            ReserverenCell.ID = "Reserveren";
+            ReserverenCell.ID = "cellReserveren";
             Label reserverenLabel = new Label();
-            reserverenLabel.ID = "reserverenlabel";
+            reserverenLabel.ID = "Reserveren";
             reserverenLabel.Width = 200;
             reserverenLabel.Text = "Reserveren";
             reserverenLabel.Font.Bold = true;
@@ -288,47 +319,6 @@ namespace Examenmonitor
             row.Cells.Add(DigitaalCell);
             row.Cells.Add(TotaalVrijCell);
             row.Cells.Add(ReserverenCell);
-
-            return row;
-        }
-
-        //Genereert een rij, waarin de sorteer buttons geplaatst worden.
-        private TableRow GenerateSortButtons()
-        {
-            Kolomnamen.Add("Locatie");
-            Kolomnamen.Add("Datum");
-            Kolomnamen.Add("BeginUur");
-            Kolomnamen.Add("EindUur");
-            Kolomnamen.Add("Duur");
-            Kolomnamen.Add("Digitaal");
-            Kolomnamen.Add("TotaalVrij");
-            TableRow row = new TableRow();
-
-            for (int i = 0; i <= 6; i++)
-            {
-                //Genereert een cell voor elke kolom, waarin 2 buttons komen.
-                TableCell tempCell = new TableCell();
-                tempCell.ID = "Sort" + i;
-                //Aflopende button per header toevoegen
-                Button btn1 = new Button();
-                btn1.Click += new EventHandler(SorteerButton_Click);
-                //Oplopende button per header toevoegen
-                Button btn2 = new Button();
-                btn2.Click += new EventHandler(SorteerButton_Click);
-                btn1.ID = "Aflopend" + Kolomnamen[i];
-                btn2.ID = "Oplopend" + Kolomnamen[i];
-
-                //Settings goed zetten voor de buttons
-                btn1.Width = 75;
-                btn2.Width = 75;
-                btn1.Text = "Aflopend";
-                btn2.Text = "Oplopend";
-                
-                //Toevoegen van de buttons aan de cellen en rij
-                tempCell.Controls.Add(btn1);
-                tempCell.Controls.Add(btn2);
-                row.Cells.Add(tempCell);
-            }
 
             return row;
         }
@@ -400,10 +390,33 @@ namespace Examenmonitor
         }
 
         //Event voor het klikken van een sorteerbutton.
+
         protected void SorteerButton_Click(object sender, EventArgs e)
         {
             Button b = (Button)sender;
-            Sorteren(b.ID);
+            string id = "";
+            for (int i = 0; i < Kolomnamen.Count; i++)
+            {
+                if (Kolomnamen[i].Equals(b.ID))
+                {
+                    if (!sorteerCheck[i])
+                    {
+                        id = "Oplopend" + b.ID;
+                        for (int j = 0; j < sorteerCheck.Count; j++)
+                        {
+                            sorteerCheck[j] = false;
+                        }
+                        sorteerCheck[i] = true;
+                    }
+                    else
+                    {
+                        id = "Aflopend" + b.ID;
+                        sorteerCheck[i] = false;
+                    }
+                }
+            }
+            Session["Sorteer"] = sorteerCheck;
+            Sorteren(id);
         }
 
         //Sorteer methode die de sorteermethode aanspreekt van ons sorteermodel.

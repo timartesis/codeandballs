@@ -39,25 +39,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="nunit.core">
-      <HintPath>..\packages\NUnitTestAdapter.1.0\lib\nunit.core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="nunit.core.interfaces">
-      <HintPath>..\packages\NUnitTestAdapter.1.0\lib\nunit.core.interfaces.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.util">
-      <HintPath>..\packages\NUnitTestAdapter.1.0\lib\nunit.util.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="NUnit.VisualStudio.TestAdapter">
-      <HintPath>..\packages\NUnitTestAdapter.1.0\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="SQLite.Designer">
       <HintPath>Externals\SQLite.Designer.dll</HintPath>
     </Reference>
@@ -100,6 +81,7 @@
     <Content Include="Resources\bootstrap.css" />
     <Content Include="Resources\bootstrap.min.css" />
     <Content Include="Resources\Images\APlogo.jpg" />
+    <Content Include="Resources\center.css" />
     <Content Include="Resources\Scripts\bootstrap.js" />
     <Content Include="Resources\Scripts\bootstrap.min.js" />
     <Content Include="Resources\Scripts\jquery-2.0.3.min.js" />
@@ -113,9 +95,9 @@
     <Content Include="MailCheck.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigDB.cs" />
-    <Compile Include="DatabankConnector.cs" />
-    <Compile Include="DBController.cs" />
+    <Compile Include="Databaseconnectie\ConfigDB.cs" />
+    <Compile Include="Databaseconnectie\DatabankConnector.cs" />
+    <Compile Include="Databaseconnectie\DBController.cs" />
     <Compile Include="DebugPaginaTim.aspx.cs">
       <DependentUpon>DebugPaginaTim.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -123,14 +105,14 @@
     <Compile Include="DebugPaginaTim.aspx.designer.cs">
       <DependentUpon>DebugPaginaTim.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Examen.cs" />
-    <Compile Include="ExamenModel.cs" />
-    <Compile Include="FilterModel.cs" />
-    <Compile Include="FormsAdapter.cs" />
+    <Compile Include="Examen\Examen.cs" />
+    <Compile Include="Examen\ExamenModel.cs" />
+    <Compile Include="Supportklasses\FilterModel.cs" />
+    <Compile Include="Supportklasses\FormsAdapter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="IOConverter.cs" />
+    <Compile Include="Supportklasses\IOConverter.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -173,7 +155,7 @@
     <Compile Include="RegistratieForm.aspx.designer.cs">
       <DependentUpon>RegistratieForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MailVersturingen.cs" />
+    <Compile Include="Supportklasses\MailVersturingen.cs" />
     <Compile Include="RegistratieVoltooid.aspx.cs">
       <DependentUpon>RegistratieVoltooid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -188,8 +170,8 @@
     <Compile Include="ResendMail.aspx.designer.cs">
       <DependentUpon>ResendMail.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reservatie.cs" />
-    <Compile Include="SorteerModel.cs" />
+    <Compile Include="Reservatie\Reservatie.cs" />
+    <Compile Include="Supportklasses\SorteerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WachtwoordVergeten.aspx.cs">
       <DependentUpon>WachtwoordVergeten.aspx</DependentUpon>

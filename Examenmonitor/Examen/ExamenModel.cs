@@ -13,7 +13,7 @@ namespace Examenmonitor
     public class ExamenModel
     {
         //velden van de klasse
-        private static ExamenModel model = new ExamenModel(); 
+        private static ExamenModel model = new ExamenModel();
         private List<Examen> examens;
 
         //Singleton constructor

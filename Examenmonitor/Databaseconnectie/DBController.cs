@@ -45,7 +45,7 @@ namespace Examenmonitor
                             {
                                 result = reader.GetString(reader.GetOrdinal(tabelnaam));
                             }
-                            catch (Exception e)
+                            catch (Exception)
                             {
                                 result = reader.GetInt32(reader.GetOrdinal(tabelnaam)).ToString();
                             }
@@ -96,7 +96,7 @@ namespace Examenmonitor
                                 {
                                     value = reader.GetString(reader.GetOrdinal(tabelnaam));
                                 }
-                                catch (Exception e)
+                                catch (Exception)
                                 {
                                     value = reader.GetInt32(reader.GetOrdinal(tabelnaam)).ToString();
                                 }
@@ -140,7 +140,7 @@ namespace Examenmonitor
                                 {
                                     value = reader.GetString(reader.GetOrdinal(tabelnaam));
                                 }
-                                catch (Exception e)
+                                catch (Exception)
                                 {
                                     value = reader.GetInt32(reader.GetOrdinal(tabelnaam)).ToString();
                                 }
