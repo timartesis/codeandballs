@@ -9,17 +9,40 @@
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
     <link href="Resources/center.css" rel="stylesheet" type="text/css" />
     <title>Login pagina</title>
+    <style>
+        body
+        {
+            background-color: #ececec;
+        }
 
+        #exHeader 
+        {
+            background-color: white;
+            opacity: 1;
+            padding: 10% 5%;
+        }
+
+        #RegisterRecovery
+        {
+           
+        }
+
+    </style>
 </head>
 <body>
-    <div class="PageContent">
-        <form id="form1" class="form-horizontal"  runat="server">
+    <div id="test">
+
+    </div>
+    
+        
             <div class="Header">
 
             </div>
-            <div>
+            <div class="PageContent">
+                <form id="form1" class="form-horizontal"  runat="server">
+            <div id="exHeader">
                 <%-- Begin div --%>
-                    <div>
+                    <div >
                         <asp:Table class="FormTables" ID="Table1" runat="server" CellPadding="5"
                             GridLines="horizontal" BorderColor="Transparent" >
                             <asp:TableRow BorderColor="Transparent">
@@ -54,7 +77,7 @@
                                 </asp:TableCell></asp:TableRow></asp:Table>
                     </div>
                 <br />
-                                <%-- Email label en textbox --%><div id="RegisterRecovery" >
+                                <%-- Email label en textbox --%><div  id="RegisterRecovery" >
                                     <asp:Button ID="buttonRegistreerHier" class="btn" runat="server" CommandName="MoveNext" Text="Registreer hier" 
                                         OnClick="buttonRegistreerHier_Click" OnClientClick="window.location.href='RegistratieForm.aspx'" 
                                         PostBackUrl="~/RegistratieForm.aspx" CausesValidation="false"/>

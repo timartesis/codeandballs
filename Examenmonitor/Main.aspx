@@ -10,6 +10,18 @@
     <script>
 
     </script>
+    <style>
+
+        .Label
+        {
+            font-size: 35px;
+            font-weight: bold;
+            color: #b3000b;
+            background-color: #e10207;
+            padding: 10px 20px;
+            border-radius: 15px;
+        }
+    </style>
 </head>
 <body>
     <div class="PageContent">
@@ -30,13 +42,16 @@
             <div id="Menu">
                 <div id="MenuFilter">
                     <asp:Label ID="titelLabel" runat="server" Text="Filter"></asp:Label>
-                    <asp:Panel ID="PanelFilter" runat="server" Height="50px" >
+                    <asp:Panel CssClass="TestStyle" ID="PanelFilter" runat="server" Height="50px" >
                     </asp:Panel>
                 </div>
             </div>
             <br />
             <div id="Data">
-                <asp:Label ID="DataLabel" runat="server" Text="Examens"></asp:Label>
+                <asp:Label ID="DataLabel" runat="server" CssClass ="Label" Text="Examens"></asp:Label>
+                <br />
+                <br />
+                <br />
                 <asp:Panel ID="PanelData" runat="server" Height="50px" >
                 </asp:Panel>
             </div>
