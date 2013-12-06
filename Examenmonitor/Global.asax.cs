@@ -31,6 +31,7 @@ namespace Examenmonitor
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
+            
             var app = (HttpApplication)sender;
             
             
@@ -48,7 +49,7 @@ namespace Examenmonitor
                     app.Context.RewritePath(
                              string.Concat(IOConverter.SanitizeHtml(app.Context.Request.Url.LocalPath), "Login.aspx"));
                 }
-            }
+            } 
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

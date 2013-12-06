@@ -13,6 +13,8 @@
     <%-- CSS sheet link--%>
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
     <link href="Resources/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="Resources/center.css" rel="stylesheet" type="text/css" />
+    <link href="Resources/center.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
