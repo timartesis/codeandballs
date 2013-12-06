@@ -41,26 +41,16 @@ namespace Examenmonitor
                 {
 
                     app.Context.RewritePath(
-                             string.Concat(app.Context.Request.Url.LocalPath, "Login.aspx"));
-                    app.Context.RewritePath(
-                             string.Concat(IOConverter.SanitizeInjection(app.Context.Request.Url.LocalPath), "Login.aspx"));
-                    app.Context.RewritePath(
-                             string.Concat(IOConverter.SanitizeHtml(app.Context.Request.Url.LocalPath), "Login.aspx"));
+                             string.Concat(app.Context.Request.Url.LocalPath, "Login.aspx"));                    
                 }
                 catch (HttpRequestValidationException)
                 {
 
                     app.Context.RewritePath(
-                             string.Concat(IOConverter.SanitizeHtml(app.Context.Request.Url.LocalPath), "Login.aspx"));
-                    app.Context.RewritePath(
-                             string.Concat(IOConverter.SanitizeInjection(app.Context.Request.Url.LocalPath), "Login.aspx"));
+                             string.Concat(IOConverter.SanitizeHtml(IOConverter.SanitizeInjection(app.Context.Request.Url.LocalPath)), "Login.aspx"));
+                    
                 }
-                catch (HttpException) {
-                    app.Context.RewritePath(
-                             string.Concat(IOConverter.SanitizeHtml(app.Context.Request.Url.LocalPath), "Login.aspx"));
-                    app.Context.RewritePath(
-                             string.Concat(IOConverter.SanitizeInjection(app.Context.Request.Url.LocalPath), "Login.aspx"));
-                }
+                
             }
 
            /* try
