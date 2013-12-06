@@ -110,7 +110,6 @@ namespace Examenmonitor
                 cb.ID = "Checkbox " + item.ToString();
                 cb.AutoPostBack = true;
                 cb.Width = 200;
-                //cb.CssClass = "bootstrap-checkbox";
                 cb.Text = item.ToString();
                 cb.CheckedChanged += new EventHandler(this.CheckedChangeFilter);
                 // Add the control to the TableCell

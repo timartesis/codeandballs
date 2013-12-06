@@ -22,7 +22,7 @@ body
             background-color: red;
         }
 
-td { text-align: left; }
+
 
 div.PageContent
 {
@@ -36,6 +36,13 @@ div.PageContent
   color: #000000;
   background-color: #99FFCC;
 }
+
+#MenuFilter
+{
+    padding: 5px, 5px;
+}
+
+
 
 
 

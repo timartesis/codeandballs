@@ -42,12 +42,10 @@
             <div id="Menu">
                 <div id="MenuFilter">
                     <asp:Label ID="titelLabel" runat="server" Text="Filter"></asp:Label>
-                    <asp:Panel CssClass="TestStyle" ID="PanelFilter" runat="server" Height="50px" >
+                    <asp:Panel  ID="PanelFilter" runat="server" Height="50px" >
                     </asp:Panel>
                 </div>
             </div>
-            <br />
-            <br />
             <br />
             <br />
             <br />
