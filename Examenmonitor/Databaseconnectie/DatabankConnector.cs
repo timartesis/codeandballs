@@ -17,11 +17,24 @@ namespace Examenmonitor
             //kijken of er al een reservatie in de tabel zit van het email-adres met het opgegeven slot
             string SQL = "SELECT * FROM tblReservations WHERE email = '" + IOConverter.SanitizeHtml(email) + "' AND slotid = '"+slotid+"'";
             bool result;
+            bool result2;
             DBController controller = new DBController(SQL);
             result = !controller.ExecuteReaderQueryReturnSingleResult();
 
+            //kijken of maximum reservaties in bereikt
+            int max_slots = 0;
+            int hoeveel_slots = 0;
+            SQL = "SELECT count(*) AS 'slots' FROM tblReservations WHERE slotid = '" + slotid + "'";
+            controller.SQL = SQL;
+            hoeveel_slots = int.Parse(controller.ExecuteReaderQueryReturnSingleString("slots"));
 
-            if (result)
+            SQL = "SELECT capaciteit FROM tblSlots WHERE id = '" + slotid + "'";
+            controller.SQL = SQL;
+            max_slots = int.Parse(controller.ExecuteReaderQueryReturnSingleString("capaciteit"));
+
+            result2 = hoeveel_slots < max_slots;
+
+            if (result && result2)
             {
                 string datum = IOConverter.GetHuidigeDatum();
 
