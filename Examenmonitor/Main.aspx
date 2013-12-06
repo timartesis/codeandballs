@@ -26,7 +26,7 @@
 </head>
 <body>
     <div class="PageContent">
-        <form id="form1" runat="server">
+        <form id="formMain" runat="server">
         <div class="Header" id="HeaderMain">
             <ul id="Ul1">
              <li class="dropdown pull-right">
@@ -46,6 +46,11 @@
                     </asp:Panel>
                 </div>
             </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <br />
             <div id="Data">
                 <asp:Label ID="DataLabel" runat="server" CssClass ="Label" Text="Examens"></asp:Label>

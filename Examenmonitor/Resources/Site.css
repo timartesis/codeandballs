@@ -1,6 +1,26 @@
-﻿body {
-    background-color: white;
-}
+﻿
+
+body
+        {
+            background-color: white;
+        }
+
+        #formWachtwoordVergeten, .FormTables, #form1, #formWijzigenPasswoord
+        {
+            background-color: white;
+            -moz-box-shadow: 0 0 3px #ccc;
+            -webkit-box-shadow: 0 0 3px #ccc;
+            box-shadow: 0 0 10px #ccc;
+            opacity: 1;
+            padding: 10% 5%;
+        }
+
+        #test
+        {
+            width: 200%;
+            height: 200px;
+            background-color: red;
+        }
 
 td { text-align: left; }
 

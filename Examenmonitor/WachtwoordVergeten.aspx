@@ -16,7 +16,7 @@
     <div class="PageContent">
     <div class="Header">
 
-    </div>
+    </div >
     <form id="formWachtwoordVergeten" class="form-horizontal" runat="server">
     <div style="height: 94px; width: 920px">
         <asp:Table ID="Table1" runat="server" CellPadding="5"
