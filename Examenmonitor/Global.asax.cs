@@ -31,12 +31,37 @@ namespace Examenmonitor
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
+            
             var app = (HttpApplication)sender;
+            
+            
             if (app.Context.Request.Url.LocalPath.EndsWith("/"))
             {
-                app.Context.RewritePath(
-                         string.Concat(app.Context.Request.Url.LocalPath, "Login.aspx"));
+                try
+                {
+
+                    app.Context.RewritePath(
+                             string.Concat(app.Context.Request.Url.LocalPath, "Login.aspx"));                    
+                }
+                catch (HttpRequestValidationException)
+                {
+
+                    app.Context.RewritePath(
+                             string.Concat(IOConverter.SanitizeHtml(IOConverter.SanitizeInjection(app.Context.Request.Url.LocalPath)), "Login.aspx"));
+                    
+                }
+                
             }
+
+           /* try
+            {
+                string mappedPath = Request.MapPath(inputPath.Text,
+                                                     Request.ApplicationPath, false);
+            }
+            catch (HttpException)
+            {
+                // Cross-application mapping attempted
+            }*/
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

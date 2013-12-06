@@ -70,6 +70,13 @@ namespace Examenmonitor
             return Regex.Replace(html, stringPattern, "");
         }
 
+        public static string SanitizeInjection(string html)
+        {
+            //string acceptable = "";
+            string stringPattern = @"^(?:http|https|ftp)://[a-zA-Z0-9\.\-]+(?:\:\d{1,5})?(?:[A-Za-z0-9\.\;\:\@\&\=\+\$\,\?/]|%u[0-9A-Fa-f]{4}|%[0-9A-Fa-f]{2})*$";
+            return Regex.Replace(html, stringPattern, "");
+        }
+
         //zet de string datum om naar een DateTime
         public static DateTime StringDatumNaarDateTime(string datum)
         {
