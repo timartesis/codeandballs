@@ -14,6 +14,8 @@ namespace Examenmonitor
         //toevoegen van een reservatie, returned true als het gelukt is
         public static bool addReservation(List<Examen> lijst, string email, int slotid) //is dit async?
         {
+            bool finalResult = false;
+
             //kijken of er al een reservatie in de tabel zit van het email-adres met het opgegeven slot
             string SQL = "SELECT * FROM tblReservations WHERE email = '" + IOConverter.SanitizeHtml(email) + "' AND slotid = '"+slotid+"'";
             bool result;
@@ -57,9 +59,10 @@ namespace Examenmonitor
                         ex.Reservaties.Add(new Reservatie(resID, slotid, email, IOConverter.StringDatumNaarDateTime(datum)));
                     }
                 }
+                finalResult = true;
             }
 
-            return result;
+            return finalResult;
         }
 
         //Verwijderen van een reservatie, returned true indien geslaagd
