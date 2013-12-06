@@ -37,15 +37,6 @@ div.PageContent
   background-color: #99FFCC;
 }
 
-#MenuFilter
-{
-    padding: 5px, 5px;
-}
-
-
-
-
-
 
 /*HEADER*/
 div.Header
@@ -53,9 +44,6 @@ div.Header
     background-image:url("Images/APlogo.jpg");
     background-repeat:no-repeat;
     height: 70px;
-    width: 100%;
-    background-color: white;
-    z-index: 9999;
 }
 
 div#HeaderMain

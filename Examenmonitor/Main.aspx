@@ -6,23 +6,11 @@
 <head runat="server">
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
     <link href="Resources/bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="Resources/AccountManager.css" rel="stylesheet" type="text/css" />
     <title></title>
     <script>
 
     </script>
-    <style>
-
-        .Label
-        {
-            font-size: 35px;
-            font-weight: bold;
-            color: #b3000b;
-            background-color: #e10207;
-            padding: 10px 20px;
-            border-radius: 15px;
-        }
-    </style>
+    
 </head>
 <body>
     <div class="PageContent">
@@ -51,7 +39,7 @@
             <br />
             <br />
             <div id="Data">
-                <asp:Label ID="DataLabel" runat="server" CssClass ="Label" Text="Examens"></asp:Label>
+                <asp:Label ID="DataLabel" runat="server" Text="Examens"></asp:Label>
                 <br />
                 <br />
                 <br />
