@@ -6,6 +6,7 @@
 <head runat="server">
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
     <link href="Resources/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="Resources/center.css" rel="stylesheet" type="text/css" />
     <title>Passwoord reset voltooid</title>
 </head>
 <body>
