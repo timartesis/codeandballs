@@ -22,7 +22,23 @@ body
             background-color: red;
         }
 
+.checkboxstyle input{
+    display: block;
+    float: left;
+    
+    white-space: nowrap;
+    vertical-align:top;
+}
 
+label {
+
+    display: block;
+    float: left;
+    /*padding-left: 5px;*/
+    padding-left:2%;
+    white-space: nowrap;
+    
+}
 
 div.PageContent
 {
