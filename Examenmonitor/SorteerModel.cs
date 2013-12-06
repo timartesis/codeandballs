@@ -54,6 +54,9 @@ namespace Examenmonitor
                 case "AflopendTotaalVrij":
                     resultaat = origineel.OrderByDescending(e => e.VrijeSlots()).ToList();
                     break;
+                default:
+                    resultaat = origineel;
+                    break;
             }
             return resultaat;
         }
