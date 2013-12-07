@@ -11,17 +11,19 @@ namespace Examenmonitor
 {
     public partial class Main : System.Web.UI.Page
     {
+        private bool postback;
         private Table table = new Table();
         private Table tableData = new Table();
         private List<Examen> origineleLijst = new List<Examen>();
         private List<Examen> filterLijst;
-        private List<CheckBox> checkboxLijst = new List<CheckBox>();
+        private List<CheckBox> checkboxLijst;
         private List<bool> sorteerCheck = new List<bool>();
         private string userMail;
         private List<string> Kolomnamen = new List<string>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            postback = Page.IsPostBack;
             //Valideren of de sessie geldig is
             if (Session["Logged"].Equals("No"))
             {
@@ -58,13 +60,17 @@ namespace Examenmonitor
             //Steekt alle examens in een lijst.
             this.origineleLijst = ExamenModel.getExamens();
 
-            if (Session["Lijst"] != null)
+            if (postback)
             {
-                filterLijst = (List<Examen>)Session["Lijst"];
+
+                Session["Filter"] = checkboxLijst;
             }
             else
             {
-                filterLijst = origineleLijst;
+                if (Session["Filter"] != null)
+                {
+                    checkboxLijst = (List<CheckBox>)Session["Filter"];
+                }
             }
 
             if (Session["Sorteer"] != null)
@@ -82,9 +88,10 @@ namespace Examenmonitor
                 sorteerCheck.Add(false);
                 Session["Sorteer"] = sorteerCheck;
             }
+            filterLijst = origineleLijst;
 
             //Methode om alle data weer te geven.
-            this.InitDataView(filterLijst);
+            Filteren();
         }
 
         //Methode om locatie checkboxen te genereren.
@@ -94,29 +101,59 @@ namespace Examenmonitor
             int teller = 0;
             //Nieuwe tabel row maken
             TableRow row = new TableRow();
-            foreach (var item in lijst)
+            if (checkboxLijst == null)
             {
-                teller++;
-                if (teller == 4)
+                checkboxLijst = new List<CheckBox>();
+                foreach (var item in lijst)
                 {
-                    table.Rows.Add(row);
-                    row = new TableRow();
-                    row.ID = "row" + (teller);
-                    teller = 0;
+                    teller++;
+                    if (teller == 4)
+                    {
+                        table.Rows.Add(row);
+                        row = new TableRow();
+                        row.ID = "row" + (teller);
+                        teller = 0;
+                    }
+                    TableCell tempCell = new TableCell();
+                    tempCell.ID = item.ToString();
+                    CheckBox cb = new CheckBox();
+                    cb.ID = "Checkbox " + item.ToString();
+                    cb.AutoPostBack = true;
+                    cb.Width = 200;
+                    //cb.CssClass = "bootstrap-checkbox";
+                    cb.Text = item.ToString();
+                    cb.CheckedChanged += new EventHandler(this.CheckedChangeFilter);
+                    // Add the control to the TableCell
+                    tempCell.Controls.Add(cb);
+                    row.Cells.Add(tempCell);
+                    checkboxLijst.Add(cb);
                 }
-                TableCell tempCell = new TableCell();
-                tempCell.ID = item.ToString();
-                CheckBox cb = new CheckBox();
-                cb.ID = "Checkbox " + item.ToString();
-                cb.AutoPostBack = true;
-                cb.Width = 200;
-                //cb.CssClass = "bootstrap-checkbox";
-                cb.Text = item.ToString();
-                cb.CheckedChanged += new EventHandler(this.CheckedChangeFilter);
-                // Add the control to the TableCell
-                tempCell.Controls.Add(cb);
-                row.Cells.Add(tempCell);
-                checkboxLijst.Add(cb);
+            }
+            else
+            {
+                foreach (var item in lijst)
+                {
+                    teller++;
+                    if (teller == 4)
+                    {
+                        table.Rows.Add(row);
+                        row = new TableRow();
+                        row.ID = "row" + (teller);
+                        teller = 0;
+                    }
+                    TableCell tempCell = new TableCell();
+                    tempCell.ID = item.ToString();
+                    CheckBox cb = new CheckBox();
+                    cb.ID = "Checkbox " + item.ToString();
+                    cb.AutoPostBack = true;
+                    cb.Width = 200;
+                    //cb.CssClass = "bootstrap-checkbox";
+                    cb.Text = item.ToString();
+                    cb.CheckedChanged += new EventHandler(this.CheckedChangeFilter);
+                    // Add the control to the TableCell
+                    tempCell.Controls.Add(cb);
+                    row.Cells.Add(tempCell);
+                }
             }
             table.Rows.Add(row);
         }
@@ -369,7 +406,7 @@ namespace Examenmonitor
         protected void CheckedChangeFilter(object sender, EventArgs e)
         {
             Filteren();
-            Session["Lijst"] = filterLijst;
+            Session["Filter"] = checkboxLijst;
         }
 
         //Event voor de checkboxes van de Dataview
@@ -388,7 +425,7 @@ namespace Examenmonitor
             }
             //Updaten van de data voor de gebruiker.
             InitDataView(filterLijst);
-            Session["Lijst"] = filterLijst;
+            Session["Filter"] = checkboxLijst;
         }
 
         //Event voor het klikken van een sorteerbutton.
@@ -426,7 +463,7 @@ namespace Examenmonitor
         {
             filterLijst = SorteerModel.Sorteer(filterLijst, id);
             InitDataView(filterLijst);
-            Session["Lijst"] = filterLijst;
+            Session["Filter"] = checkboxLijst;
         }
 
         //Event voor uit te loggen.
