@@ -75,7 +75,7 @@
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" EnableClientScript="false"
                                     ControlToValidate="Email" CssClass="field-validation-error" Display="Dynamic" 
                                     ValidationExpression="^((?>[a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]+\x20*|((?=[\x01-\x7f])[^\\]|\\[\x01-\x7f])*\x20*)*(?<angle><))?((?!\.)(?>\.?[a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]+)+|((?=[\x01-\x7f])[^\\]|\\[\x01-\x7f])*)@+ap\.be$" 
-                                    ErrorMessage="U kan enkel registreren met een emailadres van de AP hoge school inloggen als lector"></asp:RegularExpressionValidator>
+                                    ErrorMessage="Gelieve gebruik te maken van een sXXXXXX@ap.be of een pXXXXXX@ap.be adres"></asp:RegularExpressionValidator>
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow BorderColor="Transparent">
