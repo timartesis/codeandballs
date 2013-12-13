@@ -1,5 +1,10 @@
 ﻿body {
-    width: 25%;
+    width: 33%;
     margin-left:auto;
     margin-right:auto;
+}
+input {
+    position:relative;
+    width:100%;
+    width:205px;
 }
