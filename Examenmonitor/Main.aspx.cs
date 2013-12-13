@@ -40,6 +40,7 @@ namespace Examenmonitor
 
             //Code voor generatie check boxes
             table.ID = "Filter";
+            table.CssClass = "MenuFilter";
             tableData.ID = "Data view";
             tableData.CssClass = "test";
             PanelFilter.Controls.Add(table);
@@ -258,6 +259,7 @@ namespace Examenmonitor
             locatieLabel.Width = 200;
             locatieLabel.Text = "Locatie";
             locatieLabel.Font.Bold = true;
+            locatieLabel.CssClass = "btn";
             locatieCell.Controls.Add(locatieLabel);
 
             //Datum cell
@@ -268,6 +270,7 @@ namespace Examenmonitor
             datumLabel.Width = 200;
             datumLabel.Text = "Datum";
             datumLabel.Font.Bold = true;
+            datumLabel.CssClass = "btn";
             datumCell.Controls.Add(datumLabel);
 
             //Begin uur cell
@@ -278,6 +281,7 @@ namespace Examenmonitor
             beginUurLabel.Width = 200;
             beginUurLabel.Text = "Begin uur";
             beginUurLabel.Font.Bold = true;
+            beginUurLabel.CssClass = "btn";
             beginUurCell.Controls.Add(beginUurLabel);
 
             //Eind uur cell
@@ -288,6 +292,7 @@ namespace Examenmonitor
             EindUurLabel.Width = 200;
             EindUurLabel.Text = "Eind uur";
             EindUurLabel.Font.Bold = true;
+            EindUurLabel.CssClass = "btn";
             EindUurCell.Controls.Add(EindUurLabel);
 
             //Duur cell
@@ -298,6 +303,7 @@ namespace Examenmonitor
             duurLabel.Width = 200;
             duurLabel.Text = "Duur";
             duurLabel.Font.Bold = true;
+            duurLabel.CssClass = "btn";
             DuurCell.Controls.Add(duurLabel);
 
             //Digitaal cell
@@ -308,6 +314,7 @@ namespace Examenmonitor
             digitaalLabel.Width = 200;
             digitaalLabel.Text = "Digitaal";
             digitaalLabel.Font.Bold = true;
+            digitaalLabel.CssClass = "btn";
             DigitaalCell.Controls.Add(digitaalLabel);
 
             //TotaalVrije cell
@@ -318,6 +325,7 @@ namespace Examenmonitor
             totaalVrijLabel.Width = 200;
             totaalVrijLabel.Text = "Bezet/Totaal";
             totaalVrijLabel.Font.Bold = true;
+            totaalVrijLabel.CssClass = "btn";
             TotaalVrijCell.Controls.Add(totaalVrijLabel);
 
             //Reserveren cell
