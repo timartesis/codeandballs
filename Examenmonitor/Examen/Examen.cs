@@ -44,11 +44,12 @@ namespace Examenmonitor
 
         //Berekent het aantal vrije slots ten opzichte van het totaal. Wanneer het volzet is, returnt het Volzet, anders returned het iets in de vorm van 1/3
         public string VrijeSlots()
-        {
-            string vrijeSlots = this.Reservaties.Count + "/" + this.Capaciteit;
+        {   
+           string vrijeSlots = this.Reservaties.Count + "/" + this.Capaciteit;
+
                 if (this.Reservaties.Count == this.Capaciteit)
                     vrijeSlots = "Volzet";
-                return vrijeSlots;
+            return vrijeSlots;
         }
 
         //Haalt de volledige datum op in het formaat Dag/Maand/Jaar.

@@ -19,6 +19,7 @@ namespace Examenmonitor
         private List<bool> sorteerCheck = new List<bool>();
         private string userMail;
         private List<string> Kolomnamen = new List<string>();
+        private List<string> checkID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -84,7 +85,28 @@ namespace Examenmonitor
             }
 
             //Methode om alle data weer te geven.
-            this.InitDataView(filterLijst);
+            InitDataView(filterLijst);
+
+            //Refreshen van de pagina elke 10 seconden
+            Response.AppendHeader("Refresh", "10");
+           
+            //Checkboxen die in de sessie bijgehouden worden, worden na de reload opnieuw aangevinkt.
+            checkID = (List<string>)Session["CheckID"];
+            if (checkID != null)
+            {
+                foreach (string id in checkID)
+                {
+                    foreach (CheckBox cb in checkboxLijst)
+                    {
+                        if (id.Equals(cb.ID))
+                        {
+                            cb.Checked = true;
+                        }
+                    }
+                }
+            }
+            //Na het refreshen de pagina volledig opnieuw inladen met de laatste instellingen
+            InitDataView(filterLijst);
         }
 
         //Methode om locatie checkboxen te genereren.
@@ -328,17 +350,22 @@ namespace Examenmonitor
         protected void Filteren()
         {
             filterLijst = origineleLijst;
+            checkID = new List<string>();
 
             //Filteren indien volzet filter gechecked is
             if (checkboxLijst[checkboxLijst.Count - 1].Checked) 
             {
                 filterLijst = FilterModel.filterExamensFullCapacity(filterLijst);
+                //De id van de geselecteerde checkbox wordt bijgehouden in een lijst.
+                checkID.Add(checkboxLijst[checkboxLijst.Count - 1].ID.ToString());
             }
 
             //Filteren indien eigen reservatie filter gechecked is
             if (checkboxLijst[checkboxLijst.Count - 2].Checked) 
             {
                 filterLijst = FilterModel.filterExamensID(filterLijst, Session["User"].ToString());
+                //De id van de geselecteerde checkbox wordt bijgehouden in een lijst.
+                checkID.Add(checkboxLijst[checkboxLijst.Count - 2].ID.ToString());
             }
 
             //Aantal locaties die getoond worden
@@ -351,6 +378,8 @@ namespace Examenmonitor
                 if (checkboxLijst[i].Checked)
                 {
                     locaties.Add(checkboxLijst[i].Text);
+                    //De id van de geselecteerde checkbox wordt bijgehouden in een lijst.
+                    checkID.Add(checkboxLijst[i].ID.ToString());
                 }
             }
 
@@ -362,6 +391,8 @@ namespace Examenmonitor
 
             //Updaten van de data voor de gebruiker.
             InitDataView(filterLijst);
+            //De lijst met ID's van de checkboxen wordt in een sessievariabele gestoken, om nadien terug te kunnen gebruiken als de pagina refreshed wordt!
+            Session["CheckID"] = checkID;
         }
 
         //Event voor de checkboxes van de filter
@@ -435,7 +466,7 @@ namespace Examenmonitor
             Session.Clear();
             Session.RemoveAll();
             Session.Abandon();
-            Response.Redirect("Login.aspx"); 
+            Response.Redirect("Login.aspx");
         }
     }
 }
