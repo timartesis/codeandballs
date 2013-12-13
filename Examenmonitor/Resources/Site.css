@@ -55,6 +55,16 @@ div.PageContent
     opacity: 1;
 }
 
+.buttonLabel
+{
+    width: 200px;
+	margin: 60px auto;
+	border: 1px solid #222;
+	background-color: #ececec;
+	border-radius: 6px;
+	box-shadow: 0 1px 1px #777;
+}
+
 
 .ButtonClass
 {
