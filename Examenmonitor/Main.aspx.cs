@@ -335,7 +335,6 @@ namespace Examenmonitor
             reserverenLabel.Width = 200;
             reserverenLabel.Text = "Reserveren";
             reserverenLabel.Font.Bold = true;
-            reserverenLabel.CssClass = "btn";
             ReserverenCell.Controls.Add(reserverenLabel);
 
             //Cellen toevoegen aan de row
