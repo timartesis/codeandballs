@@ -414,15 +414,20 @@ namespace Examenmonitor
             {
                 //Reservatie toevoegen aan de database.
                 DatabankConnector.addReservation(filterLijst, userMail, int.Parse(ch.ID));
+                
             }
             else
             {
                 //Reservatie verwijderen uit de database.
                 DatabankConnector.removeReservation(filterLijst, userMail, int.Parse(ch.ID));
+                
             }
-            //Updaten van de data voor de gebruiker.
-            InitDataView(filterLijst);
-            Session["Lijst"] = filterLijst;
+            ExamenModel.ReloadData();
+            //Session["CheckID"] = null;
+            Session["Lijst"] = ExamenModel.getExamens();
+            origineleLijst = (List<Examen>)Session["Lijst"];
+            Filteren();
+            
         }
 
         //Event voor het klikken van een sorteerbutton.
@@ -451,16 +456,19 @@ namespace Examenmonitor
                     }
                 }
             }
-            Session["Sorteer"] = sorteerCheck;
+            Session["Lijst"] = ExamenModel.getExamens();
+            origineleLijst = (List<Examen>)Session["Lijst"];
+            Filteren();
+            Session["Sorteer"] = sorteerCheck;            
             Sorteren(id);
+            Session["Lijst"] = filterLijst;
+            InitDataView(filterLijst);
         }
 
         //Sorteer methode die de sorteermethode aanspreekt van ons sorteermodel.
         protected void Sorteren(string id)
         {
             filterLijst = SorteerModel.Sorteer(filterLijst, id);
-            InitDataView(filterLijst);
-            Session["Lijst"] = filterLijst;
         }
 
         //Event voor uit te loggen.
