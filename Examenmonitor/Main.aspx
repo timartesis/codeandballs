@@ -27,6 +27,8 @@
             <div id="Menu">
                 <div id="MenuFilter">
                     <asp:Label ID="titelLabel" runat="server" Text="Filter"></asp:Label>
+                    <br />
+                    <br />
                     <asp:Panel  ID="PanelFilter" runat="server" Height="50px" >
                     </asp:Panel>
                 </div>

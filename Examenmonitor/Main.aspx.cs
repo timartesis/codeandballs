@@ -40,6 +40,7 @@ namespace Examenmonitor
 
             //Code voor generatie check boxes
             table.ID = "Filter";
+            table.CssClass = "MenuFilter";
             tableData.ID = "Data view";
             tableData.CssClass = "test";
             PanelFilter.Controls.Add(table);

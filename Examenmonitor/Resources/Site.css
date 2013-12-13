@@ -46,6 +46,15 @@ div.PageContent
     margin-left: 2%;
 }
 
+.MenuFilter
+{
+    background-color: white;
+    -moz-box-shadow: 0 0 3px #ccc;
+    -webkit-box-shadow: 0 0 3px #ccc;
+    box-shadow: 0 0 10px #ccc;
+    opacity: 1;
+}
+
 
 .ButtonClass
 {
