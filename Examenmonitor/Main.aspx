@@ -16,15 +16,12 @@
     <div class="PageContent">
         <form id="formMain" runat="server">
         <div class="Header" id="HeaderMain">
-            <ul id="Ul1">
-             <li class="dropdown pull-right">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle"><%= Session["User"].ToString() %> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="PassWijzigen.aspx">Wachtwoord wijzigen</a></li>
-                        <li><asp:LinkButton id="myLink" Text="Logout" OnClick="LinkButton_Click" runat="server"/></li>
-                    </ul>
-             </li>
-            </ul>
+            <div id="ButtonsAccount">
+                <asp:Button ID="resendMailButton" class="btn" runat="server" CommandName="MoveNext" Text="Wachtwoord wijzigen" 
+                                        OnClientClick="window.location.href='PassWijzigen.aspx'" 
+                                        PostBackUrl="~/PassWijzigen.aspx" CausesValidation="false"/>
+                <asp:LinkButton id="myLink" class="btn" Text ="Logout" OnClick="LinkButton_Click" runat="server"/>
+            </div>
         </div>
         
             <div id="Menu">
