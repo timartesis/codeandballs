@@ -33,11 +33,11 @@
                                 <asp:TableCell BorderColor="Transparent">
                                     <asp:TextBox runat="server" ID="Email" TextMode="Email" />
                                     <%-- Validator om te zien of het veld is ingevuld --%>
-                                <asp:RequiredFieldValidator EnableClientScript="true" ID="RequiredFieldValidator2" runat="server" ControlToValidate="Email"
+                                <asp:RequiredFieldValidator EnableClientScript="false" ID="RequiredFieldValidator2" runat="server" ControlToValidate="Email"
                                     CssClass="field-validation-error" ErrorMessage="Email is een verplicht veld!" />
                                     <%-- REGEX Validator --%>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" 
-                                    ControlToValidate="Email" CssClass="field-validation-error" EnableClientScript="true" Display="Dynamic" 
+                                    ControlToValidate="Email" CssClass="field-validation-error" EnableClientScript="false" Display="Dynamic" 
                                     ValidationExpression="^((?>[a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]+\x20*|((?=[\x01-\x7f])[^\\]|\\[\x01-\x7f])*\x20*)*(?<angle><))?((?!\.)(?>\.?[a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]+)+|((?=[\x01-\x7f])[^\\]|\\[\x01-\x7f])*)@(((?!-)[a-zA-Z\d\-]+(?<!-)\.)+[a-zA-Z]{2,}|\[(((?(?<!\[)\.)(25[0-5]|2[0-4]\d|[01]?\d?\d)){4}|[a-zA-Z\d\-]*[a-zA-Z\d]:((?=[\x01-\x7f])[^\\\[\]]|\\[\x01-\x7f])+)\])(?(angle)>)$"
                                     ErrorMessage="Gebruik geen illegale tekens in uw email aub!"></asp:RegularExpressionValidator>
                                 </asp:TableCell></asp:TableRow><asp:TableRow BorderColor="Transparent">
@@ -47,7 +47,7 @@
                                 </asp:TableCell><asp:TableCell BorderColor="Transparent">
                                     <asp:TextBox runat="server" ID="Password" TextMode="Password" />
                                     <%-- Validator om te zien of het veld is ingevuld--%>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="Password"
+                                    <asp:RequiredFieldValidator EnableClientScript="false" ID="RequiredFieldValidator3" runat="server" ControlToValidate="Password"
                                     CssClass="field-validation-error" ErrorMessage="Wachtwoord is een verplicht veld!" />
                                     <asp:Label ID="CredentialsLabel" runat="server" Text=""></asp:Label>
                                 </asp:TableCell></asp:TableRow><asp:TableRow BorderColor="Transparent">
