@@ -86,9 +86,6 @@ namespace Examenmonitor
 
             //Methode om alle data weer te geven.
             InitDataView(filterLijst);
-
-            //Refreshen van de pagina elke 10 seconden
-            Response.AppendHeader("Refresh", "10");
            
             //Checkboxen die in de sessie bijgehouden worden, worden na de reload opnieuw aangevinkt.
             checkID = (List<string>)Session["CheckID"];
@@ -105,8 +102,6 @@ namespace Examenmonitor
                     }
                 }
             }
-            //Na het refreshen de pagina volledig opnieuw inladen met de laatste instellingen
-            InitDataView(filterLijst);
         }
 
         //Methode om locatie checkboxen te genereren.
