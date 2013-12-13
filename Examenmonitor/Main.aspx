@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <link href="Resources/Site.css" rel="stylesheet" type="text/css" />
-    <!--<link href="Resources/bootstrap.css" rel="stylesheet" type="text/css" />-->
+    <link href="Resources/bootstrap.css" rel="stylesheet" type="text/css" />
     <title></title>
     <script>
 
